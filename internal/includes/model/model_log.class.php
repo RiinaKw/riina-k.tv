@@ -1,6 +1,6 @@
 <?php
 
-require_once(INCLUDE_DIR . '/model/model.class.php');
+require_once($config->app_class_dir . '/model/model.class.php');
 
 class Model_Log extends Model {
 	
@@ -9,7 +9,7 @@ class Model_Log extends Model {
 	public function __construct($path, $mode)
 	{
 		$this->fp = fopen($path, $mode);
-	}
+	} // function __construct()
 	
 	function append($name, $suffix)
 	{
@@ -28,6 +28,6 @@ class Model_Log extends Model {
 		fwrite( $this->fp, implode(', ', $logData)."\n" );
 		flock($this->fp, LOCK_UN);
 		fclose($this->fp);
-	}
+	} // function append()
 	
 } // class Model_Log

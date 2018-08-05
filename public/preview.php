@@ -2,9 +2,9 @@
 
 $config = require_once('init.inc.php');
 
-require_once(INCLUDE_DIR . '/exception.inc.php');
-require_once(INCLUDE_DIR . '/model/model_track.class.php');
-require_once(INCLUDE_DIR . '/model/model_log.class.php');
+require_once($config->app_class_dir . '/exception.inc.php');
+require_once($config->app_class_dir . '/model/model_track.class.php');
+require_once($config->app_class_dir . '/model/model_log.class.php');
 
 
 if ( isset($_SERVER['PATH_INFO']) ) {
@@ -25,19 +25,19 @@ try {
 		throw new HttpBadRequestException('track name missing');
 	}
 	
-	$model = new Model_Track($config['db']);
+	$model = new Model_Track($config->db);
 	$track = $model->get_by_slug($name);
 	if ( !$track ) {
 		throw new HttpNotFoundException('track "' . $name . '" not exists');
 	}
 	
-	$path = MUSIC_DIR . '/' . $name . $suffix . $extension;
+	$path = $config->music_dir . '/' . $name . $suffix . $extension;
 	if ( !file_exists($path) ) {
 		throw new HttpInternalServerErrorException('missing track "' . $name . '"');
 	} else {
 		$size = filesize($path);
 		// output to log
-		$log = new Model_Log( LOG_DIR . '/music.log', 'a' );
+		$log = new Model_Log( $config->log_dir . '/music.log', 'a' );
 		$log->append($name, $suffix);
 		
 		// output file

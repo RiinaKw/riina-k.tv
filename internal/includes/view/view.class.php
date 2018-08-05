@@ -1,6 +1,6 @@
 <?php
 
-define( 'SMARTY_DIR', realpath(PRIVATE_DIR.'/smarty/') . '/' );
+define( 'SMARTY_DIR', realpath($config->internal_dir.'/smarty/') . '/' );
 require_once(SMARTY_DIR . 'Smarty.class.php');
 
 class View {
@@ -14,17 +14,17 @@ class View {
 		
 		$this->engine = new Smarty();
 		
-		$this->engine->template_dir = PRIVATE_DIR . '/smarty_templates/';
-		$this->engine->compile_dir  = PRIVATE_DIR . '/smarty_templates_c/';
-		$this->engine->config_dir   = PRIVATE_DIR . '/smarty_configs/';
-		$this->engine->cache_dir    = PRIVATE_DIR . '/smarty_cache/';
+		$this->engine->template_dir = $config->internal_dir . '/smarty_templates/';
+		$this->engine->compile_dir  = $config->internal_dir . '/smarty_templates_c/';
+		$this->engine->config_dir   = $config->internal_dir . '/smarty_configs/';
+		$this->engine->cache_dir    = $config->internal_dir . '/smarty_cache/';
 		$this->engine->plugins_dir = array(
-			SMARTY_DIR . '/plugins',         // SMARTY_DIR 直下（デフォルト）
-			PRIVATE_DIR . '/smarty_plugins/' // 独自プラグイン用
+			SMARTY_DIR . '/plugins',                   // SMARTY_DIR 直下（デフォルト）
+			$config->internal_dir . '/smarty_plugins/' // 独自プラグイン用
 		);
 		
 		// デバッグ用設定
-		if ($config['env'] != 'production') {
+		if ($config->user['env'] != 'production') {
 			$this->engine->error_reporting = E_ALL;
 			$this->engine->force_compile = true;
 		}
@@ -42,7 +42,7 @@ class View {
 		if ($template) {
 			$this->template = $template;
 		}
-	}
+	} // function __construct()
 	
 	static function _uniform_charcode($source, $smarty)
 	{
@@ -59,17 +59,17 @@ class View {
 	public function set_template($template)
 	{
 		$this->template = $template;
-	}
+	} // function set_template()
 	
 	public function assign($name, $param)
 	{
 		$this->engine->assign($name, $param);
-	}
+	} // function assign()
 	
 	public function assignByRef($name, $param)
 	{
 		$this->engine->assignByRef($name, $param);
-	}
+	} // function assignByRef()
 	
 	public function render()
 	{
@@ -78,7 +78,7 @@ class View {
 		} else {
 			throw new Exception('template is not assigned.');
 		}
-	}
+	} // function render()
 	
 	public function fetch()
 	{
@@ -87,6 +87,6 @@ class View {
 		} else {
 			throw new Exception('template is not assigned.');
 		}
-	}
+	} // function fetch()
 	
 } // class View

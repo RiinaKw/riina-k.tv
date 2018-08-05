@@ -1,6 +1,6 @@
 <?php
 
-require_once(INCLUDE_DIR . '/model/model.class.php');
+require_once($config->app_class_dir . '/model/model.class.php');
 
 class Model_Whatsnew extends Model {
 	
@@ -9,6 +9,6 @@ class Model_Whatsnew extends Model {
 		$statement = $this->dbh->prepare('SELECT * FROM whatsnews ORDER BY date DESC;');
 		$statement->execute();
 		return $statement;
-	}
+	} // function get_all()
 	
 } // class Model_Whatsnew

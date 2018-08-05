@@ -1,6 +1,6 @@
 <?php
 
-require_once(INCLUDE_DIR . '/model/model.class.php');
+require_once($config->app_class_dir . '/model/model.class.php');
 
 class Model_Track extends Model {
 	
@@ -30,7 +30,7 @@ SELECT
 			);
 		}
 		return $arr;
-	}
+	} // function get_as_category()
 	
 	public function get_by_slug($slug)
 	{
@@ -45,6 +45,6 @@ SELECT
 		$statement->bindValue(':slug', $slug, PDO::PARAM_STR);
 		$statement->execute();
 		return $statement->fetch(PDO::FETCH_ASSOC);
-	}
+	} // function get_by_slug()
 	
 } // class Model_Track

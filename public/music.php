@@ -1,8 +1,8 @@
 <?php
 
 $config = require_once('init.inc.php');
-require_once(INCLUDE_DIR . '/view/view_riina.class.php');
-require_once(INCLUDE_DIR . '/model/model_track.class.php');
+require_once($config->app_class_dir . '/view/view_riina.class.php');
+require_once($config->app_class_dir . '/model/model_track.class.php');
 
 $slug = '';
 if ( isset($_SERVER['PATH_INFO']) ) {
@@ -10,7 +10,7 @@ if ( isset($_SERVER['PATH_INFO']) ) {
 	$slug = ( isset($arr[1]) ? $arr[1] : '' );
 }
 
-$model = new Model_Track($config['db']);
+$model = new Model_Track($config->db);
 $categories = $model->get_as_category();
 
 $view = new View_Riina('music.tpl.html');

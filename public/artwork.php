@@ -1,10 +1,7 @@
 <?php
 
-ini_set( 'display_errors', 1 );
-error_reporting(E_ALL);
-
 $config = require_once('./init.inc.php');
-require_once(INCLUDE_DIR . '/image.class.php');
+require_once($config->app_class_dir . '/image.class.php');
 
 try {
 
@@ -23,7 +20,7 @@ try {
 		throw new HttpImTeapotException('おれはやかんだ (Easter Egg)');
 	}
 	
-	$path = ARTWORK_DIR . '/' . $filename;
+	$path = $config->artwork_dir . '/' . $filename;
 	if ( !is_file($path) ) {
 		throw new HttpNotFoundException('file "' . $filename . '" not exists');
 	}

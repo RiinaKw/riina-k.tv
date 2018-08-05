@@ -1,6 +1,6 @@
 <?php
 
-require_once(INCLUDE_DIR . '/view/view.class.php');
+require_once($config->app_class_dir . '/view/view.class.php');
 
 class View_Riina extends View {
 	
@@ -8,25 +8,27 @@ class View_Riina extends View {
 	
 	public function __construct($template = null)
 	{
+		global $config;
+		
 		parent::__construct($template);
 		
 		$this->container_engine = new View('layout.tpl.html');
 		
-		$this->assign('root', ROOT_URL);
+		$this->assign('root', $config->root_url);
 		$this->assign('path', $_SERVER['REQUEST_URI']);
-	}
+	} // function __construct()
 	
 	public function assign($name, $param)
 	{
 		parent::assign($name, $param);
 		$this->container_engine->assign($name, $param);
-	}
+	} // function assign()
 	
 	public function assignByRef($name, $param)
 	{
 		parent::assignByRef($name, $param);
 		$this->container_engine->assignByRef($name, $param);
-	}
+	} // function assignByRef()
 	
 	public function render()
 	{
@@ -34,6 +36,6 @@ class View_Riina extends View {
 		
 		$this->container_engine->assignByRef('content', $content);
 		$this->container_engine->render();
-	}
+	} // function render()
 	
 } // class ViewRiina

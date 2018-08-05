@@ -1,6 +1,6 @@
 <?php
 
-require_once(INCLUDE_DIR . '/exception.inc.php');
+require_once($config->app_class_dir . '/exception.inc.php');
 
 class Image {
 
@@ -13,7 +13,7 @@ class Image {
 		if ($path) {
 			$this->load($path);
 		}
-	}
+	} // function __construct()
 	
 	public function __destruct()
 	{
@@ -21,7 +21,7 @@ class Image {
 			imagedestroy($this->resource);
 			$this->resource = null;
 		}
-	}
+	} // function __destruct()
 	
 	public function __get($name)
 	{
@@ -30,7 +30,7 @@ class Image {
 		} else {
 			return null;
 		}
-	}
+	} // function __get()
 	
 	public function create($width, $height = null)
 	{
@@ -45,7 +45,7 @@ class Image {
 		$this->_prop['width'] = $width;
 		$this->_prop['height'] = $height;
 		return $this;
-	}
+	} // function create()
 	
 	public function load($path)
 	{
@@ -73,7 +73,7 @@ class Image {
 			throw new HttpNotImplementedException( 'Unknown image type : ' . image_type_to_mime_type($this->imagetype) );
 		}
 		return $this;
-	}
+	} // function load()
 	
 	/****
 		one param :
@@ -191,7 +191,7 @@ class Image {
 		imagecolortransparent($canvas->resource, $bgcolor);
 		
 		return $canvas;
-	}
+	} // function resample()
 	
 	public function sharp()
 	{
@@ -211,20 +211,20 @@ class Image {
 		imageconvolution($this->resource, $matrix, $divisor, $offset);
 		
 		return $this;
-	}
+	} // function sharp()
 	
 	public function pixelate($size)
 	{
 		$this->require_resource();
 		imagefilter($this->resource, IMG_FILTER_PIXELATE, $size, false);
 		return $this;
-	}
+	} // function pixelate()
 	
 	protected function _tempnam()
 	{
 		$name = tempnam('/tmp', 'rktv');
 		return $name;
-	}
+	} // function _tempnam()
 	
 	protected function _output($filepath, $to = null, $use_self = false)
 	{
@@ -256,7 +256,7 @@ class Image {
 			echo $binary;
 			return true;
 		}
-	}
+	} // function _output()
 	
 	public function thru($to = null)
 	{
@@ -265,14 +265,14 @@ class Image {
 		} else {
 			throw new HttpNotFoundException('file not exists');
 		}
-	}
+	} // function thru()
 	
 	protected function require_resource()
 	{
 		if ( !$this->resource ) {
 			throw new HttpBadRequestException('resource not created');
 		}
-	}
+	} // function require_resource()
 	
 	public function jpeg($quality = 75, $to = null)
 	{
@@ -280,7 +280,7 @@ class Image {
 		$tmp = $this->_tempnam();
 		imagejpeg($this->resource, $tmp, $quality);
 		return $this->_output($tmp, $to);
-	}
+	} // function jpeg()
 	
 	public function gif($to = null)
 	{
@@ -288,7 +288,7 @@ class Image {
 		$tmp = $this->_tempnam();
 		imagegif($this->resource, $tmp);
 		return $this->_output($tmp, $to);
-	}
+	} // function gif()
 	
 	public function png($quality = 6, $to = null)
 	{
@@ -296,6 +296,6 @@ class Image {
 		$tmp = $this->_tempnam();
 		imagepng($this->resource, $tmp, $quality);
 		return $this->_output($tmp, $to);
-	}
+	} // function png()
 	
 }

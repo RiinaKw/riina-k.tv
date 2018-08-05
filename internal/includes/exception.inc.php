@@ -1,6 +1,6 @@
 <?php
 
-require_once(INCLUDE_DIR . '/view/view.class.php');
+require_once($config->app_class_dir . '/view/view.class.php');
 
 class HttpException extends Exception {
 	
@@ -13,7 +13,7 @@ class HttpException extends Exception {
 			throw new $this('Unknown '. get_class($this));
 		}
 		parent::__construct($message, $code);
-	}
+	} // function __construct()
 	
 	public function __toString()
 	{
@@ -21,12 +21,12 @@ class HttpException extends Exception {
 		
 		header( 'HTTP/1.0 ' . $this->code . ' ' . $this->title );
 		
-		if ($config['env'] == 'production') {
+		if ($config->env == 'production') {
 			return $this->code . ' ' . get_class($this) . ' ' . $this->title . " '{$this->message}'";
 		} else {
 			return $this->code . ' ' . get_class($this) . ' ' . $this->title . " '{$this->message}' in {$this->file}({$this->line})\n" . "{$this->getTraceAsString()}";
 		}
-	}
+	} // function __toString()
 	
 	public function render()
 	{
@@ -36,15 +36,15 @@ class HttpException extends Exception {
 		$view = new View('error.tpl.html');
 		$view->assignByRef('title', $this->title);
 		
-		if ($config['env'] == 'production') {
+		if ($config->env == 'production') {
 			$view->assignByRef('message', $this->message);
 		} else {
 			$view->assign('message', $this->message . " in {$this->file}({$this->line})\n" . "{$this->getTraceAsString()}");
 		}
 		$view->render();
-	}
+	} // function render()
 	
-}
+} // class HttpException
 
 class HttpBadRequestException extends HttpException {
 	
@@ -55,7 +55,7 @@ class HttpBadRequestException extends HttpException {
 		parent::__construct($message, $code);
 	}
 	
-}
+} // class HttpBadRequestException
 
 class HttpForbiddenException extends HttpException {
 	
@@ -66,7 +66,7 @@ class HttpForbiddenException extends HttpException {
 		return parent::__construct($message, $code);
 	}
 	
-}
+} // class HttpForbiddenException
 
 class HttpNotFoundException extends HttpException {
 	
@@ -77,7 +77,7 @@ class HttpNotFoundException extends HttpException {
 		parent::__construct($message, $code);
 	}
 	
-}
+} // class HttpNotFoundException
 
 class HttpImTeapotException extends HttpException {
 	
@@ -88,7 +88,7 @@ class HttpImTeapotException extends HttpException {
 		parent::__construct($message, $code);
 	}
 	
-}
+} // class HttpImTeapotException
 
 class HttpInternalServerErrorException extends HttpException {
 	
@@ -99,7 +99,7 @@ class HttpInternalServerErrorException extends HttpException {
 		parent::__construct($message, $code);
 	}
 	
-}
+} // class HttpInternalServerErrorException
 
 class HttpNotImplementedException extends HttpException {
 	
@@ -110,4 +110,4 @@ class HttpNotImplementedException extends HttpException {
 		parent::__construct($message, $code);
 	}
 	
-}
+} // class HttpNotImplementedException
