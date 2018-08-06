@@ -1,7 +1,7 @@
 <?php
 
 $config = require_once('init.inc.php');
-require_once($config->app_class_dir . '/view/view_riina.class.php');
+require_once($config->app_class_dir . '/view/container.class.php');
 
 $view = new View_Riina('about.tpl.html');
 $view->assign('title', 'about - rk. tv');

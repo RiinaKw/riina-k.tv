@@ -1,8 +1,8 @@
 <?php
 
 $config = require_once('init.inc.php');
-require_once($config->app_class_dir . '/view/view_riina.class.php');
-require_once($config->app_class_dir . '/model/model_track.class.php');
+require_once($config->app_class_dir . '/view/container.class.php');
+require_once($config->app_class_dir . '/model/track.class.php');
 
 $slug = '';
 if ( isset($_SERVER['PATH_INFO']) ) {

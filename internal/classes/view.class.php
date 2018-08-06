@@ -1,6 +1,6 @@
 <?php
 
-require($config->vendor_dir . '/autoload.php');
+require_once($config->vendor_dir . '/autoload.php');
 
 class View {
 	

@@ -1,6 +1,6 @@
 <?php
 
-require_once($config->app_class_dir . '/model/model.class.php');
+require_once($config->app_class_dir . '/model.class.php');
 
 class Model_Whatsnew extends Model {
 	

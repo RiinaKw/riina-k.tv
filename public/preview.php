@@ -3,8 +3,8 @@
 $config = require_once('init.inc.php');
 
 require_once($config->app_class_dir . '/exception.inc.php');
-require_once($config->app_class_dir . '/model/model_track.class.php');
-require_once($config->app_class_dir . '/model/model_log.class.php');
+require_once($config->app_class_dir . '/model/track.class.php');
+require_once($config->app_class_dir . '/model/log.class.php');
 
 
 if ( isset($_SERVER['PATH_INFO']) ) {

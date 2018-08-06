@@ -9,7 +9,7 @@ class Config {
 		$this->_prop['public_dir'] = realpath($public_dir);
 		$this->_prop['internal_dir'] = __DIR__;
 		
-		$this->_prop['app_class_dir'] = $this->internal_dir('/includes');
+		$this->_prop['app_class_dir'] = $this->internal_dir('/classes');
 		$this->_prop['vendor_dir'] = $this->internal_dir('/vendor');
 		
 		$this->_prop['server_name'] = $_SERVER['SERVER_NAME'];

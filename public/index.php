@@ -1,8 +1,8 @@
 <?php
 
 $config = require_once('init.inc.php');
-require_once($config->app_class_dir . '/view/view_riina.class.php');
-require_once($config->app_class_dir . '/model/model_whatsnew.class.php');
+require_once($config->app_class_dir . '/view/container.class.php');
+require_once($config->app_class_dir . '/model/whatsnew.class.php');
 
 $model = new Model_Whatsnew($config->db);
 $whatsnew = $model->get_all();
