@@ -1,7 +1,6 @@
 <?php
 
-define( 'SMARTY_DIR', realpath($config->vendor_dir.'/smarty/') . '/' );	// end with a slash
-require_once(SMARTY_DIR . 'Smarty.class.php');
+require($config->vendor_dir . '/autoload.php');
 
 class View {
 	
