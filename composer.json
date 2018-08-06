@@ -1,0 +1,15 @@
+{
+    "name": "riina/test.riina-k.tv",
+    "authors": [
+        {
+            "name": "RiinaKw",
+            "email": "riinak.tv@gmail.com"
+        }
+    ],
+    "require": {
+        "smarty/smarty": "^3.1"
+    },
+    "config": {
+        "vendor-dir": "internal/vendor"
+    }
+}
