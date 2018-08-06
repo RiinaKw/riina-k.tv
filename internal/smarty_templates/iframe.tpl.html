@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<style>
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+audio {
+	width: 100%;
+	position: absolute;
+	top: 8vw;
+}
+
+p {
+	margin-top: 24vw;
+	text-align: center;
+}
+
+a {
+	color: #ffff00;
+}
+		</style>
+	</head>
+	<body>
+		<audio controls="controls" preload="metadata">
+			<source src="{{$preview_url}}" type="audio/mp3" />
+		</audio>
+		<p><a href="{{$download_url}}">download</a></p>
+	</body>
+</html>

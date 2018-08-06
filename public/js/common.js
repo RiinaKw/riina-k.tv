@@ -605,7 +605,7 @@ function openTrack(param)
 					widget.pause();
 				}
 				
-				var src = previewUrl.replace("preview", "music_iframe");
+				var src = previewUrl.replace("preview", "iframe");
 				var $iframe = $("iframe", $article);
 				if ( $iframe.length == 0 ) {
 					$iframeWrapper.append('<iframe />');
