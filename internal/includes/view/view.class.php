@@ -1,6 +1,6 @@
 <?php
 
-define( 'SMARTY_DIR', realpath($config->vendor_dir.'/smarty/') . '/' );
+define( 'SMARTY_DIR', realpath($config->vendor_dir.'/smarty/') . '/' );	// end with a slash
 require_once(SMARTY_DIR . 'Smarty.class.php');
 
 class View {
@@ -19,24 +19,24 @@ class View {
 		$this->engine->config_dir   = $config->internal_dir . '/smarty_configs/';
 		$this->engine->cache_dir    = $config->internal_dir . '/smarty_cache/';
 		$this->engine->plugins_dir = array(
-			SMARTY_DIR . '/plugins',                   // SMARTY_DIR 直下（デフォルト）
-			$config->internal_dir . '/smarty_plugins/' // 独自プラグイン用
+			SMARTY_DIR . '/plugins',                   // just under SMARTY_DIR
+			$config->internal_dir . '/smarty_plugins/' // my pulgin
 		);
 		
-		// デバッグ用設定
+		// for debug
 		if ($config->user['env'] != 'production') {
 			$this->engine->error_reporting = E_ALL;
 			$this->engine->force_compile = true;
 		}
 		
-		// デリミタ変更
+		// change delimiter
 		$this->engine->left_delimiter = '{{';
 		$this->engine->right_delimiter = '}}';
 		
-		// フィルタ登録
+		// register prefilter
 		$this->engine->registerFilter( "pre", array('View', '_uniform_charcode') );
 		
-		// confファイル登録
+		// add conf
 		$this->engine->configLoad('riina-k.tv.conf');
 		
 		if ($template) {
