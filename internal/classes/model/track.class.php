@@ -1,7 +1,5 @@
 <?php
 
-require_once($config->app_class_dir . '/model.class.php');
-
 class Model_Track extends Model {
 	
 	function get_as_category()

@@ -1,7 +1,5 @@
 <?php
 
-require_once($config->app_class_dir . '/view.class.php');
-
 class HttpException extends Exception {
 	
 	protected $title = '';

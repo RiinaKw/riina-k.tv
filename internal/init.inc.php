@@ -26,6 +26,51 @@ class Config {
 		foreach ($config['dir'] as $name => $dir) {
 			$this->_prop[$name] = realpath( $this->_prop['internal_dir'] . $dir );
 		}
+		
+		require_once($this->_prop['vendor_dir'] . '/autoload.php');
+		
+		spl_autoload_register( array($this, '_class_autoload') );
+	}
+	
+	protected function _class_autoload($class_name)
+	{
+		if ( class_exists($class_name) ) {
+			return;
+		}
+		
+		$registered_classes = array(
+			'HttpException' => 'exception.inc.php',
+			'HttpBadRequestException'          => 'exception.inc.php',
+			'HttpForbiddenException'           => 'exception.inc.php',
+			'HttpNotFoundException'            => 'exception.inc.php',
+			'HttpImTeapotException'            => 'exception.inc.php',
+			'HttpInternalServerErrorException' => 'exception.inc.php',
+			'HttpNotImplementedException'      => 'exception.inc.php',
+		);
+		
+		if ( array_key_exists($class_name, $registered_classes) ) {
+			$path = $this->_prop['app_class_dir'] . '/' . $registered_classes[$class_name];
+			if ( !is_file($path) ) {
+				trigger_error('file ' . $file . ' not found', E_USER_ERROR);
+			}
+			require_once($path);
+			if ( !class_exists($class_name) ) {
+				trigger_error('class ' . $class_name . ' not found', E_USER_ERROR);
+			}
+			return;
+		}
+		
+		$lower = strtolower($class_name);
+		$arr = explode('_', $lower);
+		$file = implode('/', $arr);
+		$path = $this->_prop['app_class_dir'] . '/' . $file . '.class.php';
+		if ( !is_file($path) ) {
+			trigger_error('file ' . $file . ' not found', E_USER_ERROR);
+		}
+		require_once($path);
+		if ( !class_exists($class_name) ) {
+			trigger_error('class ' . $class_name . ' not found', E_USER_ERROR);
+		}
 	}
 	
 	public function __get($name)

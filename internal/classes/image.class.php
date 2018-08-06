@@ -1,7 +1,5 @@
 <?php
 
-require_once($config->app_class_dir . '/exception.inc.php');
-
 class Image {
 
 	protected $resource = null;

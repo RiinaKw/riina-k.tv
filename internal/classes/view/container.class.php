@@ -1,8 +1,6 @@
 <?php
 
-require_once($config->app_class_dir . '/view.class.php');
-
-class View_Riina extends View {
+class View_Container extends View {
 	
 	protected $container_engine;
 	

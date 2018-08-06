@@ -1,8 +1,6 @@
 <?php
 
-$config = require_once('init.inc.php');
-require_once($config->app_class_dir . '/view/container.class.php');
-require_once($config->app_class_dir . '/model/track.class.php');
+require_once('init.inc.php');
 
 $slug = '';
 if ( isset($_SERVER['PATH_INFO']) ) {
@@ -13,7 +11,7 @@ if ( isset($_SERVER['PATH_INFO']) ) {
 $model = new Model_Track($config->db);
 $categories = $model->get_as_category();
 
-$view = new View_Riina('music.tpl.html');
+$view = new View_Container('music.tpl.html');
 $view->assign('page_id', 'page-music');
 $view->assignByRef('categories', $categories);
 if ($slug) {

@@ -1,7 +1,6 @@
 <?php
 
-$config = require_once('./init.inc.php');
-require_once($config->app_class_dir . '/image.class.php');
+require_once('init.inc.php');
 
 try {
 

@@ -1,7 +1,5 @@
 <?php
 
-require_once($config->vendor_dir . '/autoload.php');
-
 class View {
 	
 	protected $engine;
