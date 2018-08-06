@@ -10,13 +10,14 @@ class Config {
 		$this->_prop['internal_dir'] = __DIR__;
 		
 		$this->_prop['app_class_dir'] = $this->internal_dir('/includes');
+		$this->_prop['vendor_dir'] = $this->internal_dir('/vendor');
 		
 		$this->_prop['server_name'] = $_SERVER['SERVER_NAME'];
 		$this->_prop['root_url'] = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'];
 		
 		$env = realpath($this->_prop['internal_dir'] . '/env/' . $this->_prop['server_name'] . '.inc.php');
 		if ( !$env || !is_file($env) ) {
-			trigger_error('environment error: unknown environment ' . SERVER_NAME, E_USER_ERROR);
+			trigger_error('environment error: unknown environment ' . $this->_prop['server_name'], E_USER_ERROR);
 		}
 		$config = require_once($env);
 		$this->_prop['db'] = $config['db'];
