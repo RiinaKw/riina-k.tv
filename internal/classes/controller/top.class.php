@@ -10,9 +10,9 @@ class Controller_Top extends Controller {
 		$whatsnew = $model->get_all();
 
 		$view = new View_Container('index.tpl.html');
-		$view->assign('title', 'rk. tv : あーけーどてぃーゔぃー');
-		$view->assign('page_id', 'page-top');
-		$view->assignByRef('whatsnew', $whatsnew);
+		$view->title = 'rk. tv : あーけーどてぃーゔぃー';
+		$view->page_id = 'page-top';
+		$view->whatsnew = $whatsnew;
 		$view->render();
 	}
 	

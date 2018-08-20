@@ -31,13 +31,15 @@ class HttpException extends Exception {
 		global $config;
 		header( 'HTTP/1.0 ' . $this->code . ' ' . $this->title );
 		
-		$view = new View('error.tpl.html');
-		$view->assignByRef('title', $this->title);
+		$view = new View('error.tpl.php');
+		$view->title = $this->title;
 		
 		if ($config->env == 'production') {
-			$view->assignByRef('message', $this->message);
+			$view->message = $this->message;
+			$view->trace = '';
 		} else {
-			$view->assign('message', $this->message . " in {$this->file}({$this->line})\n" . "{$this->getTraceAsString()}");
+			$view->message = $this->message . " in {$this->file}({$this->line})";
+			$view->trace = $this->getTraceAsString();
 		}
 		$view->render();
 	} // function render()

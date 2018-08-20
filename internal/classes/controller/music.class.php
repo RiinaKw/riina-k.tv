@@ -10,10 +10,10 @@ class Controller_Music extends Controller {
 		$categories = $model->get_as_category();
 
 		$view = new View_Container('music.tpl.html');
-		$view->assign('page_id', 'page-music');
-		$view->assignByRef('categories', $categories);
+		$view->page_id = 'page-music';
+		$view->categories = $categories;
 		
-		$view->assign('title', 'music - rk. tv');
+		$view->title = 'music - rk. tv';
 		$view->render();
 	}
 	
@@ -27,12 +27,12 @@ class Controller_Music extends Controller {
 		$categories = $model->get_as_category();
 		
 		$view = new View_Container('music.tpl.html');
-		$view->assign('page_id', 'page-music');
-		$view->assignByRef('categories', $categories);
+		$view->page_id = 'page-music';
+		$view->categories = $categories;
 		
 		$track = $model->get_by_slug($slug);
-		$view->assignByRef('track', $track);
-		$view->assignByRef('title', $track['title'] . ' - rk. tv');
+		$view->track = $track;
+		$view->title = $track['title'] . ' - rk. tv';
 		$view->render();
 	}
 	

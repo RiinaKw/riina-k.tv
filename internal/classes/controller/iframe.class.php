@@ -9,9 +9,9 @@ class Controller_Iframe extends Controller {
 		$preview_url = $config->root_url . '/preview/' . $arg[0];
 		$download_url = $preview_url . '/download';
 
-		$view = new View('iframe.tpl.html');
-		$view->assignByRef('preview_url', $preview_url);
-		$view->assignByRef('download_url', $download_url);
+		$view = new View_Smarty('iframe.tpl.html');
+		$view->preview_url = $preview_url;
+		$view->download_url = $download_url;
 		$view->render();
 	}
 	

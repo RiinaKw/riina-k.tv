@@ -7,9 +7,9 @@ class Controller_About extends Controller {
 		global $config;
 		
 		$view = new View_Container('about.tpl.html');
-		$view->assign('title', 'about - rk. tv');
-		$view->assign('page_id', 'page-about');
-		$view->assign('easter_egg', '/artwork/riina');
+		$view->title = 'about - rk. tv';
+		$view->page_id = 'page-about';
+		$view->easter_egg = '/artwork/riina';
 		$view->render();
 	}
 	

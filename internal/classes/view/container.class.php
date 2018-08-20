@@ -1,8 +1,8 @@
 <?php
 
-class View_Container extends View {
+class View_Container extends View_Smarty {
 	
-	protected $container_engine;
+	protected $_container_engine;
 	
 	public function __construct($template = null)
 	{
@@ -10,30 +10,17 @@ class View_Container extends View {
 		
 		parent::__construct($template);
 		
-		$this->container_engine = new View('layout.tpl.html');
+		$this->_container_engine = new View_Smarty('layout.tpl.html');
 		
-		$this->assign('root', $config->root_url);
-		$this->assign('path', $_SERVER['REQUEST_URI']);
+		$this->root = $config->root_url;
+		$this->path = $_SERVER['REQUEST_URI'];
 	} // function __construct()
-	
-	public function assign($name, $param)
-	{
-		parent::assign($name, $param);
-		$this->container_engine->assign($name, $param);
-	} // function assign()
-	
-	public function assignByRef($name, $param)
-	{
-		parent::assignByRef($name, $param);
-		$this->container_engine->assignByRef($name, $param);
-	} // function assignByRef()
 	
 	public function render()
 	{
-		$content = $this->fetch();
-		
-		$this->container_engine->assignByRef('content', $content);
-		$this->container_engine->render();
+		$this->_container_engine->assign($this->_prop);
+		$this->_container_engine->content = $this->fetch();
+		$this->_container_engine->render();
 	} // function render()
 	
 } // class ViewRiina

@@ -67,30 +67,34 @@ class Config {
 		$file = implode('/', $arr);
 		$path = $this->_prop['app_class_dir'] . '/' . $file . '.class.php';
 		if ( !is_file($path) ) {
-			trigger_error('file ' . $file . ' not found', E_USER_ERROR);
+			//trigger_error('file ' . $file . ' not found', E_USER_ERROR);
+			return false;
 		}
 		require_once($path);
 		if ( !class_exists($class_name) ) {
 			trigger_error('class ' . $class_name . ' not found', E_USER_ERROR);
 		}
+		return true;
 	} // function _class_autoload()
 	
-	protected function _error_handle($errno, $errstr, $errfile, $errline)
+	public function _error_handle($errno, $errstr, $errfile, $errline)
 	{
 		throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
 	} // function _error_handle()
 	
-	function _exception_handle($e)
+	public function _exception_handle($e)
 	{
-		if ($this->env == 'development') {
-			echo '<h1>' . $e->getMessage() . '</h1>'."\n";
-			echo '<p>file ' . $e->getFile() . ' on line ' . $e->getLine() . '</p>'."\n";
-			echo "<pre>\n";
-			echo $e->getTraceAsString();
-			echo "\n</pre>\n";
+		$view = new View('error.tpl.php');
+		$view->title = $e->getMessage();
+		
+		if ($this->env == 'production') {
+			$view->message = $e->getMessage();
+			$view->trace = '';
 		} else {
-			echo '<h1>' . $e->getMessage() . '</h1>'."\n";
+			$view->message = $e->getMessage() . ' in ' . $e->getFile() . '(' . $e->getLine() . ')';
+			$view->trace = $e->getTraceAsString();
 		}
+		$view->render();
 	} // function _exception_handle()
 	
 	public function __get($name)
