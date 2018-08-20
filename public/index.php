@@ -12,6 +12,30 @@ if ($config->env == 'development') {
 	error_reporting(E_ALL);
 }
 
+set_error_handler(
+	function($errno, $errstr, $errfile, $errline)
+	{
+		throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+	}
+);
+
+set_exception_handler(
+	function($e)
+	{
+		global $config;
+		if ($config->env == 'development') {
+			echo '<h1>' . $e->getMessage() . '</h1>'."\n";
+			echo '<p>file ' . $e->getFile() . ' on line ' . $e->getLine() . '</p>'."\n";
+			echo "<pre>\n";
+			echo $e->getTraceAsString();
+			echo "\n</pre>\n";
+		} else {
+			echo '<h1>' . $e->getMessage() . '</h1>'."\n";
+			//readfile('path/to/error.html');
+		}
+	}
+);
+
 require_once($config->vendor_dir . '/autoload.php');
 
 $routing = array(
