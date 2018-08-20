@@ -30,7 +30,9 @@ class Config {
 		require_once($this->_prop['vendor_dir'] . '/autoload.php');
 		
 		spl_autoload_register( array($this, '_class_autoload') );
-	}
+		set_error_handler( array($this, '_error_handle') );
+		set_exception_handler( array($this, '_exception_handle') );
+	} // function __construct()
 	
 	protected function _class_autoload($class_name)
 	{
@@ -71,7 +73,25 @@ class Config {
 		if ( !class_exists($class_name) ) {
 			trigger_error('class ' . $class_name . ' not found', E_USER_ERROR);
 		}
-	}
+	} // function _class_autoload()
+	
+	protected function _error_handle($errno, $errstr, $errfile, $errline)
+	{
+		throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+	} // function _error_handle()
+	
+	function _exception_handle($e)
+	{
+		if ($this->env == 'development') {
+			echo '<h1>' . $e->getMessage() . '</h1>'."\n";
+			echo '<p>file ' . $e->getFile() . ' on line ' . $e->getLine() . '</p>'."\n";
+			echo "<pre>\n";
+			echo $e->getTraceAsString();
+			echo "\n</pre>\n";
+		} else {
+			echo '<h1>' . $e->getMessage() . '</h1>'."\n";
+		}
+	} // function _exception_handle()
 	
 	public function __get($name)
 	{
@@ -80,7 +100,7 @@ class Config {
 		} else {
 			return null;
 		}
-	}
+	} // function __get()
 
 	protected function internal_dir($dir)
 	{
