@@ -6,10 +6,22 @@ class Controller_Iframe extends Controller {
 	{
 		global $config;
 		
+		$slug = ( isset($arg[0]) ? $arg[0] : '' );
+		if ( !$slug ) {
+			throw new HttpBadRequestException('slug missing');
+		}
+		
+		$model = new Model_Track($config->db);
+		$track = $model->get_by_slug($slug);
+		if ( !$track ) {
+			throw new HttpNotFoundException('track "' . $slug . '" not exists');
+		}
+		
 		$preview_url = $config->root_url . '/preview/' . $arg[0];
 		$download_url = $preview_url . '/download';
 
 		$view = new View_Smarty('iframe.tpl.html');
+		$view->title = $track['title'] . ' - rk. tv';
 		$view->preview_url = $preview_url;
 		$view->download_url = $download_url;
 		$view->render();

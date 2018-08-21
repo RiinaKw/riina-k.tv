@@ -7,7 +7,7 @@
 {{if isset($track)}}
 		<meta property="og:url"         content="{{$root}}{{$path}}" />
 		<meta property="og:type"        content="article" />
-		<meta property="og:title"       content="{{$track.title|escape}} - rk. tv" />
+		<meta property="og:title"       content="{{$track.title|escape}} - {{#title_en#}}" />
 		<meta property="og:description" content="{{$track.content|escape|serialize}}" />
 {{if $track.image_name}}
 		<meta property="og:image"       content="{{$root}}/artwork/{{$track.image_name}}" />
@@ -19,8 +19,8 @@
 		
 		<meta property="twitter:url"         content="{{$root}}{{$path}}" />
 		<meta property="twitter:card"        content="summary" />
-		<meta property="twitter:site"        content="@Riina_Kw_m" />
-		<meta property="twitter:title"       content="{{$track.title|escape}} - rk. tv" />
+		<meta property="twitter:site"        content="{{#twitter#}}" />
+		<meta property="twitter:title"       content="{{$track.title|escape}} - {{#title_en#}}" />
 		<meta property="twitter:description" content="{{$track.content|escape|serialize}}" />
 {{if $track.image_name}}
 		<meta property="twitter:image"       content="{{$root}}/artwork/{{$track.image_name}}" />
@@ -31,7 +31,7 @@
 {{else}}
 		<meta property="og:url"         content="{{$root}}{{$path}}" />
 		<meta property="og:type"        content="website" />
-		<meta property="og:title"       content="rk. tv : あーけーどてぃーゔぃー" />
+		<meta property="og:title"       content="{{#title#}}" />
 		<meta property="og:description" content="Keyアレンジ、Master of Epic アレンジをメインに手がける同人音楽サークルです。" />
 		<meta property="og:image"       content="{{$root}}/images/logo500.png" />
 		<meta property="fb:admins"      content="100027747308230" />
@@ -39,8 +39,8 @@
 		
 		<meta property="twitter:url"         content="{{$root}}{{$path}}" />
 		<meta property="twitter:card"        content="summary" />
-		<meta property="twitter:site"        content="@Riina_Kw_m" />
-		<meta property="twitter:title"       content="rk. tv : あーけーどてぃーゔぃー" />
+		<meta property="twitter:site"        content="{{#twitter#}}" />
+		<meta property="twitter:title"       content="{{#title#}}" />
 		<meta property="twitter:description" content="Keyアレンジ、Master of Epic アレンジをメインに手がける同人音楽サークルです。" />
 		<meta property="twitter:image"       content="{{$root}}/images/logo500.png" />
 {{/if}}
@@ -73,8 +73,8 @@ $(function(){
 				
 					<header>
 						<div id="logo" class="cf">
-							<h1><a href="{{$root}}/" data-rel="internal">rk. tv</a></h1>
-							<p>あーけーどてぃーゔぃー</p>
+							<h1><a href="{{$root}}/" data-rel="internal">{{#title_en#}}</a></h1>
+							<p>{{#title_jp#}}</p>
 						</div>
 						<nav>
 							<ul>

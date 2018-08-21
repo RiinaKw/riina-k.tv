@@ -30,9 +30,9 @@
 												{{$root}}{{$track.preview_url|escape}}
 											{{/strip}}{{/if}}" data-iframe="{{$track.soundcloud_url|escape}}"></a>
 											<header>
-												<a href="/music/{{$track.slug|escape}}">
+												<a href="{{$root}}/music/{{$track.slug|escape}}">
 {{if $track.image_name}}
-													<img src="/artwork/{{$track.image_name}}" alt="" />
+													<img src="{{$root}}/artwork/{{$track.image_name}}" alt="" />
 {{else}}
 													<img src="{{$root}}/images/no-jacket.jpg" alt="" />
 {{/if}}
