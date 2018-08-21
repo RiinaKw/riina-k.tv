@@ -11,8 +11,8 @@ return array(
 	),
 	'env' => 'development',
 	'dir' => array(
-		'artwork_dir' => '/artwork',
-		'music_dir' => '/music',
-		'log_dir' => '/log',
+		'artwork_dir' => '/app/artwork',
+		'music_dir' => '/app/music',
+		'log_dir' => '/app/log',
 	),
 );
