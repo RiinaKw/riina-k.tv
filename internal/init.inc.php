@@ -11,8 +11,12 @@ class Config {
 		
 		$this->_prop['app_dir'] = $this->internal_dir('/app');
 		$this->_prop['app_class_dir'] = $this->internal_dir('/app/classes');
+		
 		$this->_prop['core_dir'] = $this->internal_dir('/core');
 		$this->_prop['core_class_dir'] = $this->internal_dir('/core/classes');
+		
+		$this->_prop['view_dir'] = $this->internal_dir('/app/view');
+		
 		$this->_prop['vendor_dir'] = $this->internal_dir('/vendor');
 		
 		$this->_prop['server_name'] = $_SERVER['SERVER_NAME'];

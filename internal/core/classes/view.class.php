@@ -34,7 +34,7 @@ class View {
 	{
 		global $config;
 		
-		$path = $config->internal_dir . '/smarty_templates/' . $this->_template;
+		$path = $config->view_dir . '/' . $this->_template;
 		
 		require_once($path);
 	} // function render()

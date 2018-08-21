@@ -10,13 +10,13 @@ class View_Smarty extends View {
 		
 		$this->_engine = new Smarty();
 		
-		$this->_engine->template_dir = $config->internal_dir . '/smarty_templates/';
+		$this->_engine->template_dir = $config->view_dir;
+		$this->_engine->config_dir   = $config->app_dir . '/smarty_configs/';
 		$this->_engine->compile_dir  = $config->internal_dir . '/smarty_templates_c/';
-		$this->_engine->config_dir   = $config->internal_dir . '/smarty_configs/';
 		$this->_engine->cache_dir    = $config->internal_dir . '/smarty_cache/';
 		$this->_engine->plugins_dir = array(
 			SMARTY_DIR . '/plugins',                   // just under SMARTY_DIR
-			$config->internal_dir . '/smarty_plugins/' // my pulgin
+			$config->app_dir . '/smarty_plugins/' // my pulgin
 		);
 		
 		// for debug
