@@ -9,7 +9,10 @@ class Config {
 		$this->_prop['public_dir'] = realpath($public_dir);
 		$this->_prop['internal_dir'] = __DIR__;
 		
-		$this->_prop['app_class_dir'] = $this->internal_dir('/classes');
+		$this->_prop['app_dir'] = $this->internal_dir('/app');
+		$this->_prop['app_class_dir'] = $this->internal_dir('/app/classes');
+		$this->_prop['core_dir'] = $this->internal_dir('/core');
+		$this->_prop['core_class_dir'] = $this->internal_dir('/core/classes');
 		$this->_prop['vendor_dir'] = $this->internal_dir('/vendor');
 		
 		$this->_prop['server_name'] = $_SERVER['SERVER_NAME'];
@@ -65,14 +68,24 @@ class Config {
 		$lower = strtolower($class_name);
 		$arr = explode('_', $lower);
 		$file = implode('/', $arr);
-		$path = $this->_prop['app_class_dir'] . '/' . $file . '.class.php';
-		if ( !is_file($path) ) {
-			//trigger_error('file ' . $file . ' not found', E_USER_ERROR);
-			return false;
+		
+		$path = $this->_prop['core_class_dir'] . '/' . $file . '.class.php';
+		if ( is_file($path) ) {
+			require_once($path);
+			if ( !class_exists($class_name) ) {
+				trigger_error('class ' . $class_name . ' not found', E_USER_ERROR);
+			}
 		}
-		require_once($path);
-		if ( !class_exists($class_name) ) {
-			trigger_error('class ' . $class_name . ' not found', E_USER_ERROR);
+		
+		$path = $this->_prop['app_class_dir'] . '/' . $file . '.class.php';
+		if ( is_file($path) ) {
+			//trigger_error('file ' . $file . ' not found', E_USER_ERROR);
+			require_once($path);
+			if ( !class_exists($class_name) ) {
+				trigger_error('class ' . $class_name . ' not found', E_USER_ERROR);
+			}
+		} else {
+			return false;
 		}
 		return true;
 	} // function _class_autoload()

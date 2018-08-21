@@ -1,11 +1,6 @@
 <?php
 
-$routing = array(
-	'music/(.*)'   => 'music/detail/$1',
-	'artwork/(.*)' => 'artwork/detail/$1',
-	'preview/(.*)' => 'preview/detail/$1',
-	'iframe/(.*)'  => 'iframe/detail/$1',
-);
+$routing = require($config->app_dir . '/route.inc.php');
 
 if ( !isset($_SERVER['PATH_INFO']) ) {
 	$controller = 'top';
