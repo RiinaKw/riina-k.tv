@@ -58,7 +58,7 @@ class Config {
 		);
 		
 		if ( array_key_exists($class_name, $core_registered_classes) ) {
-			$path = $this->_prop['core_class_dir'] . '/' . $core_registered_classes[$class_name];
+			$path = $this->_prop['core_dir'] . '/' . $core_registered_classes[$class_name];
 			if ( !is_file($path) ) {
 				trigger_error('file ' . $path . ' not found', E_USER_ERROR);
 			}
