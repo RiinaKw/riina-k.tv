@@ -132,7 +132,7 @@ class Config {
 		return realpath(
 			$this->_prop['internal_dir'] . '/' . $dir
 		);
-	} // functiob internal_dir
+	} // function internal_dir()
 	
 	public function route()
 	{
@@ -182,5 +182,5 @@ class Config {
 		} else {
 			trigger_error('class "' . $class . '" has not method "' . $method . '"', E_USER_ERROR);
 		}
-	}
+	} // function route()
 }
