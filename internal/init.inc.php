@@ -34,7 +34,11 @@ class Config {
 			$this->_prop[$name] = $this->internal_dir($dir);
 		}
 		
-		require_once($this->_prop['vendor_dir'] . '/autoload.php');
+		$vendor_autoload_path = realpath($this->_prop['vendor_dir'] . '/autoload.php');
+		if ( !$vendor_autoload_path || !is_file($vendor_autoload_path) ) {
+			trigger_error('vendor autoload not found', E_USER_ERROR);
+		}
+		require_once($vendor_autoload_path);
 		
 		spl_autoload_register( array($this, '_class_autoload') );
 		set_error_handler( array($this, '_error_handle') );

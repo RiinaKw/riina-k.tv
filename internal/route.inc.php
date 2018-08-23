@@ -1,6 +1,10 @@
 <?php
 
-$routing = require($config->app_dir . '/route.inc.php');
+$routing_definition_path = realpath($config->app_dir . '/route.inc.php');
+if ( !$routing_definition_path || !is_file($routing_definition_path) ) {
+	trigger_error('routing definition not found', E_USER_ERROR);
+}
+$routing = require($routing_definition_path);
 
 if ( !isset($_SERVER['PATH_INFO']) ) {
 	$controller = 'top';
