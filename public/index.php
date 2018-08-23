@@ -12,6 +12,4 @@ if ($config->env == 'development') {
 	error_reporting(E_ALL);
 }
 
-require_once($config->vendor_dir . '/autoload.php');
-
-require_once($config->internal_dir . '/route.inc.php');
+$config->route();
