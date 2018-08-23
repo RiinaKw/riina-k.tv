@@ -61,7 +61,7 @@ class HttpForbiddenException extends HttpException {
 	
 	public function __construct($message = null, $code = 403)
 	{
-		$this->title = 'Forbiddent';
+		$this->title = 'Forbidden';
 		$this->code = 403;
 		return parent::__construct($message, $code);
 	}
