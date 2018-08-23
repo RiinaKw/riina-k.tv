@@ -47,7 +47,7 @@ class Config {
 			return;
 		}
 		
-		$registered_classes = array(
+		$core_registered_classes = array(
 			'HttpException' => 'exception.inc.php',
 			'HttpBadRequestException'          => 'exception.inc.php',
 			'HttpForbiddenException'           => 'exception.inc.php',
@@ -57,10 +57,10 @@ class Config {
 			'HttpNotImplementedException'      => 'exception.inc.php',
 		);
 		
-		if ( array_key_exists($class_name, $registered_classes) ) {
-			$path = $this->_prop['app_class_dir'] . '/' . $registered_classes[$class_name];
+		if ( array_key_exists($class_name, $core_registered_classes) ) {
+			$path = $this->_prop['core_class_dir'] . '/' . $core_registered_classes[$class_name];
 			if ( !is_file($path) ) {
-				trigger_error('file ' . $file . ' not found', E_USER_ERROR);
+				trigger_error('file ' . $path . ' not found', E_USER_ERROR);
 			}
 			require_once($path);
 			if ( !class_exists($class_name) ) {
