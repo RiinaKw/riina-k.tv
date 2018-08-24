@@ -22,11 +22,11 @@ class Config {
 		
 		$this->_prop['root_url'] = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'];
 		
-		$env = $this->env( $_SERVER['SERVER_NAME'] );
-		if ( !$env || !is_file($env) ) {
+		$env_path = $this->env_path( $_SERVER['SERVER_NAME'] );
+		if ( !$env_path || !is_file($env_path) ) {
 			trigger_error('environment error: unknown environment ' . $_SERVER['SERVER_NAME'], E_USER_ERROR);
 		}
-		$config = require_once($env);
+		$config = require_once($env_path);
 		$this->_prop['db'] = $config['db'];
 		$this->_prop['env'] = $config['env'];
 		
@@ -160,12 +160,12 @@ class Config {
 		);
 	} // function app_class_path()
 	
-	public function env($server_name)
+	public function env_path($server_name)
 	{
 		return realpath(
 			$this->_prop['env_dir'] . '/' . $server_name . '.inc.php'
 		);
-	} // function env()
+	} // function env_path()
 	
 	public function vendor_path($file)
 	{
