@@ -82,18 +82,20 @@ class Config {
 			require_once($path);
 			if ( !class_exists($class_name) ) {
 				trigger_error('class ' . $class_name . ' not found', E_USER_ERROR);
+			} else {
+				return true;
 			}
 		}
 		
 		$path = $this->app_class_path($file);
 		if ( is_file($path) ) {
-			//trigger_error('file ' . $file . ' not found', E_USER_ERROR);
 			require_once($path);
 			if ( !class_exists($class_name) ) {
 				trigger_error('class ' . $class_name . ' not found', E_USER_ERROR);
 			}
 		} else {
-			return false;
+			trigger_error('file ' . $file . ' not found', E_USER_ERROR);
+			//return false;
 		}
 		return true;
 	} // function _class_autoload()
