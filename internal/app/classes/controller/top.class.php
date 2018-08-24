@@ -16,4 +16,15 @@ class Controller_Top extends Controller {
 		$view->render();
 	}
 	
+	public function action_about()
+	{
+		global $bootstrap;
+		
+		$view = new View_Container('about.tpl.html');
+		$view->title = 'about - rk. tv';
+		$view->page_id = 'page-about';
+		$view->easter_egg = '/artwork/riina';
+		$view->render();
+	}
+	
 }
