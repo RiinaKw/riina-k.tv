@@ -6,7 +6,7 @@
 	</head>
 	<body>
 <?php
-	if ($config->env == 'development') {
+	if ($bootstrap->env == 'development') {
 		var_dump($this);
 	}
 ?>

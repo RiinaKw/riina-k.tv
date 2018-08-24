@@ -4,7 +4,7 @@ class Controller_Preview extends Controller {
 	
 	public function action_detail($arg)
 	{
-		global $config;
+		global $bootstrap;
 		
 		$name = ( isset($arg[0]) ? $arg[0] : '' );
 		$mode = ( isset($arg[1]) ? $arg[1] : '' );
@@ -21,19 +21,19 @@ class Controller_Preview extends Controller {
 				throw new HttpBadRequestException('track name missing');
 			}
 			
-			$model = new Model_Track($config->db);
+			$model = new Model_Track($bootstrap->db);
 			$track = $model->get_by_slug($name);
 			if ( !$track ) {
 				throw new HttpNotFoundException('track "' . $name . '" not exists');
 			}
 			
-			$path = $config->music_dir . '/' . $name . $suffix . $extension;
+			$path = $bootstrap->music_dir . '/' . $name . $suffix . $extension;
 			if ( !file_exists($path) ) {
 				throw new HttpInternalServerErrorException('missing track "' . $name . '"');
 			} else {
 				$size = filesize($path);
 				// output to log
-				$log = new Model_Log( $config->log_dir . '/music.log', 'a' );
+				$log = new Model_Log( $bootstrap->log_dir . '/music.log', 'a' );
 				$log->append($name, $suffix);
 				
 				// output file

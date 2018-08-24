@@ -4,7 +4,7 @@ class Controller_Artwork extends Controller {
 	
 	public function action_detail($arg)
 	{
-		global $config;
+		global $bootstrap;
 		
 		try {
 
@@ -20,7 +20,7 @@ class Controller_Artwork extends Controller {
 				throw new HttpImTeapotException('おれはやかんだ (Easter Egg)');
 			}
 			
-			$path = $config->artwork_dir . '/' . $filename;
+			$path = $bootstrap->artwork_dir . '/' . $filename;
 			if ( !is_file($path) ) {
 				throw new HttpNotFoundException('file "' . $filename . '" not exists');
 			}

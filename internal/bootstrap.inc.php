@@ -1,6 +1,6 @@
 <?php
 
-class Config {
+class Bootstrap {
 	
 	protected $_prop = array();
 	
@@ -230,4 +230,4 @@ class Config {
 			trigger_error('class "' . $class . '" has not method "' . $method . '"', E_USER_ERROR);
 		}
 	} // function route()
-}
+} // class Bootstrap

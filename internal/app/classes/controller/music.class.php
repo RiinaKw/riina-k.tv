@@ -4,9 +4,9 @@ class Controller_Music extends Controller {
 	
 	public function action_index()
 	{
-		global $config;
+		global $bootstrap;
 		
-		$model = new Model_Track($config->db);
+		$model = new Model_Track($bootstrap->db);
 		$categories = $model->get_as_category();
 
 		$view = new View_Container('music.tpl.html');
@@ -19,11 +19,11 @@ class Controller_Music extends Controller {
 	
 	public function action_detail($arg)
 	{
-		global $config;
+		global $bootstrap;
 		
 		$slug = $arg[0];
 		
-		$model = new Model_Track($config->db);
+		$model = new Model_Track($bootstrap->db);
 		$categories = $model->get_as_category();
 		
 		$view = new View_Container('music.tpl.html');

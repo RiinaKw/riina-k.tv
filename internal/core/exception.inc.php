@@ -15,11 +15,11 @@ class HttpException extends Exception {
 	
 	public function __toString()
 	{
-		global $config;
+		global $bootstrap;
 		
 		header( 'HTTP/1.0 ' . $this->code . ' ' . $this->title );
 		
-		if ($config->env == 'production') {
+		if ($bootstrap->env == 'production') {
 			return $this->code . ' ' . get_class($this) . ' ' . $this->title . " '{$this->message}'";
 		} else {
 			return $this->code . ' ' . get_class($this) . ' ' . $this->title . " '{$this->message}' in {$this->file}({$this->line})\n" . "{$this->getTraceAsString()}";
@@ -28,13 +28,14 @@ class HttpException extends Exception {
 	
 	public function render()
 	{
-		global $config;
+		global $bootstrap;
+		
 		header( 'HTTP/1.0 ' . $this->code . ' ' . $this->title );
 		
 		$view = new View('error.tpl.php');
 		$view->title = $this->title;
 		
-		if ($config->env == 'production') {
+		if ($bootstrap->env == 'production') {
 			$view->message = $this->message;
 			$view->trace = '';
 		} else {

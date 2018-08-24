@@ -4,12 +4,12 @@ mb_language('ja');
 mb_internal_encoding('UTF-8');
 mb_regex_encoding('UTF-8');
 
-require_once('../internal/config.inc.php');
-$config =  new Config(__DIR__);
+require_once('../internal/bootstrap.inc.php');
+$bootstrap =  new Bootstrap(__DIR__);
 
-if ($config->env == 'development') {
+if ($bootstrap->env == 'development') {
 	ini_set( 'display_errors', 1 );
 	error_reporting(E_ALL);
 }
 
-$config->route();
+$bootstrap->route();

@@ -4,7 +4,7 @@ class Controller_About extends Controller {
 	
 	public function action_index()
 	{
-		global $config;
+		global $bootstrap;
 		
 		$view = new View_Container('about.tpl.html');
 		$view->title = 'about - rk. tv';

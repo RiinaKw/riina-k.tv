@@ -32,9 +32,9 @@ class View {
 	
 	public function render()
 	{
-		global $config;
+		global $bootstrap;
 		
-		$path = $config->view_path($this->_template);
+		$path = $bootstrap->view_path($this->_template);
 		
 		require_once($path);
 	} // function render()

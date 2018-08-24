@@ -6,21 +6,21 @@ class View_Smarty extends View {
 	
 	public function __construct($template = null)
 	{
-		global $config;
+		global $bootstrap;
 		
 		$this->_engine = new Smarty();
 		
-		$this->_engine->template_dir = $config->view_dir;
-		$this->_engine->config_dir   = $config->app_path('smarty_configs');
-		$this->_engine->compile_dir  = $config->internal_path('smarty_templates_c');
-		$this->_engine->cache_dir    = $config->internal_path('smarty_cache');
+		$this->_engine->template_dir = $bootstrap->view_dir;
+		$this->_engine->config_dir   = $bootstrap->app_path('smarty_configs');
+		$this->_engine->compile_dir  = $bootstrap->internal_path('smarty_templates_c');
+		$this->_engine->cache_dir    = $bootstrap->internal_path('smarty_cache');
 		$this->_engine->plugins_dir = array(
 			SMARTY_DIR . '/plugins',            // just under SMARTY_DIR
-			$config->app_path('smarty_plugins') // my pulgin
+			$bootstrap->app_path('smarty_plugins') // my pulgin
 		);
 		
 		// for debug
-		if ($config->user['env'] != 'production') {
+		if ($bootstrap->env != 'production') {
 			$this->_engine->error_reporting = E_ALL;
 			$this->_engine->force_compile = true;
 		}

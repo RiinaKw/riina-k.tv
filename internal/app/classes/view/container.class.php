@@ -6,13 +6,13 @@ class View_Container extends View_Smarty {
 	
 	public function __construct($template = null)
 	{
-		global $config;
+		global $bootstrap;
 		
 		parent::__construct($template);
 		
 		$this->_container_engine = new View_Smarty('layout.tpl.html');
 		
-		$this->root = $config->root_url;
+		$this->root = $bootstrap->root_url;
 		$this->path = $_SERVER['REQUEST_URI'];
 	} // function __construct()
 	

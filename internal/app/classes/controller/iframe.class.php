@@ -4,20 +4,20 @@ class Controller_Iframe extends Controller {
 	
 	public function action_detail($arg)
 	{
-		global $config;
+		global $bootstrap;
 		
 		$slug = ( isset($arg[0]) ? $arg[0] : '' );
 		if ( !$slug ) {
 			throw new HttpBadRequestException('slug missing');
 		}
 		
-		$model = new Model_Track($config->db);
+		$model = new Model_Track($bootstrap->db);
 		$track = $model->get_by_slug($slug);
 		if ( !$track ) {
 			throw new HttpNotFoundException('track "' . $slug . '" not exists');
 		}
 		
-		$preview_url = $config->root_url . '/preview/' . $arg[0];
+		$preview_url = $bootstrap->root_url . '/preview/' . $arg[0];
 		$download_url = $preview_url . '/download';
 
 		$view = new View_Smarty('iframe.tpl.html');
