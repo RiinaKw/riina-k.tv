@@ -1,6 +1,6 @@
 <?php
 
-class Controller_Artwork extends Controller {
+class Controller_Artwork extends Controller_Base {
 	
 	public function action_detail($arg)
 	{

@@ -172,7 +172,7 @@ class Bootstrap {
 	public function app_config_path($file)
 	{
 		return realpath(
-			$this->_prop['app_config_dir'] . '/' . $file . '.inc.php'
+			$this->_prop['app_config_dir'] . '/' . $file
 		);
 	} // function app_config_path()
 	
@@ -199,7 +199,7 @@ class Bootstrap {
 	
 	public function route()
 	{
-		$routing_definition_path = $this->app_config_path('routes');
+		$routing_definition_path = $this->app_config_path('routes.inc.php');
 		if ( $routing_definition_path && is_file($routing_definition_path) ) {
 			$routing = require($routing_definition_path);
 		} else {

@@ -11,7 +11,7 @@ class View_Smarty extends View {
 		$this->_engine = new Smarty();
 		
 		$this->_engine->template_dir = $bootstrap->view_dir;
-		$this->_engine->config_dir   = $bootstrap->app_path('smarty_configs');
+		$this->_engine->config_dir   = $bootstrap->app_config_path('conf');
 		$this->_engine->compile_dir  = $bootstrap->internal_path('smarty_templates_c');
 		$this->_engine->cache_dir    = $bootstrap->internal_path('smarty_cache');
 		$this->_engine->plugins_dir = array(
