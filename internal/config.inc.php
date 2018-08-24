@@ -51,15 +51,11 @@ class Config {
 			return;
 		}
 		
-		$core_registered_classes = array(
-			'HttpException' => 'exception.inc.php',
-			'HttpBadRequestException'          => 'exception.inc.php',
-			'HttpForbiddenException'           => 'exception.inc.php',
-			'HttpNotFoundException'            => 'exception.inc.php',
-			'HttpImTeapotException'            => 'exception.inc.php',
-			'HttpInternalServerErrorException' => 'exception.inc.php',
-			'HttpNotImplementedException'      => 'exception.inc.php',
-		);
+		$registered_classes_path = $this->core_path('config/registered_classes.inc.php');
+		if ( !$registered_classes_path || !is_file($registered_classes_path) ) {
+			trigger_error('file "registered_classes.inc.php" not found', E_USER_ERROR);
+		}
+		$core_registered_classes = require($registered_classes_path);
 		
 		if ( array_key_exists($class_name, $core_registered_classes) ) {
 			$path = $this->core_path( $core_registered_classes[$class_name] );
