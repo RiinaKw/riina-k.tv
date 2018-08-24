@@ -9,16 +9,18 @@ class Bootstrap {
 		$this->_prop['public_dir'] = realpath($public_dir);
 		$this->_prop['internal_dir'] = __DIR__;
 		
-		$this->_prop['app_dir']        = $this->internal_path('/app');
-		$this->_prop['app_class_dir']  = $this->internal_path('/app/classes');
-		$this->_prop['env_dir']        = $this->internal_path('/app/env');
+		$this->_prop['app_dir']          = $this->internal_path('/app');
+		$this->_prop['app_classes_dir']  = $this->internal_path('/app/classes');
+		$this->_prop['app_config_dir']   = $this->internal_path('/app/config');
+		$this->_prop['env_dir']          = $this->internal_path('/app/env');
 		
-		$this->_prop['core_dir']       = $this->internal_path('/core');
-		$this->_prop['core_class_dir'] = $this->internal_path('/core/classes');
+		$this->_prop['core_dir']         = $this->internal_path('/core');
+		$this->_prop['core_classes_dir'] = $this->internal_path('/core/classes');
+		$this->_prop['core_config_dir']  = $this->internal_path('/core/config');
 		
-		$this->_prop['view_dir']       = $this->internal_path('/app/view');
+		$this->_prop['view_dir']         = $this->internal_path('/app/view');
 		
-		$this->_prop['vendor_dir']     = $this->internal_path('/vendor');
+		$this->_prop['vendor_dir']       = $this->internal_path('/vendor');
 		
 		$this->_prop['root_url'] = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'];
 		
@@ -26,11 +28,11 @@ class Bootstrap {
 		if ( !$env_path || !is_file($env_path) ) {
 			trigger_error('environment error: unknown environment ' . $_SERVER['SERVER_NAME'], E_USER_ERROR);
 		}
-		$config = require_once($env_path);
-		$this->_prop['db'] = $config['db'];
-		$this->_prop['env'] = $config['env'];
+		$env = require_once($env_path);
+		$this->_prop['db'] = $env['db'];
+		$this->_prop['env'] = $env['env'];
 		
-		foreach ($config['dir'] as $name => $dir) {
+		foreach ($env['dir'] as $name => $dir) {
 			$this->_prop[$name] = $this->internal_path($dir);
 		}
 		
@@ -51,7 +53,7 @@ class Bootstrap {
 			return;
 		}
 		
-		$registered_classes_path = $this->core_path('config/registered_classes.inc.php');
+		$registered_classes_path = $this->core_config_path('registered_classes');
 		if ( !$registered_classes_path || !is_file($registered_classes_path) ) {
 			trigger_error('file "registered_classes.inc.php" not found', E_USER_ERROR);
 		}
@@ -73,7 +75,7 @@ class Bootstrap {
 		$arr = explode('_', $lower);
 		$file = implode('/', $arr);
 		
-		$path = $this->core_class_path($file);
+		$path = $this->core_classes_path($file);
 		if ( is_file($path) ) {
 			require_once($path);
 			if ( !class_exists($class_name) ) {
@@ -83,7 +85,7 @@ class Bootstrap {
 			}
 		}
 		
-		$path = $this->app_class_path($file);
+		$path = $this->app_classes_path($file);
 		if ( is_file($path) ) {
 			require_once($path);
 			if ( !class_exists($class_name) ) {
@@ -139,12 +141,19 @@ class Bootstrap {
 		);
 	} // function core_path()
 	
-	public function core_class_path($file)
+	public function core_classes_path($file)
 	{
 		return realpath(
-			$this->_prop['core_class_dir'] . '/' . $file . '.class.php'
+			$this->_prop['core_classes_dir'] . '/' . $file . '.class.php'
 		);
-	} // function core_class_path()
+	} // function core_classes_path()
+	
+	public function core_config_path($file)
+	{
+		return realpath(
+			$this->_prop['core_config_dir'] . '/' . $file . '.inc.php'
+		);
+	} // function core_config_path()
 	
 	public function app_path($file)
 	{
@@ -153,12 +162,19 @@ class Bootstrap {
 		);
 	} // function app_path()
 	
-	public function app_class_path($file)
+	public function app_classes_path($file)
 	{
 		return realpath(
-			$this->_prop['app_class_dir'] . '/' . $file . '.class.php'
+			$this->_prop['app_classes_dir'] . '/' . $file . '.class.php'
 		);
-	} // function app_class_path()
+	} // function app_classes_path()
+	
+	public function app_config_path($file)
+	{
+		return realpath(
+			$this->_prop['app_config_dir'] . '/' . $file . '.inc.php'
+		);
+	} // function app_config_path()
 	
 	public function env_path($server_name)
 	{
@@ -183,7 +199,7 @@ class Bootstrap {
 	
 	public function route()
 	{
-		$routing_definition_path = $this->app_path('route.inc.php');
+		$routing_definition_path = $this->app_config_path('routes');
 		if ( !$routing_definition_path || !is_file($routing_definition_path) ) {
 			trigger_error('routing definition not found', E_USER_ERROR);
 		}
