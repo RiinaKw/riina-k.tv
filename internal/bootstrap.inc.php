@@ -22,7 +22,7 @@ class Bootstrap {
 		
 		$this->_prop['vendor_dir']       = $this->internal_path('/vendor');
 		
-		$this->_prop['root_url'] = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'];
+		$this->_prop['root_url'] = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['SERVER_NAME'];
 		
 		$env_path = $this->env_path( $_SERVER['SERVER_NAME'] );
 		if ( !$env_path || !is_file($env_path) ) {
@@ -200,10 +200,10 @@ class Bootstrap {
 	public function route()
 	{
 		$routing_definition_path = $this->app_config_path('routes');
-		if ( !$routing_definition_path || !is_file($routing_definition_path) ) {
-			$routing = null;
-		} else {
+		if ( $routing_definition_path && is_file($routing_definition_path) ) {
 			$routing = require($routing_definition_path);
+		} else {
+			$routing = null;
 		}
 		
 		if ( !isset($_SERVER['PATH_INFO']) ) {
