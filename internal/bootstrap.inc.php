@@ -201,10 +201,11 @@ class Bootstrap {
 	{
 		$routing_definition_path = $this->app_config_path('routes');
 		if ( !$routing_definition_path || !is_file($routing_definition_path) ) {
-			trigger_error('routing definition not found', E_USER_ERROR);
+			$routing = null;
+		} else {
+			$routing = require($routing_definition_path);
 		}
-		$routing = require($routing_definition_path);
-
+		
 		if ( !isset($_SERVER['PATH_INFO']) ) {
 			$controller = 'top';
 			$action = 'index';
@@ -212,11 +213,13 @@ class Bootstrap {
 		} else {
 			$path = substr($_SERVER['PATH_INFO'], 1);
 			
-			foreach ($routing as $key => $value) {
-				$re = '/^' . str_replace('/', '\/', $key) . '/';
-				if ( preg_match($re, $path) ) {
-					$path = preg_replace($re, $value, $path);
-					break;
+			if ($routing) {
+				foreach ($routing as $key => $value) {
+					$re = '/^' . str_replace('/', '\/', $key) . '/';
+					if ( preg_match($re, $path) ) {
+						$path = preg_replace($re, $value, $path);
+						break;
+					}
 				}
 			}
 			
