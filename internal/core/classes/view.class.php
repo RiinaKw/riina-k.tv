@@ -34,7 +34,7 @@ class View {
 	{
 		global $config;
 		
-		$path = $config->view_dir . '/' . $this->_template;
+		$path = $config->view_path($this->_template);
 		
 		require_once($path);
 	} // function render()

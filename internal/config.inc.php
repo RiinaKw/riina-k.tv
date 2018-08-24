@@ -9,32 +9,32 @@ class Config {
 		$this->_prop['public_dir'] = realpath($public_dir);
 		$this->_prop['internal_dir'] = __DIR__;
 		
-		$this->_prop['app_dir'] = $this->internal_dir('/app');
-		$this->_prop['app_class_dir'] = $this->internal_dir('/app/classes');
+		$this->_prop['app_dir']        = $this->internal_path('/app');
+		$this->_prop['app_class_dir']  = $this->internal_path('/app/classes');
+		$this->_prop['env_dir']        = $this->internal_path('/app/env');
 		
-		$this->_prop['core_dir'] = $this->internal_dir('/core');
-		$this->_prop['core_class_dir'] = $this->internal_dir('/core/classes');
+		$this->_prop['core_dir']       = $this->internal_path('/core');
+		$this->_prop['core_class_dir'] = $this->internal_path('/core/classes');
 		
-		$this->_prop['view_dir'] = $this->internal_dir('/app/view');
+		$this->_prop['view_dir']       = $this->internal_path('/app/view');
 		
-		$this->_prop['vendor_dir'] = $this->internal_dir('/vendor');
+		$this->_prop['vendor_dir']     = $this->internal_path('/vendor');
 		
-		$this->_prop['server_name'] = $_SERVER['SERVER_NAME'];
 		$this->_prop['root_url'] = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'];
 		
-		$env = realpath($this->_prop['app_dir'] . '/env/' . $this->_prop['server_name'] . '.inc.php');
+		$env = $this->env( $_SERVER['SERVER_NAME'] );
 		if ( !$env || !is_file($env) ) {
-			trigger_error('environment error: unknown environment ' . $this->_prop['server_name'], E_USER_ERROR);
+			trigger_error('environment error: unknown environment ' . $_SERVER['SERVER_NAME'], E_USER_ERROR);
 		}
 		$config = require_once($env);
 		$this->_prop['db'] = $config['db'];
 		$this->_prop['env'] = $config['env'];
 		
 		foreach ($config['dir'] as $name => $dir) {
-			$this->_prop[$name] = $this->internal_dir($dir);
+			$this->_prop[$name] = $this->internal_path($dir);
 		}
 		
-		$vendor_autoload_path = realpath($this->_prop['vendor_dir'] . '/autoload.php');
+		$vendor_autoload_path = $this->vendor_path('autoload.php');
 		if ( !$vendor_autoload_path || !is_file($vendor_autoload_path) ) {
 			trigger_error('vendor autoload not found', E_USER_ERROR);
 		}
@@ -62,7 +62,7 @@ class Config {
 		);
 		
 		if ( array_key_exists($class_name, $core_registered_classes) ) {
-			$path = $this->_prop['core_dir'] . '/' . $core_registered_classes[$class_name];
+			$path = $this->core_path( $core_registered_classes[$class_name] );
 			if ( !is_file($path) ) {
 				trigger_error('file ' . $path . ' not found', E_USER_ERROR);
 			}
@@ -77,7 +77,7 @@ class Config {
 		$arr = explode('_', $lower);
 		$file = implode('/', $arr);
 		
-		$path = $this->_prop['core_class_dir'] . '/' . $file . '.class.php';
+		$path = $this->core_class_path($file);
 		if ( is_file($path) ) {
 			require_once($path);
 			if ( !class_exists($class_name) ) {
@@ -85,7 +85,7 @@ class Config {
 			}
 		}
 		
-		$path = $this->_prop['app_class_dir'] . '/' . $file . '.class.php';
+		$path = $this->app_class_path($file);
 		if ( is_file($path) ) {
 			//trigger_error('file ' . $file . ' not found', E_USER_ERROR);
 			require_once($path);
@@ -127,16 +127,65 @@ class Config {
 		}
 	} // function __get()
 
-	protected function internal_dir($dir)
+	public function internal_path($file)
 	{
 		return realpath(
-			$this->_prop['internal_dir'] . '/' . $dir
+			$this->_prop['internal_dir'] . '/' . $file
 		);
-	} // function internal_dir()
+	} // function internal_path()
+	
+	public function core_path($file)
+	{
+		return realpath(
+			$this->_prop['core_dir'] . '/' . $file
+		);
+	} // function core_path()
+	
+	public function core_class_path($file)
+	{
+		return realpath(
+			$this->_prop['core_class_dir'] . '/' . $file . '.class.php'
+		);
+	} // function core_class_path()
+	
+	public function app_path($file)
+	{
+		return realpath(
+			$this->_prop['app_dir'] . '/' . $file
+		);
+	} // function app_path()
+	
+	public function app_class_path($file)
+	{
+		return realpath(
+			$this->_prop['app_class_dir'] . '/' . $file . '.class.php'
+		);
+	} // function app_class_path()
+	
+	public function env($server_name)
+	{
+		return realpath(
+			$this->_prop['env_dir'] . '/' . $server_name . '.inc.php'
+		);
+	} // function env()
+	
+	public function vendor_path($file)
+	{
+		return realpath(
+			$this->_prop['vendor_dir'] . '/' . $file
+		);
+	} // function vendor_path()
+	
+	public function view_path($file)
+	{
+		return realpath(
+			$this->_prop['view_dir'] . '/' . $file
+		);
+	} // function view_path()
 	
 	public function route()
 	{
-		$routing_definition_path = realpath($this->_prop['app_dir'] . '/route.inc.php');
+		$routing_definition_path = $this->app_path('route.inc.php');
 		if ( !$routing_definition_path || !is_file($routing_definition_path) ) {
 			trigger_error('routing definition not found', E_USER_ERROR);
 		}
