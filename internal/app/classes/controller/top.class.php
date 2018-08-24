@@ -16,7 +16,7 @@ class Controller_Top extends Controller_Base {
 		$view->page_id = 'page-top';
 		$view->whatsnew = $whatsnew;
 		$view->render();
-	}
+	} // function action_index()
 	
 	public function action_about()
 	{
@@ -29,6 +29,6 @@ class Controller_Top extends Controller_Base {
 		$view->page_id = 'page-about';
 		$view->easter_egg = '/artwork/riina';
 		$view->render();
-	}
+	} // function action_about()
 	
-}
+} // class Controller_Top

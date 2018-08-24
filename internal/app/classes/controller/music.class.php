@@ -17,7 +17,7 @@ class Controller_Music extends Controller_Base {
 		
 		$view->title = 'music - ' . $this->_config['title_en'];
 		$view->render();
-	}
+	} // function action_index()
 	
 	public function action_detail($arg)
 	{
@@ -38,6 +38,6 @@ class Controller_Music extends Controller_Base {
 		$view->track = $track;
 		$view->title = $track['title'] . ' - ' . $this->_config['title_en'];
 		$view->render();
-	}
+	} // function action_detail()
 	
-}
+} // class Controller_Music

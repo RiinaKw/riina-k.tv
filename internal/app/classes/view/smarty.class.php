@@ -94,4 +94,4 @@ class View_Smarty extends View {
 		}
 	} // function fetch()
 	
-} // class View
+} // class View_Smarty

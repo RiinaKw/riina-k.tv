@@ -296,4 +296,4 @@ class Image {
 		return $this->_output($tmp, $to);
 	} // function png()
 	
-}
+} // class Image

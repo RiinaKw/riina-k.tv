@@ -50,6 +50,6 @@ class Controller_Preview extends Controller_Base {
 			exit;
 			
 		}
-	}
+	} // function action_detail()
 	
-}
+} // class Controller_Preview

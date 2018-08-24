@@ -35,6 +35,6 @@ class Controller_Artwork extends Controller_Base {
 			exit;
 			
 		}
-	}
+	} // function action_detail()
 	
-}
+} // class Controller_Artwork

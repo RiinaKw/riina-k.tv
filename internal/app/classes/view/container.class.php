@@ -23,4 +23,4 @@ class View_Container extends View_Smarty {
 		$this->_container_engine->render();
 	} // function render()
 	
-} // class ViewRiina
+} // class View_Container
