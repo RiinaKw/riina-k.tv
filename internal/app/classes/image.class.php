@@ -84,7 +84,7 @@ class Image {
 			resample('', '') : no change
 			resample('auto', 'auto') : no change
 			resample(100, 'auto') : width as 100px, save the ratio
-			resample('50%', 'auto') : wisth as 50% of original, save the ratio
+			resample('50%', 'auto') : width as 50% of original, save the ratio
 			resample('auto', 200) : height as 200px, save the ratio
 			resample('auto', '50%') : height as 50% of original, save the ratio
 			resample(1000, 800) : width as 1000px, height as 800px, NOT save the ratio
