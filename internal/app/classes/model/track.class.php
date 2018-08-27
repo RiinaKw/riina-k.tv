@@ -4,12 +4,12 @@ class Model_Track extends Model {
 	
 	function get_as_category()
 	{
-		$statement = $this->dbh->prepare('SELECT * FROM categories ORDER BY display_order ASC, id ASC;');
+		$statement = $this->_dbh->prepare('SELECT * FROM categories ORDER BY display_order ASC, id ASC;');
 		$statement->execute();
 
 		$arr = array();
 		foreach ($statement as $category) {
-			$category_statement = $this->dbh->prepare( <<<SELECT
+			$category_statement = $this->_dbh->prepare( <<<SELECT
 	SELECT t.*, a.image_name
 	FROM tracks AS t
 		LEFT JOIN albums a
@@ -32,7 +32,7 @@ SELECT
 	
 	public function get_by_slug($slug)
 	{
-		$statement = $this->dbh->prepare( <<<SELECT
+		$statement = $this->_dbh->prepare( <<<SELECT
 	SELECT t.*, a.image_name
 	FROM tracks AS t
 		LEFT JOIN albums a
