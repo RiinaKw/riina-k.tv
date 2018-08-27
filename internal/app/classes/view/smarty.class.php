@@ -57,7 +57,7 @@ class View_Smarty extends View {
 		$this->_engine->assign($param);
 	} // function assign()
 	
-	protected function _acceptable_template()
+	protected function _require_template()
 	{
 		if ( !$this->_template ) {
 			throw new Exception('template is not assigned.');
@@ -76,22 +76,20 @@ class View_Smarty extends View {
 			}
 		}
 		return true;
-	} // function _acceptable_template()
+	} // function _require_template()
 	
 	public function render()
 	{
-		if ( $this->_acceptable_template() ) {
-			$this->_engine->assign($this->_prop);
-			$this->_engine->display($this->_template);
-		}
+		$this->_require_template();
+		$this->_engine->assign($this->_prop);
+		$this->_engine->display($this->_template);
 	} // function render()
 	
 	public function fetch()
 	{
-		if ( $this->_acceptable_template() ) {
-			$this->_engine->assign($this->_prop);
-			return $this->_engine->fetch($this->_template);
-		}
+		$this->_require_template();
+		$this->_engine->assign($this->_prop);
+		return $this->_engine->fetch($this->_template);
 	} // function fetch()
 	
 } // class View_Smarty

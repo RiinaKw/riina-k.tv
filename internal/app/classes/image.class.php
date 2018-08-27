@@ -193,7 +193,7 @@ class Image {
 	
 	public function sharp()
 	{
-		$this->require_resource();
+		$this->_require_resource();
 		
 		$matrix  = array(
 			array( 0.0, -1.0,  0.0),
@@ -213,7 +213,7 @@ class Image {
 	
 	public function pixelate($size)
 	{
-		$this->require_resource();
+		$this->_require_resource();
 		imagefilter($this->resource, IMG_FILTER_PIXELATE, $size, false);
 		return $this;
 	} // function pixelate()
@@ -265,16 +265,16 @@ class Image {
 		}
 	} // function thru()
 	
-	protected function require_resource()
+	protected function _require_resource()
 	{
 		if ( !$this->resource ) {
 			throw new HttpBadRequestException('resource not created');
 		}
-	} // function require_resource()
+	} // function _require_resource()
 	
 	public function jpeg($quality = 75, $to = null)
 	{
-		$this->require_resource();
+		$this->_require_resource();
 		$tmp = $this->_tempnam();
 		imagejpeg($this->resource, $tmp, $quality);
 		return $this->_output($tmp, $to);
@@ -282,7 +282,7 @@ class Image {
 	
 	public function gif($to = null)
 	{
-		$this->require_resource();
+		$this->_require_resource();
 		$tmp = $this->_tempnam();
 		imagegif($this->resource, $tmp);
 		return $this->_output($tmp, $to);
@@ -290,7 +290,7 @@ class Image {
 	
 	public function png($quality = 6, $to = null)
 	{
-		$this->require_resource();
+		$this->_require_resource();
 		$tmp = $this->_tempnam();
 		imagepng($this->resource, $tmp, $quality);
 		return $this->_output($tmp, $to);
