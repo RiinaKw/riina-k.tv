@@ -20,7 +20,7 @@ class Controller_Artwork extends Controller_Base {
 				throw new HttpImTeapotException('おれはやかんだ (Easter Egg)');
 			}
 			
-			$path = $bootstrap->artwork_dir . '/' . $filename;
+			$path = $bootstrap->user_path('artwork', $filename);
 			if ( !is_file($path) ) {
 				throw new HttpNotFoundException('file "' . $filename . '" not exists');
 			}

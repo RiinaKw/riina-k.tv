@@ -27,13 +27,15 @@ class Controller_Preview extends Controller_Base {
 				throw new HttpNotFoundException('track "' . $name . '" not exists');
 			}
 			
-			$path = $bootstrap->music_dir . '/' . $name . $suffix . $extension;
+			$filename = $name . $suffix . $extension;
+			$path = $bootstrap->user_path('music', $filename);
 			if ( !file_exists($path) ) {
 				throw new HttpInternalServerErrorException('missing track "' . $name . '"');
 			} else {
 				$size = filesize($path);
 				// output to log
-				$log = new Model_Log( $bootstrap->log_dir . '/music.log', 'a' );
+				$log_path = $bootstrap->user_path('log', 'music.log');
+				$log = new Model_Log($log_path, 'a');
 				$log->append($name, $suffix);
 				
 				// output file

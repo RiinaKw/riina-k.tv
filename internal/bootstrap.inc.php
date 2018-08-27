@@ -197,6 +197,14 @@ class Bootstrap {
 		);
 	} // function view_path()
 	
+	public function user_path($dir, $file)
+	{
+		$dir .= '_dir';
+		return realpath(
+			$this->_prop[$dir] . '/' . $file
+		);
+	}
+	
 	public function route()
 	{
 		$routing_definition_path = $this->app_config_path('routes.inc.php');
