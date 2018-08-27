@@ -1,13 +1,13 @@
 <?php
 
-function smarty_modifier_indent2($strInput, $nWidth=1, $indentString="\t")
+function smarty_modifier_indent2($input, $width=1, $indentString="\t")
 {
-	if ( $nWidth < 0 )
-		return $strInput;
+	if ( $width < 0 )
+		return $input;
 	
-	$strIndent = str_repeat( $indentString, $nWidth );
-	$strInput = str_replace( "\n", ( "\n" . $strIndent ), $strInput );
-	return $strInput;
+	$indent = str_repeat( $indentString, $width );
+	$input = str_replace( "\n", ( "\n" . $indent ), $input );
+	return $input;
 }
 
 ?>
