@@ -30,7 +30,7 @@ class View_Smarty extends View {
 		$this->_engine->right_delimiter = '}}';
 		
 		// register prefilter
-		$this->_engine->registerFilter( "pre", array('View_Smarty', '_uniform_charcode') );
+		$this->_engine->registerFilter( "pre", array(__CLASS__, '_uniform_charcode') );
 		
 		// add conf
 		$this->_engine->configLoad('riina-k.tv.conf');
