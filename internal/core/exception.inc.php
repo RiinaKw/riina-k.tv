@@ -33,7 +33,7 @@ class HttpException extends Exception {
 		header( 'HTTP/1.0 ' . $this->code . ' ' . $this->title );
 		
 		$view = new View('error.tpl.php');
-		$view->title = $this->title;
+		$view->title = $this->code . ' ' . $this->title;
 		
 		if ($bootstrap->env == 'production') {
 			$view->message = $this->message;
@@ -104,10 +104,10 @@ class HttpInternalServerErrorException extends HttpException {
 
 class HttpNotImplementedException extends HttpException {
 	
-	public function __construct($message = null, $code = 500)
+	public function __construct($message = null, $code = 501)
 	{
 		$this->title = 'Not Implemented';
-		$this->code = 500;
+		$this->code = 501;
 		parent::__construct($message, $code);
 	}
 	

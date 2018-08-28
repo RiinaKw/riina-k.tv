@@ -105,8 +105,9 @@ class Bootstrap {
 	
 	public function _exception_handle($e)
 	{
+		
 		$view = new View('error.tpl.php');
-		$view->title = $e->getMessage();
+		$view->title = '404 ' . $e->getMessage();
 		
 		if ($this->env == 'production') {
 			$view->message = $e->getMessage();
@@ -115,6 +116,8 @@ class Bootstrap {
 			$view->message = $e->getMessage() . ' in ' . $e->getFile() . '(' . $e->getLine() . ')';
 			$view->trace = $e->getTraceAsString();
 		}
+		
+		header( 'HTTP/1.0 404 ' . $this->title );
 		$view->render();
 	} // function _exception_handle()
 	
