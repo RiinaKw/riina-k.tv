@@ -707,8 +707,7 @@ function closeTrack(param)
 			// background fade out
 			$("#popup-background").css(
 				{
-					zIndex: 0,
-					cursor: "default"
+					zIndex: 0
 				}
 			).fadeTo(100, 0, function(){
 				$("#popup-background").hide();
