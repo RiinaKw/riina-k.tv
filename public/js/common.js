@@ -87,15 +87,7 @@ function init(){
 			closeTrack({
 				track: $(".track.active")
 			});
-		}).css(
-			{
-				position: "absolute",
-				height: $(document).height(),
-				top: -$("#track-list").offset().top + $(document).scrollTop(),
-				left: -$("#track-list").offset().left - $("#outer").offset().left,
-				width: $(window).width()
-			}
-		);
+		});
 		
 		$(".track").on({
 			// hover
@@ -282,17 +274,6 @@ function init(){
 	}
 	
 	$(window).on("scroll", function(){
-		if ( $("#popup-background").length ) {
-			$("#popup-background").css(
-				{
-					position: "absolute",
-					width: $(window).width(),
-					height: $(window).height(),
-					left: -$("#track-list").offset().left - $("#outer").offset().left,
-					top: -$("#track-list").offset().top + $(document).scrollTop()
-				}
-			);
-		}
 		debug();
 	});
 	
@@ -374,15 +355,6 @@ function resizeHandler()
 		});
 	}
 	
-	$("#popup-background").css(
-		{
-			cursor: "pointer",
-		//	position: "absolute",
-			top: $(window).scrollTop() - $("main").offset().top,
-			height: $(window).height()
-		}
-	);
-	
 	if ( $(window).width() >= 760 ) {
 		$("#nav-music ol").hide();
 	}
@@ -459,7 +431,7 @@ function openTrack(param)
 		if ( $background.is(":hidden") ) {
 			$background.stop(false, false).css(
 				{
-					height: $(window).height(),
+			//		height: $(document).height(),
 					zIndex: 5,
 					opacity: 0
 				}
