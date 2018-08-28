@@ -786,17 +786,6 @@ function loadPage(nextUrl, curUrl, popstate)
 			if ( $("article.active").length ) {
 				closeTrack({
 					track: $("article.active"),
-					popstate: popstate,
-					success: function(){
-						openTrack({
-							track: $(hash),
-							popstate: popstate
-						});
-					}
-				});
-			} else {
-				openTrack({
-					track: $(hash),
 					popstate: popstate
 				});
 			}
