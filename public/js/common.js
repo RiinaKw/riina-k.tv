@@ -424,175 +424,172 @@ function openTrack(param)
 	$article.addClass("animating");
 	$(".content", $article).css("z-index", 10);
 	
-	$.globalQueue
-	.queue(function(){
-		// background fade in
-		var $background = $("#popup-background");
-		if ( $background.is(":hidden") ) {
-			$background.stop(false, false).css(
-				{
-			//		height: $(document).height(),
-					zIndex: 5,
-					opacity: 0
-				}
-			).show().fadeTo(300, 0.8, function(){});
+	// background fade in
+	var $background = $("#popup-background");
+	$background.stop(false, false).css(
+		{
+			zIndex: 5,
+			opacity: 0,
+			display: "block"
 		}
-		return $background;
-	})
-	.queue(function(){
-		var $content = $(".content", $article);
-		var $iconbox = $(".iconbox", $article);
-		if ( $iconbox.length == 0 ) {
-			$iconbox = $('<div class="iconbox" />').prependTo($content);
-			if ( $("img", $iconbox).length == 0 ) {
-				var width = 200;
-				var height = 200;
-				if ($(window).width() < 760) {
-					width = "26.5vw";
-					height = "26.5vw";
+	).show().fadeTo(300, 0.8, function(){
+		$.globalQueue
+		.queue(function(){
+			$background.show();
+			var $content = $(".content", $article);
+			var $iconbox = $(".iconbox", $article);
+			if ( $iconbox.length == 0 ) {
+				$iconbox = $('<div class="iconbox" />').prependTo($content);
+				if ( $("img", $iconbox).length == 0 ) {
+					var width = 200;
+					var height = 200;
+					if ($(window).width() < 760) {
+						width = "26.5vw";
+						height = "26.5vw";
+					}
+					$iconbox.empty()
+						.css({
+							position: "absolute",
+							left: 0,
+							top: 0,
+							width: width,
+							height: height,
+							opacity: 1,
+							display: "block"
+						})
+						.prepend( $("img", $article).clone().show() );
 				}
-				$iconbox.empty()
-					.css({
-						position: "absolute",
-						left: 0,
-						top: 0,
-						width: width,
-						height: height,
-						opacity: 1,
-						display: "block"
-					})
-					.prepend( $("img", $article).clone().show() );
 			}
-		}
-		var $innerHeader = $(".content header", $article);
-		if ( $innerHeader.length == 0 ) {
-			var $orgHeader = $(".track-container > header", $article);
-			$innerHeader = $('<header />').prependTo( $(".content-inner", $article) );
-			$("> a > *", $orgHeader).not("a").not("img").each(function(){
-				$innerHeader.append( $(this).clone().show() );
-			});
-		}
-		$(".track-container > header *", $article).not("a").not("img").hide();
-		
-		// show iconbox
-		var width = 600;
-		if ($(window).width() < 760) {
-			width = "79.5vw";
-		}
-		return $content.css({opacity:0}).show().animate(
-			{
-				width: width,
-				left: 0,
-				opacity: 1
-			},
-			{ duration: 300 }
-		);
-	})
-	.queue(function(){
-		var pos = $article.position();
-		var duration = ( pos.left ? 600 : 0 );
-		var containerOffset = $article.parents(".category-container").offset();
-		var articleOffset = $article.offset();
-		$(".iconbox", $article).show().css("opacity", 1);
-		$(".content > *", $article).show();
-		// cover slide in
-		return $(".content", $article).show().animate(
-			{ left: containerOffset.left - articleOffset.left },
-			{ duration: duration }
-		);
-	})
-	.queue(function(){
-		return $(".animating *").fadeTo(500, 1);
-	})
-	.queue(function(){
-		if ( $article.hasClass("animating") ) {
-			$article.removeClass("animating");
-			if ( !$article.hasClass("active") ) {
-				//var url = location.href.split("#")[0] + "#" + $article.attr("id");
-				var url = "/music/" + $article.attr("id").split("-")[1];
-				if ( !param.popstate ) {
-					window.history.pushState(null, null, url);
-				}
-				currentUrl = url;
-				document.title = $("h4", $article).html() + " - " + $("h1 a").html();
-				$article.addClass("active");
-			}
-			// close button
-			$close = $(".close", $article);
-			if ( !$close.length ) {
-				$close = $("<div />").addClass("close").appendTo( $(".iconbox", $article) );
-				$close.html("close").css("opacity", 0).fadeTo(200, 0.8);
-				$close.on("click", function(){
-					debug("close track");
-					closeTrack({
-						track: $(this).parents(".track")
-					});
+			var $innerHeader = $(".content header", $article);
+			if ( $innerHeader.length == 0 ) {
+				var $orgHeader = $(".track-container > header", $article);
+				$innerHeader = $('<header />').prependTo( $(".content-inner", $article) );
+				$("> a > *", $orgHeader).not("a").not("img").each(function(){
+					$innerHeader.append( $(this).clone().show() );
 				});
 			}
-			// soundcloud fade in
-			var iframeUrl = $("a.meta", $article).data("iframe");
-			var previewUrl = $("a.meta", $article).data("preview");
-			var $iframeWrapper = $(".iframe-wrapper", $article);
-			if ( $iframeWrapper.length == 0 ) {
-				$(".content", $article).append('<div class="iframe-wrapper" width="600" height="200" style="" />');
-				$iframeWrapper = $(".iframe-wrapper", $article).show(400);
+			$(".track-container > header *", $article).not("a").not("img").hide();
+			
+			// show iconbox
+			var width = 600;
+			if ($(window).width() < 760) {
+				width = "79.5vw";
 			}
-			if (iframeUrl) {
-				// stop mp3
-				var audio = $("iframe.preview");
-				for (idx in track) {
-					var track = audio[idx];
-					track.pause();
-					track.currentTime = 0;
+			return $content.css({opacity:0}).show().animate(
+				{
+					width: width,
+					left: 0,
+					opacity: 1
+				},
+				{ duration: 300 }
+			);
+		})
+		.queue(function(){
+			var pos = $article.position();
+			var duration = ( pos.left ? 600 : 0 );
+			var containerOffset = $article.parents(".category-container").offset();
+			var articleOffset = $article.offset();
+			$(".iconbox", $article).show().css("opacity", 1);
+			$(".content > *", $article).show();
+			// cover slide in
+			return $(".content", $article).show().animate(
+				{ left: containerOffset.left - articleOffset.left },
+				{ duration: duration }
+			);
+		})
+		.queue(function(){
+			return $(".animating *").fadeTo(500, 1);
+		})
+		.queue(function(){
+			if ( $article.hasClass("animating") ) {
+				$article.removeClass("animating");
+				if ( !$article.hasClass("active") ) {
+					//var url = location.href.split("#")[0] + "#" + $article.attr("id");
+					var url = "/music/" + $article.attr("id").split("-")[1];
+					if ( !param.popstate ) {
+						window.history.pushState(null, null, url);
+					}
+					currentUrl = url;
+					document.title = $("h4", $article).html() + " - " + $("h1 a").html();
+					$article.addClass("active");
 				}
-				
-				// soundcloud iframe
-				var $iframe = $("iframe", $article);
-				if ( $iframe.length == 0 ) {
-					$iframeWrapper.append('<iframe />');
-					$iframe = $("iframe", $article);
-					$iframe.attr("src", iframeUrl);
-					$iframe.on("load", function(){
-						setTimeout(function(){
-							var iframeElement = $(".track.active iframe").get(0);
-							var widget = SC.Widget(iframeElement);
-							widget.bind(SC.Widget.Events.PLAY, function() {
-								$(".track.active iframe").addClass("playing");
-							});
-							widget.bind(SC.Widget.Events.PAUSE, function() {
-								$("iframe.playing").removeClass("playing");
-							});
-							widget.bind(SC.Widget.Events.FINISH, function() {
-								$("iframe.playing").removeClass("playing");
-							});
-						}, 1000);
+				// close button
+				$close = $(".close", $article);
+				if ( !$close.length ) {
+					$close = $("<div />").addClass("close").appendTo( $(".iconbox", $article) );
+					$close.html("close").css("opacity", 0).fadeTo(200, 0.8);
+					$close.on("click", function(){
+						debug("close track");
+						closeTrack({
+							track: $(this).parents(".track")
+						});
 					});
 				}
-			} else if (previewUrl) {
-				//$iframeWrapper.empty().html('<p class="no-soundcloud">soundcloud not available. <a href="' + previewUrl + '" target="_blank">download here</a></p>');
-				// stop soundcloud
-				var iframeElement = $("iframe.playing").get(0);
-				if (iframeElement) {
-					widget = SC.Widget(iframeElement);
-					widget.pause();
+				// soundcloud fade in
+				var iframeUrl = $("a.meta", $article).data("iframe");
+				var previewUrl = $("a.meta", $article).data("preview");
+				var $iframeWrapper = $(".iframe-wrapper", $article);
+				if ( $iframeWrapper.length == 0 ) {
+					$(".content", $article).append('<div class="iframe-wrapper" width="600" height="200" style="" />');
+					$iframeWrapper = $(".iframe-wrapper", $article).show(400);
 				}
-				
-				var src = previewUrl.replace("preview", "iframe");
-				var $iframe = $("iframe", $article);
-				if ( $iframe.length == 0 ) {
-					$iframeWrapper.append('<iframe />');
-					$iframe = $("iframe", $article);
-					$iframe.addClass("preview").addClass("playing").attr("src", src);
+				if (iframeUrl) {
+					// stop mp3
+					var audio = $("iframe.preview");
+					for (idx in track) {
+						var track = audio[idx];
+						track.pause();
+						track.currentTime = 0;
+					}
+					
+					// soundcloud iframe
+					var $iframe = $("iframe", $article);
+					if ( $iframe.length == 0 ) {
+						$iframeWrapper.append('<iframe />');
+						$iframe = $("iframe", $article);
+						$iframe.attr("src", iframeUrl);
+						$iframe.on("load", function(){
+							setTimeout(function(){
+								var iframeElement = $(".track.active iframe").get(0);
+								var widget = SC.Widget(iframeElement);
+								widget.bind(SC.Widget.Events.PLAY, function() {
+									$(".track.active iframe").addClass("playing");
+								});
+								widget.bind(SC.Widget.Events.PAUSE, function() {
+									$("iframe.playing").removeClass("playing");
+								});
+								widget.bind(SC.Widget.Events.FINISH, function() {
+									$("iframe.playing").removeClass("playing");
+								});
+							}, 1000);
+						});
+					}
+				} else if (previewUrl) {
+					//$iframeWrapper.empty().html('<p class="no-soundcloud">soundcloud not available. <a href="' + previewUrl + '" target="_blank">download here</a></p>');
+					// stop soundcloud
+					var iframeElement = $("iframe.playing").get(0);
+					if (iframeElement) {
+						widget = SC.Widget(iframeElement);
+						widget.pause();
+					}
+					
+					var src = previewUrl.replace("preview", "iframe");
+					var $iframe = $("iframe", $article);
+					if ( $iframe.length == 0 ) {
+						$iframeWrapper.append('<iframe />');
+						$iframe = $("iframe", $article);
+						$iframe.addClass("preview").addClass("playing").attr("src", src);
+					}
+					//$iframeWrapper.empty().html('<p class="no-soundcloud"><audio controls="controls" preload="metadata"><source src="' + previewUrl + '" type="audio/mp3" /></audio></p>');
+				} else {
+					$iframeWrapper.empty().html('<p class="no-soundcloud">listening not available</p>');
 				}
-				//$iframeWrapper.empty().html('<p class="no-soundcloud"><audio controls="controls" preload="metadata"><source src="' + previewUrl + '" type="audio/mp3" /></audio></p>');
-			} else {
-				$iframeWrapper.empty().html('<p class="no-soundcloud">listening not available</p>');
+				debug("open track complete");
 			}
-			debug("open track complete");
-		}
-		return $article;
-		
-	}); // $.globalQueue.queue()
+			return $article;
+			
+		}); // $.globalQueue.queue()
+	});
 	
 } // function openTrack()
 
