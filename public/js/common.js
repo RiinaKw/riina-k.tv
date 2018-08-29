@@ -56,7 +56,7 @@ function init(){
 			$div = $("<div />").attr("id", "popup-background");
 			$("#track-list").append($div);
 		}
-		$("#popup-background").hide();
+		$("#popup-background").hide().addClass("hide");
 		
 		// music category to global navi
 		$("#nav-music ol").remove();
@@ -439,8 +439,9 @@ function openTrack(param)
 			$background.removeClass("hide").addClass("animating").fadeTo(300, 0.8, function(){
 				$background.removeClass("animating").addClass("show");
 			});
+		} else {
+			$background.removeClass("animating").addClass("show");
 		}
-		$background.removeClass("animating").addClass("show");
 		$.globalQueue
 		.queue(function(){
 			$background.show();
