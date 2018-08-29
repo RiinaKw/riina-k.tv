@@ -426,13 +426,21 @@ function openTrack(param)
 	
 	// background fade in
 	var $background = $("#popup-background");
+	
 	$background.stop(false, false).css(
 		{
 			zIndex: 5,
 			opacity: 0,
 			display: "block"
 		}
-	).show().fadeTo(300, 0.8, function(){
+	).show().removeClass("hide").addClass("animating").fadeTo(300, 0.8, function(){
+		// 以下のif文が無いと、「ページ遷移後」かつ「2件目以降のトラックオープン」でbackgroundがfadeしない
+		if ( $background.hasClass("hide") ) {
+			$background.removeClass("hide").addClass("animating").fadeTo(300, 0.8, function(){
+				$background.removeClass("animating").addClass("show");
+			});
+		}
+		$background.removeClass("animating").addClass("show");
 		$.globalQueue
 		.queue(function(){
 			$background.show();
@@ -678,8 +686,8 @@ function closeTrack(param)
 				{
 					zIndex: 0
 				}
-			).fadeTo(100, 0, function(){
-				$("#popup-background").hide();
+			).removeClass("show").addClass("animating").fadeTo(100, 0, function(){
+				$("#popup-background").hide().removeClass("animating").addClass("hide");
 				if (param.success) {
 					param.success();
 				}
