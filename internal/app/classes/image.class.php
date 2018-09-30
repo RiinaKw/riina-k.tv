@@ -6,11 +6,16 @@ class Image {
 	protected $filepath = null;
 	protected $_prop = [];
 	
-	public function __construct($path = '')
+	protected $_temp_dir = '';
+	protected $_temp_prefix = '';
+	
+	public function __construct($path = '', $temp_dir = '/tmp', $temp_prefix = '')
 	{
 		if ($path) {
 			$this->load($path);
 		}
+		$this->_temp_dir = $temp_dir;
+		$this->_temp_prefix = $temp_prefix;
 	} // function __construct()
 	
 	public function __destruct()
@@ -93,6 +98,15 @@ class Image {
 	****/
 	public function resample($new_width, $new_height = null)
 	{
+		$percentage_width = false;
+		$percentage_height = false;
+		if( preg_match('/^(.*)%$/', $new_width, $matches) ) {
+			$percentage_width = $matches[1] / 100;
+		}
+		if( preg_match('/^(.*)%$/', $new_height, $matches) ) {
+			$percentage_height = $matches[1] / 100;
+		}
+		
 		if ( is_numeric($new_width) && !is_numeric($new_height) ) {
 			$new_width = floatval($new_width);
 			// width is numeric, height is NOT numeric
@@ -100,10 +114,9 @@ class Image {
 				// height is auto
 				$percentage = $new_width / $this->_prop['width'];
 				$new_height = $this->_prop['height'] * $percentage;
-			} else if ( preg_match('/^(.*)%$/', $new_height, $matches) ) {
+			} else if ( $percentage_height ) {
 				// height is percentage
-				$percentage = $matches[1] / 100;
-				$new_height = $this->_prop['height'] * $percentage;
+				$new_height = $this->_prop['height'] * $percentage_height;
 			} else {
 				// unknown height
 				throw new HttpBadRequestException('bad height');
@@ -115,10 +128,9 @@ class Image {
 				// width is auto
 				$percentage = $new_height / $this->_prop['height'];
 				$new_width = $this->_prop['width'] * $percentage;
-			} else if ( preg_match('/^(.*)%$/', $new_width, $matches) ) {
+			} else if ( $percentage_width ) {
 				// width is percentage
-				$percentage = $matches[1] / 100;
-				$new_width = $this->_prop['width'] * $percentage;
+				$new_width = $this->_prop['width'] * $percentage_width;
 			} else {
 				// unknown height
 				throw new HttpBadRequestException('bad width');
@@ -139,22 +151,18 @@ class Image {
 				$percentage = $matches[1] / $min;
 				$new_width = $this->_prop['width'] * $percentage;
 				$new_height = $this->_prop['height'] * $percentage;
-			} else if ( preg_match('/^(.*)%$/', $new_width, $matches_width) && preg_match('/^(.*)%$/', $new_height, $matches_height) ) {
+			} else if ( $percentage_width && $percentage_height ) {
 				// both percentage
-				$percentage_width = $matches_width[1] / 100;
-				$percentage_height = $matches_height[1] / 100;
 				$new_width = $this->_prop['width'] * $percentage_width;
 				$new_height = $this->_prop['height'] * $percentage_height;
-			} else if ( preg_match('/^(.*)%$/', $new_width, $matches) && ($new_height == '' || $new_height == 'auto') ) {
+			} else if ( $percentage_width && ($new_height == '' || $new_height == 'auto') ) {
 				// width is percentage, height is default
-				$percentage = $new_width / $this->_prop['width'];
-				$new_width = $this->_prop['width'] * $percentage;
-				$new_height = $this->_prop['height'] * $percentage;
-			} else if ( preg_match('/^(.*)%$/', $new_height, $matches) && ($new_width == '' || $new_width == 'auto') ) {
+				$new_width = $this->_prop['width'] * $percentage_width;
+				$new_height = $this->_prop['height'] * $percentage_width;
+			} else if ( $percentage_height && ($new_width == '' || $new_width == 'auto') ) {
 				// width is default, height is percentage
-				$percentage = $new_height / $this->_prop['height'];
-				$new_width = $this->_prop['width'] * $percentage;
-				$new_height = $this->_prop['height'] * $percentage;
+				$new_width = $this->_prop['width'] * $percentage_height;
+				$new_height = $this->_prop['height'] * $percentage_height;
 			} else {
 				// unknown width or height
 				throw new HttpBadRequestException('bad width or height');
@@ -220,7 +228,7 @@ class Image {
 	
 	protected function _tempnam()
 	{
-		$name = tempnam('/tmp', 'rktv');
+		$name = @tempnam($this->_temp_dir, $this->_temp_prefix);
 		return $name;
 	} // function _tempnam()
 	
