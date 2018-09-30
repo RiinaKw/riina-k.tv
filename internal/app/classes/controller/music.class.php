@@ -4,14 +4,14 @@ class Controller_Music extends Controller_Base {
 	
 	protected function _set_url(&$track)
 	{
-		$track['detail_url'] = $this->url_create( '/music/' . $track['slug'] );
+		$track['detail_url'] = $this->url_create( 'music/' . $track['slug'] );
 		if ( $track['preview_url'] ) {
 			$track['preview_url'] = $this->url_create( $track['preview_url'] );
 		}
 		if ( $track['image_name'] != '' ) {
-			$track['image_url'] = $this->url_create( '/artwork/' . $track['image_name'] );
+			$track['image_url'] = $this->url_create( 'artwork/' . $track['image_name'] );
 		} else {
-			$track['image_url'] = $this->url_create( '/images/no-jacket.jpg' );
+			$track['image_url'] = $this->url_create( 'images/no-jacket.jpg' );
 		}
 	}
 	

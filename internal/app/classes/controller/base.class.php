@@ -22,7 +22,7 @@ class Controller_Base extends Controller {
 		global $bootstrap;
 		
 		$first = substr($path, 0, 1);
-		return $bootstrap->root_url . ($first == '/' ? $first : '') . $path;
+		return $bootstrap->root_url . ($first == '/' ? $first : '/') . $path;
 	} // function url_create()
 	
 } // class Controller_Base

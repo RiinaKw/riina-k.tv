@@ -19,7 +19,7 @@ class Controller_Iframe extends Controller_Base {
 			throw new HttpNotFoundException('track "' . $slug . '" not exists');
 		}
 		
-		$preview_url = $this->url_create('/preview/' . $arg[0]);
+		$preview_url = $this->url_create('preview/' . $arg[0]);
 		$download_url = $preview_url . '/download';
 
 		$view = new View_Smarty('iframe.tpl.html');
