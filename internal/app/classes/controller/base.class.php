@@ -10,6 +10,7 @@ class Controller_Base extends Controller {
 		
 		$path = $bootstrap->app_config_path('conf/riina-k.tv.conf');
 		$this->_config = parse_ini_file($path);
+		$this->root = $bootstrap->root_url;
 	} // function __before()
 	
 	protected function _get_config($key)

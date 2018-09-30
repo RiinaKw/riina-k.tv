@@ -223,6 +223,9 @@ class Bootstrap {
 			$param = array();
 		} else {
 			$path = substr($_SERVER['PATH_INFO'], 1);
+			if ( preg_match('/^(.*)\/$/', $path, $matches) ) {
+				$path = $matches[1];
+			}
 			
 			if ($routing) {
 				foreach ($routing as $key => $value) {

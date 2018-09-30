@@ -24,7 +24,7 @@ SELECT
 				'count' => $category_statement->rowCount(),
 				'slug' => $category['slug'],
 				'title' => $category['title'],
-				'tracks' => $category_statement,
+				'tracks' => $category_statement->fetchAll(PDO::FETCH_ASSOC),
 			);
 		}
 		return $arr;

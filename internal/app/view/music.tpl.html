@@ -27,15 +27,11 @@
 									<article class="track" id="track-{{$track.slug|escape}}">
 										<div class="track-container">
 											<a class="meta" data-preview="{{if $track.preview_url}}{{strip}}
-												{{$root}}{{$track.preview_url|escape}}
+												{{$track.preview_url|escape}}
 											{{/strip}}{{/if}}" data-iframe="{{$track.soundcloud_url|escape}}"></a>
 											<header>
-												<a href="{{$root}}/music/{{$track.slug|escape}}">
-{{if $track.image_name}}
-													<img src="{{$root}}/artwork/{{$track.image_name}}" alt="" />
-{{else}}
-													<img src="{{$root}}/images/no-jacket.jpg" alt="" />
-{{/if}}
+												<a href="{{$track.detail_url|escape}}">
+													<img src="{{$track.image_url|escape}}" alt="" />
 													<h4>{{$track.title|escape}}</h4>
 {{if $track.base}}
 													<p class="base">
