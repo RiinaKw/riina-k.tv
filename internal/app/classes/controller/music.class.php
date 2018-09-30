@@ -15,7 +15,7 @@ class Controller_Music extends Controller_Base {
 		$view->page_id = 'page-music';
 		$view->categories = $categories;
 		
-		$view->title = 'music - ' . $this->_config['title_en'];
+		$view->title = 'music - ' . $this->_get_config('title_en');
 		$view->render();
 	} // function action_index()
 	
@@ -36,7 +36,7 @@ class Controller_Music extends Controller_Base {
 		
 		$track = $model->get_by_slug($slug);
 		$view->track = $track;
-		$view->title = $track['title'] . ' - ' . $this->_config['title_en'];
+		$view->title = $track['title'] . ' - ' . $this->_get_config('title_en');
 		$view->render();
 	} // function action_detail()
 	

@@ -12,4 +12,9 @@ class Controller_Base extends Controller {
 		$this->_config = parse_ini_file($path);
 	} // function __before()
 	
+	protected function _get_config($key)
+	{
+		return $this->_config[$key];
+	}
+	
 } // class Controller_Base

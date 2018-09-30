@@ -23,7 +23,7 @@ class Controller_Iframe extends Controller_Base {
 		$download_url = $preview_url . '/download';
 
 		$view = new View_Smarty('iframe.tpl.html');
-		$view->title = $track['title'] . ' - ' . $this->_config['title_en'];
+		$view->title = $track['title'] . ' - ' . $this->_get_config('title_en');
 		$view->preview_url = $preview_url;
 		$view->download_url = $download_url;
 		$view->render();
