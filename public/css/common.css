@@ -19,6 +19,12 @@ body {
 	background-repeat: no-repeat;
 	overflow-y: scroll;
 }
+body.blackout {
+	background-image: none;
+}
+body.blur {
+	background-image: url("../images/bg-blur.jpg");
+}
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
 	body {
 		overflow: visible;

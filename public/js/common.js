@@ -6,7 +6,7 @@ function naviScroll()
 	var $nav = $("header nav ul");
 	var navTopMargin = 80;
 	var headerHeight = $("#container header").height();
-	
+
 	if ($(window).scrollTop() > headerHeight) {
 		$nav.stop().animate(
 			{ top: $(window).scrollTop() + navTopMargin - headerHeight }
@@ -45,23 +45,23 @@ function init(){
 		window.open(this.href);
 		return false;
 	});
-	
+
 	// navigation effect (scroll)
 	$(window).on("scroll", function() {
 		naviScroll();
 	});
-	
+
 	if ( $("#page-music").length ) {
 		if ( ! $("#popup-background").length ) {
 			$div = $("<div />").attr("id", "popup-background");
 			$("#track-list").append($div);
 		}
 		$("#popup-background").hide().addClass("hide");
-		
+
 		// music category to global navi
 		$("#nav-music ol").remove();
 		$("#nav-music").append( $("#index ol").clone().hide() );
-		
+
 		// music category index effect (scroll)
 		var indexTopMargin = 30;
 		var indexDefaultOffset = $("#index-wrapper").offset();
@@ -82,13 +82,13 @@ function init(){
 				resizeHandler();
 			}
 		});
-		
+
 		$("#popup-background").on("click", function(){
 			closeTrack({
 				track: $(".track.active")
 			});
 		});
-		
+
 		$(".track").on({
 			// hover
 			"mouseenter" : function(){
@@ -126,7 +126,7 @@ function init(){
 	} else {
 		$("#nav-music ol").remove();
 	}
-	
+
 	var urlHash = location.hash;
 	//ハッシュ値があればページ内スクロール
 	if (urlHash) {
@@ -144,7 +144,7 @@ function init(){
 		scrollToAnchor(hash);
 		return false;
 	});
-	
+
 	// navigation effect (item pop)
 	$("header nav a").off("mouseenter").off("mouseleave");
 	var $li = $("header nav > ul > li").not("[class = 'disabled']").not("[class = 'current']");
@@ -170,12 +170,12 @@ function init(){
 			}
 		}
 	});
-	
+
 	// current page navi
 	$("header nav li").removeClass("current");
 	var $curNavi = $("header nav > ul > li#nav-" + $("body").attr("id").split("-")[1] + " > a");
 	$curNavi.parents("li").addClass("current");
-	
+
 	$("header nav > ul > li > a").off("click");
 	$("header nav > ul > li.disabled > a").on("click", function(e){
 		e.preventDefault();
@@ -194,7 +194,7 @@ function init(){
 		e.preventDefault();
 		return false;
 	});
-	
+
 	// internal link ajax
 	$("a[data-rel='internal']").on("click", function(e){
 		if ( $("body").hasClass("ajaxing") ) {
@@ -208,8 +208,8 @@ function init(){
 		}
 		return true;
 	});
-	
-	
+
+
 	if ( !$("body").hasClass("effected") ) {
 		// load effect
 		$("#container").css("visibility", "hidden");
@@ -229,7 +229,7 @@ function init(){
 				}
 			}
 		);
-		
+
 		// background effect
 		var bg = $("body").css("background-image");
 		var bg2 = "../images/bg-blur.jpg";
@@ -240,9 +240,8 @@ function init(){
 		});
 		$.get(bg2);
 		setInterval(function(){
-			$("body").css("background-image", "none").delay(50).queue(function(){
-				$(this).css({
-					backgroundImage: "url(" + bg2 + ")",
+			$("body").addClass("blackout").delay(50).queue(function(){
+				$(this).removeClass("blackout").addClass("blur").css({
 					backgroundPosition: "center " + (backgroundPos + 50) + "px"
 				}).dequeue();
 			}).delay(100).queue(function(){
@@ -250,15 +249,14 @@ function init(){
 					backgroundPosition: "center " + (backgroundPos - 50) + "px"
 				}).dequeue();
 			}).delay(100).queue(function(){
-				$(this).css("background-image", "none").dequeue();
+				$(this).removeClass("blur").addClass("blackout").dequeue();
 			}).delay(100).queue(function(){
-				$(this).css({
-					backgroundImage: bg,
+				$(this).removeClass("blackout").css({
 					backgroundPosition: "center " + backgroundPos + "px"
 				}).dequeue();
 			});
 		}, 10000);
-		
+
 		var title = location.pathname.split("/")[2];
 		//if (location.hash) {
 		if (title) {
@@ -272,13 +270,13 @@ function init(){
 			});
 		}
 	}
-	
+
 	$(window).on("scroll", function(){
 		debug();
 	});
-	
+
 	resizeHandler();
-	
+
 	$(window).on("load resize orientationchange", resizeHandler);
 	$(window).on("orientationchange", function(){ debug("orientationchange") });
 	currentUrl = location.href;
@@ -315,9 +313,9 @@ function resizeHandler()
 	var headerHeight = $("#container > header").outerHeight(true);
 	var contentHeight = $("#main").outerHeight(true);
 	var footerHeight = $("footer").outerHeight(true);
-	
+
 	var scrollPos = $("html, body").scrollTop();
-	
+
 	if ( $("#page-music").length ) {
 		// active track
 		var $track = $("article.active");
@@ -327,7 +325,7 @@ function resizeHandler()
 			$("article.active .content").css( "left", -trackPosition );
 		}
 	}
-	
+
 	if (_ua.Webkit) {
 		$("body").css("overflowY", "hidden");
 	} else if (_ua.Opera) {
@@ -336,7 +334,7 @@ function resizeHandler()
 	if ( windowHeight < headerHeight + contentHeight + footerHeight ) {
 		// appear scroll bar
 		$("#container").css("height", headerHeight + contentHeight + footerHeight + "px");
-		
+
 		if (_ua.Webkit) {
 			$("body").css("overflowY", "auto");
 		} else if (_ua.Opera) {
@@ -354,13 +352,13 @@ function resizeHandler()
 			bottom: "0"
 		});
 	}
-	
+
 	if ( $(window).width() >= 760 ) {
 		$("#nav-music ol").hide();
 	}
-	
+
 	naviScroll();
-	
+
 	debug();
 } // function resizeHandler()
 
@@ -386,11 +384,11 @@ function openTrack(param)
 	if ( $("article.active").length ) {
 		return;
 	}
-	
+
 	closeCategory( $("#nav-music ol") );
-	
+
 	debug("open track");
-	
+
 	// expand category
 	var $categories = $(".category-container");
 	var categoriesLength = $categories.length;
@@ -417,16 +415,16 @@ function openTrack(param)
 			}
 		);
 	}
-	
+
 	$(".close", $article).remove();
-	
+
 	scrollToAnchor( "#" + $article.attr("id") );
 	$article.addClass("animating");
 	$(".content", $article).css("z-index", 10);
-	
+
 	// background fade in
 	var $background = $("#popup-background");
-	
+
 	$background.stop(false, false).css(
 		{
 			zIndex: 5,
@@ -478,7 +476,7 @@ function openTrack(param)
 				});
 			}
 			$(".track-container > header *", $article).not("a").not("img").hide();
-			
+
 			// show iconbox
 			var width = 600;
 			if ($(window).width() < 760) {
@@ -550,7 +548,7 @@ function openTrack(param)
 						track.pause();
 						track.currentTime = 0;
 					}
-					
+
 					// soundcloud iframe
 					var $iframe = $("iframe", $article);
 					if ( $iframe.length == 0 ) {
@@ -581,7 +579,7 @@ function openTrack(param)
 						widget = SC.Widget(iframeElement);
 						widget.pause();
 					}
-					
+
 					var src = previewUrl.replace("preview", "iframe");
 					var $iframe = $("iframe", $article);
 					if ( $iframe.length == 0 ) {
@@ -596,10 +594,10 @@ function openTrack(param)
 				debug("open track complete");
 			}
 			return $article;
-			
+
 		}); // $.globalQueue.queue()
 	});
-	
+
 } // function openTrack()
 
 /*****
@@ -623,17 +621,17 @@ function closeTrack(param)
 	if ( !$article || $article.length == 0 ) {
 		return;
 	}
-	
+
 	debug("close track");
-	
+
 	var $iconbox = $(".iconbox", $article);
-	
+
 	// close button
 	$(".close", $article).fadeTo(200, 0, function(){
 		$(this).remove();
 	});
-	
-	
+
+
 	$.globalQueue
 	.queue(function(){
 		return $(".active .content > *").not(".iconbox").fadeTo(300, 0);
@@ -655,7 +653,7 @@ function closeTrack(param)
 		$content.hide();
 		$article.removeClass("active");
 		$content.css("z-index", 0);
-		
+
 		// shrink category
 		var $categories = $(".category-container");
 		var categoriesLength = $categories.length;
@@ -703,10 +701,10 @@ function loadPage(nextUrl, curUrl, popstate)
 {
 	var reCurPage = currentUrl.match( /^(https?:\/\/.*)?\/([^\/]*)/ );
 	var curPage = "/" + (reCurPage[2] ? reCurPage[2] : "");
-	
+
 	var reNextPage = nextUrl.match( /^(https?:\/\/.*)?\/([^\/]*)/ );
 	var nextPage = "/" + (reNextPage[2] ? reNextPage[2] : "");
-	
+
 	if (curPage != nextPage) {
 		debug("load page");
 		$("body").addClass("ajaxing");
@@ -715,7 +713,7 @@ function loadPage(nextUrl, curUrl, popstate)
 			dataType: "html"
 		})
 		.done(function(data, status, xhr){
-			
+
 			if ( $("body").hasClass("ajaxing") ) {
 				$("header nav ul > li.current ol").hide(200);
 				$("body,html").stop().animate(
@@ -735,7 +733,7 @@ function loadPage(nextUrl, curUrl, popstate)
 								$("body").removeClass("ajaxing");
 								$("header nav a").css("top", "");
 								debug("load page complete");
-							
+
 								// get track title
 								var title = location.pathname.split("/")[2];
 								if ( $("#page-music").length && title ) {
@@ -752,7 +750,7 @@ function loadPage(nextUrl, curUrl, popstate)
 					}
 				);
 			}
-			
+
 		})
 		.fail(function(xhr, status, message){
 			alert("something wrong");
