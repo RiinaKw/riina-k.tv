@@ -1,5 +1,5 @@
 
-					<div id="main" class="cf">
+					<div id="main" class="clearfix">
 						<script>
 							var _gaq = _gaq || [];
 							_gaq.push(['_setAccount', 'UA-46798910-1']);
@@ -12,11 +12,11 @@
 							})();
 						</script>
 						<main id="left-content">
-							<header id="main-header" class="cf">
+							<header id="main-header" class="clearfix">
 								<h2>About {{#title_en#}}</h2>
 								<p>取扱説明書</p>
 							</header>
-							
+
 							<section class="about">
 								<h3>What's "{{#title_en#}}"?</h3>
 								<p>
@@ -24,7 +24,7 @@
 									Key アレンジを中心に、他作品のアレンジやオリジナルなどもやっています。個人サークルなので自由気ままに。
 								</p>
 							</section>
-							
+
 							<section class="about">
 								<h3>Who's "{{#author#}}"?</h3>
 								<p>
@@ -32,7 +32,7 @@
 									Twitter ウィジェットを貼り付けているとおり、なんか色んな事しすぎてよく分からなくなってる人です<a href="{{$root}}{{$easter_egg}}" style="color:#ffffff;text-decoration:none;">。</a>
 								</p>
 								<h4>基本スペック</h4>
-								<dl class="cf">
+								<dl class="clearfix">
 									<dt>名前</dt>
 									<dd>{{#author#}}（りいな・けー） ※末尾のピリオドを忘れてはいけません</dd>
 									<dt>年齢</dt>
@@ -45,7 +45,7 @@
 									</dd>
 								</dl>
 							</section>
-							
+
 							<section class="about">
 								<h3>Where's "{{#domain#}}"?</h3>
 								<p>
@@ -54,7 +54,7 @@
 								</p>
 							</section>
 						</main><!-- #left-content -->
-						
+
 						<aside id="right-content">
 							<div id="timeline">
 								<a class="twitter-timeline" data-lang="ja" data-height="500" data-theme="dark"
@@ -68,14 +68,14 @@
 										var script = document.createElement("script");
 										script.setAttribute("src", "https://platform.twitter.com/widgets.js");
 										wrapper.appendChild(script);
-										
+
 										setTimeout(function(){
 											resizeHandler();
 										}, 1500);
 									}, duration);
 								});
 							</script>
-							
+
 							<div class="validator">
 								<a href="https://validator.w3.org/check?uri=referer" data-rel="external"><img src="{{$root}}/images/html.svg" alt="valid html5" /></a>
 								<a href="http://jigsaw.w3.org/css-validator/check/referer" data-rel="external"><img src="{{$root}}/images/css.svg" alt="valid css" /></a>

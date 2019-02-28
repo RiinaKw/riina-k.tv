@@ -1,5 +1,5 @@
 
-					<div id="main" class="cf">
+					<div id="main" class="clearfix">
 						<script>
 							var _gaq = _gaq || [];
 							_gaq.push(['_setAccount', 'UA-46798910-1']);
@@ -11,13 +11,13 @@
 								var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 							})();
 						</script>
-						<header id="main-header" class="cf">
+						<header id="main-header" class="clearfix">
 							<h2>Music</h2>
 							<p>いままで作ってきた曲の紹介</p>
 						</header>
-						
+
 						<main id="track-list">
-							
+
 {{foreach from=$categories item=cur}}
 {{if $cur.count > 0}}
 							<section class="category" id="category-{{$cur.slug|escape}}">
@@ -61,9 +61,9 @@
 							</section>
 {{/if}}
 {{/foreach}}
-							
+
 						</main>
-						
+
 						<div id="index-wrapper">
 							<nav id="index">
 								<ol>
@@ -75,5 +75,5 @@
 								</ol>
 							</nav>
 						</div>
-						
+
 					</div><!-- #main -->
