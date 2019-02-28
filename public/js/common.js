@@ -231,14 +231,11 @@ function init(){
 		);
 
 		// background effect
-		var bg = $("body").css("background-image");
-		var bg2 = "../images/bg-blur.jpg";
 		var bgHeight = 800;
 		var backgroundPos = ( $(window).height() - bgHeight ) / 2;
 		$("body").css({
 			backgroundPosition: "center " + backgroundPos + "px"
 		});
-		$.get(bg2);
 		setInterval(function(){
 			$("body").addClass("blackout").delay(50).queue(function(){
 				$(this).removeClass("blackout").addClass("blur").css({
