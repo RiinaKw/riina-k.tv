@@ -19,7 +19,7 @@ body {
 	background-repeat: no-repeat;
 	overflow-y: scroll;
 }
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { 
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
 	body {
 		overflow: visible;
 	}
@@ -61,16 +61,10 @@ p {
 }
 
 /* clearfix */
-.cf:before,
-.cf:after {
-	content: " ";
-	display: table;
-}
-.cf:after {
-	clear: both;
-}
-.cf {
-	*zoom: 1;
+.clearfix:after {
+	content:" ";
+	display:block;
+	clear:both;
 }
 
 #logo {
@@ -117,14 +111,14 @@ header nav ul {
 	width: 250px;
 	height: 50px;
 	right: 0;
-	
+
 	/* background as #444444, opacity 0.7 */
 	background: rgba(68, 68, 68, 0.7);
 	filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#80444444, endcolorstr=#80444444, gradienttype=0); /* rgba to IE */
-	
+
 	margin-top: -80px;	/* header height */
 	text-align: center;
-	
+
 	border-bottom-left-radius: 10px;
 	-webkit-border-bottom-left-radius: 10px; /* Chrome, Safari */
 	-moz-border-radius-bottomleft: 10px; /* Firefox */
@@ -303,21 +297,21 @@ ul.track-detail li.key:before {
 	display: -webkit-flex; /* Safari6.1以降 */
 	display: -moz-box;     /*Firefox21*/
 	display: flex;
-	
+
 	-ms-flex-wrap    : wrap; /*IE10*/
 	-webkit-flex-wrap: wrap; /* Safari6.1以降 */
 	-moz-flex-wrap   : wrap; /*Firefox21*/
 	flex-wrap        : wrap;
-	
+
 	-ms-flex-line-pack   : flex-start; /*IE10*/
 	-webkit-align-content: flex-start; /* Safari6.1以降 */
 	-moz-box-align       : start;  /*Firefox21*/
 	align-content        : flex-start;
-	
+
 	-webkit-align-items: flex-start;
 	-ms-align-items    : flex-start;  /* IE10 */
 	align-items        : flex-start;
-	
+
 	position: relative;
 	color: #ffffff;
 }
@@ -456,7 +450,7 @@ ul.track-detail li.key:before {
 	line-height: 2em;
 	padding: 0 5px 0 2.5em;
 	cursor: pointer;
-	
+
 	border-bottom-right-radius        : 10px;
 	-webkit-border-bottom-right-radius: 10px; /* Chrome, Safari */
 	-moz-border-radius-bottomright    : 10px; /* Firefox */
@@ -599,15 +593,15 @@ ul.track-detail li.key:before {
 		display: -moz-box;     /*Firefox21*/
 		display: -webkit-flex; /* Safari6.1以降 */
 		display: flex;
-		
+
 		-webkit-justify-content: space-around;   /* Safari etc. */
 		-ms-justify-content    : space-around;   /* IE10        */
 		justify-content        : space-around;
-		
+
 		padding: 0;
 		top: 80px;
 		right: auto;
-		
+
 		border-bottom-left-radius        : 0;
 		-webkit-border-bottom-left-radius: 0; /* Chrome, Safari */
 		-moz-border-radius-bottomleft    : 0; /* Firefox */
@@ -634,19 +628,19 @@ ul.track-detail li.key:before {
 	header nav #nav-music.current > a:after {
 		content : "▼"
 	}
-	
+
 	/* global music category navi */
 	#nav-music ol {
 		position: absolute;
 		left: 30vw;
-		
+
 		/* background as #444444, opacity 0.7 */
 		background: rgba(68, 68, 68, 0.7);
-		
+
 		border-bottom-left-radius        : 10px;
 		-webkit-border-bottom-left-radius: 10px; /* Chrome, Safari */
 		-moz-border-radius-bottomleft    : 10px; /* Firefox */
-		
+
 		border-bottom-right-radius        : 10px;
 		-webkit-border-bottom-right-radius: 10px; /* Chrome, Safari */
 		-moz-border-radius-bottomright    : 10px; /* Firefox */
@@ -663,7 +657,7 @@ ul.track-detail li.key:before {
 	#index-wrapper {
 		display: none;
 	}
-	
+
 	/* track */
 	#page-music #track-list {
 		float: none;
