@@ -485,12 +485,14 @@ function openTrack(param)
 					left: 0,
 					opacity: 1
 				},
-				{ duration: 300 }
+				{
+					duration: 300
+				}
 			);
 		})
 		.queue(function(){
 			var pos = $article.position();
-			var duration = ( pos.left ? 600 : 0 );
+			var duration = ( Math.floor(pos.left) ? 600 : 0 );
 			var containerOffset = $article.parents(".category-container").offset();
 			var articleOffset = $article.offset();
 			$(".iconbox", $article).show().css("opacity", 1);
@@ -638,8 +640,12 @@ function closeTrack(param)
 		// content fade out
 		var pos = $article.position();
 		return $(".active .content").animate(
-			{ left: 0 },
-			{ duration: ( pos.left ? 600 : 0 ) }
+			{
+				left: 0
+			},
+			{
+				duration: ( Math.floor(pos.left) ? 600 : 0 )
+			}
 		);
 	})
 	.queue(function(){
