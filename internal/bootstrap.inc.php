@@ -116,7 +116,6 @@ class Bootstrap {
 
 	public function _exception_handle($e)
 	{
-
 		$view = new View('error.tpl.php');
 		$view->title = '404 ' . $e->getMessage();
 
@@ -127,6 +126,9 @@ class Bootstrap {
 			$view->message = $e->getMessage() . ' in ' . $e->getFile() . '(' . $e->getLine() . ')';
 			$view->trace = $e->getTraceAsString();
 		}
+
+		$path = $this->app_config_path('conf/riina-k.tv.conf');
+		$view->config = parse_ini_file($path);
 
 		header( 'HTTP/1.0 404 ' . $this->title );
 		$view->render();

@@ -2,7 +2,7 @@
 <html lang="ja">
 	<head>
 		<meta charset="utf-8" />
-		<title><?php echo $this->title; ?> - rk. tv</title>
+		<title><?php echo $this->title; ?> - <?php echo $this->config['title_en']; ?></title>
 	</head>
 	<body>
 <?php
