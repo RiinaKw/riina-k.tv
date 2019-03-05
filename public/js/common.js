@@ -793,52 +793,33 @@ function debug(eventName)
 		var $windowScrollTop = $(".scroll-top", $body);
 		var $eventName = $(".event-name", $body);
 		if ( !$documentWidth.length ) {
-			$documentWidth = $("<span />").addClass("document-width").css({
-				position: "fixed",
+			$documentWidth = $("<span />").addClass("debug").addClass("document-width").css({
 				bottom: 80,
-				zIndex: 100,
-				backgroundColor: "rgba(0, 0, 0, 0.7)"
 			}).prependTo($body);
 		}
 		if ( !$documentHeight.length ) {
-			$documentHeight = $("<span />").addClass("document-height").css({
-				position: "fixed",
+			$documentHeight = $("<span />").addClass("debug").addClass("document-height").css({
 				bottom: 60,
-				zIndex: 100,
-				backgroundColor: "rgba(0, 0, 0, 0.7)"
 			}).prependTo($body);
 		}
 		if ( !$windowWidth.length ) {
-			$windowWidth = $("<span />").addClass("window-width").css({
-				position: "fixed",
+			$windowWidth = $("<span />").addClass("debug").addClass("window-width").css({
 				bottom: 40,
-				zIndex: 100,
-				backgroundColor: "rgba(0, 0, 0, 0.7)"
 			}).prependTo($body);
 		}
 		if ( !$windowHeight.length ) {
-			$windowHeight = $("<span />").addClass("window-height").css({
-				position: "fixed",
+			$windowHeight = $("<span />").addClass("debug").addClass("window-height").css({
 				bottom: 20,
-				zIndex: 100,
-				backgroundColor: "rgba(0, 0, 0, 0.7)"
 			}).prependTo($body);
 		}
 		if ( !$windowScrollTop.length ) {
-			$windowScrollTop = $("<span />").addClass("scroll-top").css({
-				position: "fixed",
+			$windowScrollTop = $("<span />").addClass("debug").addClass("scroll-top").css({
 				bottom: 0,
-				zIndex: 100,
-				backgroundColor: "rgba(0, 0, 0, 0.7)"
 			}).prependTo($body);
 		}
 		if ( !$eventName.length && eventName ) {
-			$eventName = $("<span />").addClass("event-name").css({
-				position: "fixed",
-				opacity: 1,
+			$eventName = $("<span />").addClass("debug").addClass("event-name").css({
 				bottom: 100,
-				zIndex: 100,
-				backgroundColor: "rgba(0, 0, 0, 0.7)"
 			}).prependTo($body);
 		}
 		$documentWidth.html( " document-width:" +  $("body").width() + " " );

@@ -1,10 +1,19 @@
 @charset "utf-8";
 
+$background-color: #333333;
+$border-color: #444444;
+$content-background-color: #666666;
+$content-opacity: 0.9;
+$text-color: #ffffff;
+$link-color: #ffff00;
+$visited-link-color: #ffcc00;
+$border-width: 30px;
+
 body {
-	background-color: #333333;
+	background-color: $background-color;
 	position: relative;
 	margin: 0;
-	color: #ffffff;
+	color: $text-color;
 	font-size: 14px;
 	font-family: Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
 	background-image: url("../images/bg.png");
@@ -26,11 +35,11 @@ body.blur {
 }
 
 a {
-	color: #ffff00;
+	color: $link-color;
 	outline: none;
 }
 a:visited {
-	color: #ffcc00;
+	color: $visited-link-color;
 }
 h1, h2, h3, h4, h5, h6 {
 	font-weight: bold;
@@ -41,13 +50,13 @@ h1, h2, h3, h4, h5, h6 {
 	margin:0 auto;
 }
 #wrapper {
-	border-left: solid 30px #444444;
-	border-right: solid 30px #444444;
-	opacity: 0.9;
-	filter: alpha(opacity=90);
+	border: solid 0 $border-color;
+	border-width: 0 $border-width;
+	opacity: $content-opacity;
+	filter: alpha(opacity=$content-opacity*100);
 }
 #container {
-	background-color: #666666;
+	background-color: $content-background-color;
 }
 
 #main {
@@ -68,87 +77,89 @@ p {
 }
 
 #logo {
-	background-color: #444444;
+	background-color: $border-color;
 	padding: 15px 0;
 	z-index: 10;
-}
-#logo h1 {
-	float: left;
-	height: 50px;
-	margin: 0;
-	line-height: 50px;
-	font-size: 36px;
-}
-#logo h1 a {
-	display: block;
-	background-image: url("../images/logo48.png");
-	background-repeat: no-repeat;
-	background-position: left center;
-	padding-left: 70px;
-	text-decoration: none;
-}
-#logo p {
-	float: left;
-	margin: 0;
-	padding-top: 5px;
-	font-size: 24px;
-	line-height: 50px;
-	font-weight: bold;
-}
-#logo p:before {
-	content: " : ";
-	margin: 0 0.5em 0 0.8em;
+
+	h1 {
+		float: left;
+		height: 50px;
+		margin: 0;
+		line-height: 50px;
+		font-size: 36px;
+	}
+	h1 a {
+		display: block;
+		background-image: url("../images/logo48.png");
+		background-repeat: no-repeat;
+		background-position: left center;
+		padding-left: 70px;
+		text-decoration: none;
+	}
+	p {
+		float: left;
+		margin: 0;
+		padding-top: 5px;
+		font-size: 24px;
+		line-height: 50px;
+		font-weight: bold;
+	}
+	p:before {
+		content: " : ";
+		margin: 0 0.5em 0 0.8em;
+	}
 }
 header nav {
 	float: right;
 	width: 240px;
 	position: relative;
 	z-index: 1;
-}
-header nav ul {
-	position: absolute;
-	list-style-type: none;
-	width: 250px;
-	height: 50px;
-	right: 0;
 
-	/* background as #444444, opacity 0.7 */
-	background: rgba(68, 68, 68, 0.7);
-	filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#80444444, endcolorstr=#80444444, gradienttype=0); /* rgba to IE */
+	ul {
+		position: absolute;
+		list-style-type: none;
+		width: 250px;
+		height: 50px;
+		right: 0;
 
-	margin-top: -80px;	/* header height */
-	text-align: center;
+		/* background as #444444, opacity 0.7 */
+		background: rgba(68, 68, 68, 0.7);
+		filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#80444444, endcolorstr=#80444444, gradienttype=0); /* rgba to IE */
 
-	border-bottom-left-radius: 10px;
-	-webkit-border-bottom-left-radius: 10px; /* Chrome, Safari */
-	-moz-border-radius-bottomleft: 10px; /* Firefox */
-	/* behavior: url(ie-css3.htc); IE...why does not work?  http://fetchak.com/ie-css3/ */
-}
-header nav > ul > li {
-	display: inline-block;
-	margin: 0 3px;
-	line-height: 30px;
-}
-header nav a {
-	display: inline-block;
-	padding: 10px 0;
-	position: relative;
-}
-header nav li.current {
-	font-weight: bold;
-	padding-top: 10px;
-}
-header nav li.disabled > a {
-	text-decoration: line-through;
-	cursor: default;
-}
-header nav li.current > a {
-	padding: 0 !important;
-	line-height: 1em;
-	text-decoration: none;
-	cursor: default;
-	color: #ffffff;
-	top: -10px;
+		margin-top: -80px;	/* header height */
+		text-align: center;
+
+		border-bottom-left-radius: 10px;
+		-webkit-border-bottom-left-radius: 10px; /* Chrome, Safari */
+		-moz-border-radius-bottomleft: 10px; /* Firefox */
+		/* behavior: url(ie-css3.htc); IE...why does not work?  http://fetchak.com/ie-css3/ */
+	}
+	> ul > li {
+		display: inline-block;
+		margin: 0 3px;
+		line-height: 30px;
+	}
+	a {
+		display: inline-block;
+		padding: 10px 0;
+		position: relative;
+	}
+	li.current {
+		font-weight: bold;
+		padding-top: 10px;
+	}
+	li.disabled > a {
+		text-decoration: line-through;
+		cursor: default;
+	}
+	li.current > a {
+		padding: 0 !important;
+		line-height: 1em;
+		text-decoration: none;
+		cursor: default;
+		color: #ffffff;
+		top: -10px;
+	}
 }
 #nav-music ol {
 	display: none;
@@ -168,56 +179,59 @@ footer {
 
 #main-header {
 	margin-bottom: 20px;
-}
-#main-header h2 {
-	float: left;
-	font-size: 24px;
-}
-#main-header p:before,
-#main-header p:after {
-	content: " ─ ";
-	margin: 0 1em;
-}
-#main-header p {
-	margin: 0;
-	padding-top: 2px;
-	line-height: 24px;
-	float: left;
-	font-weight: bold;
+
+	h2 {
+		float: left;
+		font-size: 24px;
+	}
+	p:before,
+	p:after {
+		content: " ─ ";
+		margin: 0 1em;
+	}
+	p {
+		margin: 0;
+		padding-top: 2px;
+		line-height: 24px;
+		float: left;
+		font-weight: bold;
+	}
 }
 
-#main #left-content {
+#left-content {
 	float: left;
 	width: 550px;
 }
-#main #right-content {
+#right-content {
 	float: right;
 	width: 250px;
 	height: 400px;
 }
 
-body#page-music #main #left-content {
-	float: left;
-	width: 250px;
-	height: 400px;
-}
-body#page-music #main #right-content {
-	float: right;
-	width: 500px;
+#page-music {
+	#left-content {
+		float: left;
+		width: 250px;
+		height: 400px;
+	}
+	#right-content {
+		float: right;
+		width: 500px;
+	}
 }
 
 #whatsnew {
-}
-#whatsnew dt {
-	clear: both;
-	float: left;
-	width: 100px;
-	margin-bottom: 10px;
-}
-#whatsnew dd {
-	float: left;
-	width: 450px;
-	margin-bottom: 10px;
+	dt {
+		clear: both;
+		float: left;
+		width: 100px;
+		margin-bottom: 10px;
+	}
+	dd {
+		float: left;
+		width: 450px;
+		margin-bottom: 10px;
+	}
 }
 
 .about h3 {
@@ -234,61 +248,64 @@ body#page-music #main #right-content {
 .about {
 	margin-left: 20px;
 	margin-bottom: 4em;
+
+	dt {
+		clear: both;
+		float: left;
+		width: 80px;
+		margin-bottom: 10px;
+	}
+	dd {
+		float: left;
+		width: 400px;
+		margin-bottom: 10px;
+	}
 }
 
 .about h4,
 .track h4 {
 	margin: 0.5em 0;
 }
-.about dl {
-}
-.about dt {
-	clear: both;
-	float: left;
-	width: 80px;
-	margin-bottom: 10px;
-}
-.about dd {
-	float: left;
-	width: 400px;
-	margin-bottom: 10px;
-}
 
-#page-music #track-list {
-	float: right;
-	width: 600px;
-	position: relative;
-}
-#page-music #index {
-	float: left;
-	width: 200px;
-}
-#page-music #index ol {
-	list-style-type: square;
-	margin-left: 1.5em;
-}
-#page-music #index li {
-	margin: 0.3em 0;
+#page-music {
+	#track-list {
+		float: right;
+		width: 600px;
+		position: relative;
+	}
+	#index {
+		float: left;
+		width: 200px;
+
+		ol {
+			list-style-type: square;
+			margin-left: 1.5em;
+		}
+		li {
+			margin: 0.3em 0;
+		}
+	}
 }
 
 ul.track-detail {
 	list-style-type: none;
 	font-size: 85%;
-}
-ul.track-detail li {
-	display: inline-block;
-	margin: 3px 12px;
-}
-ul.track-detail li.enviroment {
-}
-ul.track-detail li.genre:before {
-	content: "Genre: ";
-}
-ul.track-detail li.bpm:before {
-	content: "BPM: ";
-}
-ul.track-detail li.key:before {
-	content: "Key: ";
+
+	li {
+		display: inline-block;
+		margin: 3px 12px;
+	}
+	li.enviroment {
+	}
+	li.genre:before {
+		content: "Genre: ";
+	}
+	li.bpm:before {
+		content: "BPM: ";
+	}
+	li.key:before {
+		content: "Key: ";
+	}
 }
 
 .category-container {
@@ -315,14 +332,54 @@ ul.track-detail li.key:before {
 	position: relative;
 	color: #ffffff;
 }
+
+$lg-track-size: 200px;
+$md-track-size: 21vw;
+$sm-track-size: 26.5vw;
+
 .track {
 	position: relative;
-	width: 200px;
-	height: 200px;
+	width: $lg-track-size;
+	height: $lg-track-size;
 	margin: 0 !important;
 	padding: 0 !important;
 	overflow: visible !important;
 	cursor: pointer;
+
+	h4 {
+		margin-top: 0;
+	}
+	img {
+		position: relative;
+		width: $lg-track-size;
+		height: $lg-track-size;
+		opacity: 1;
+	}
+	.content {
+		z-index: 10;
+	/*	pointer-events: auto;*/
+		position: relative;
+		left: 0;
+		top: -1 * $lg-track-size;
+		width: $lg-track-size;
+		cursor: default;
+	}
+	.close {
+		position: absolute;
+		left: 0;
+		top: 0;
+		background-image: url(../images/close.png);
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-color: rgba(0, 0, 0, 0.7);
+		line-height: 2em;
+		padding: 0 5px 0 2.5em;
+		cursor: pointer;
+
+		border-bottom-right-radius        : 10px;
+		-webkit-border-bottom-right-radius: 10px; /* Chrome, Safari */
+		-moz-border-radius-bottomright    : 10px; /* Firefox */
+	}
 }
 .track.active .content {
 	position: relative;
@@ -332,104 +389,89 @@ ul.track-detail li.key:before {
 .track-container {
 	width: 200px;
 /*	pointer-events: none;*/
+
+	> header {
+		position: relative;
+		top: 0;
+		left: 0;
+		opacity: 1;
+		display: block;
+		width: $lg-track-size;
+		height: $lg-track-size;
+
+		a {
+			display: block;
+			width: $lg-track-size;
+			height: $lg-track-size;
+			color: #ffffff;
+			text-decoration: none;
+		}
+		h4,
+		p {
+			position: relative;
+			top: -1 * $lg-track-size;
+			display: none;
+			opacity: 0;
+			padding: 5px;
+		}
+	}
 }
 
-.track img {
-	position: relative;
-	width: 200px;
-	height: 200px;
-	opacity: 1;
-}
-.track-container > header {
-	position: relative;
-	top: 0;
-	left: 0;
-	opacity: 1;
-	display: block;
-	width: 200px;
-	height: 200px;
-}
-.track-container > header a {
-	display: block;
-	width: 200px;
-	height: 200px;
-	color: #ffffff;
-	text-decoration: none;
-}
-.track-container > header h4,
-.track-container > header p {
-	position: relative;
-	top: -200px;
-	display: none;
-	opacity: 0;
-	padding: 5px;
-}
-.track-container .base:before {
-	content: "原曲: ";
-}
-.track-container > header .base {
-	margin: 10px 0;
-	padding: 5px;
-	font-size: 80%;
-}
-.track-container .base .production:before {
-	content: "(";
-}
-.track-container .base .production:after {
-	content: ")";
+.track-container {
+	.base:before {
+		content: "原曲: ";
+	}
+	> header .base {
+		margin: 10px 0;
+		padding: 5px;
+		font-size: 80%;
+	}
+	.base .production:before {
+		content: "(";
+	}
+	.base .production:after {
+		content: ")";
+	}
 }
 
 .track .content-inner {
-	margin-left: 205px;
-	padding: 5px;
+	opacity: 0;
+	display: none;
+	position: relative;
+	margin-left: 35%;
 }
 
 .track .content {
-	z-index: 10;
-/*	pointer-events: auto;*/
-	position: relative;
-	left: 0;
-	top: -200px;
-	width: 200px;
-	cursor: default;
-}
-.track .content-inner {
-	opacity: 0;
-	display: none;
-	position: relative;
+	header {
+		margin-bottom: 0.5em;
+
+		h4 {
+			display: inline;
+		}
+		.base {
+			display: inline-block;
+			margin: 0.5em;
+			padding: 0;
+			margin-left: 1em;
+			font-size: 80%;
+		}
+	}
+
+	.iframe-wrapper {
+		position: absolute;
+		top: $lg-track-size;
+		width: $lg-track-size * 3;
+		height: $lg-track-size;
+		background-color: rgba(255, 255, 255, 0.5);
+		color: #000000;
+		text-align: center;
+	}
+	iframe {
+		width: 100%;
+		height: 100%;
+	}
 }
 
-.track .content header {
-	margin-bottom: 0.5em;
-}
-.track .content header h4 {
-	display: inline;
-}
-.track .content header .base {
-	display: inline-block;
-	margin: 0.5em;
-	padding: 0;
-	margin-left: 1em;
-	font-size: 80%;
-}
-
-.track h4 {
-	margin-top: 0;
-}
-
-.track .content .iframe-wrapper {
-	position: absolute;
-	top: 200px;
-	width: 600px;
-	height: 200px;
-	background-color: rgba(255, 255, 255, 0.5);
-	color: #000000;
-	text-align: center;
-}
-.track .content iframe {
-	width: 100%;
-	height: 100%;
-}
 
 .iframe-loading {
 	position: absolute;
@@ -439,26 +481,9 @@ ul.track-detail li.key:before {
 	top: -140px;
 }
 
-.track .close {
-	position: absolute;
-	left: 0;
-	top: 0;
-	background-image: url(../images/close.png);
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-color: rgba(0, 0, 0, 0.7);
-	line-height: 2em;
-	padding: 0 5px 0 2.5em;
-	cursor: pointer;
-
-	border-bottom-right-radius        : 10px;
-	-webkit-border-bottom-right-radius: 10px; /* Chrome, Safari */
-	-moz-border-radius-bottomright    : 10px; /* Firefox */
-}
-
 .no-soundcloud {
 	margin: 0;
-	line-height: 200px;
+	line-height: $lg-track-size;
 }
 
 #popup-background {
@@ -473,7 +498,6 @@ ul.track-detail li.key:before {
 	overflow: hidden;
 	cursor: pointer;
 }
-
 
 .validator {
 	margin-top: 14px;
@@ -493,14 +517,14 @@ ul.track-detail li.key:before {
 	#outer {
 		width: 100%;
 	}
-	#main #left-content {
+	#left-content {
 		float: none;
 		width: 100%;
 		margin-bottom: 1em;
 		border-bottom: dotted 1px #cccccc;
 		padding-bottom: 1em;
 	}
-	#main #right-content {
+	#right-content {
 		float: none;
 		width: 100%;
 		height: auto;
@@ -521,55 +545,58 @@ ul.track-detail li.key:before {
 	}
 	/* track */
 	#page-music #track-list {
-		width: 63vw;
+		width: $md-track-size * 3;
 	}
 	#page-music #index {
 		width: 15vw;
 	}
-	#track-list .track {
-		width: 21vw;
-		height: 21vw;
-	}
-	#track-list .track img {
-		width: 21vw;
-		height: 21vw;
-	}
-	.track-container > header {
-		width: 21vw;
-		height: 21vw;
-	}
-	.track-container > header a {
-		width: 21vw;
-		height: 21vw;
-	}
-	.track .content-inner {
-		width: 40vw;
-		margin-left: 22vw;
-		padding: 0;
+	.track {
+		width: $md-track-size;
+		height: $md-track-size;
+
+		img {
+			width: $md-track-size;
+			height: $md-track-size;
+		}
+		> header {
+			width: $md-track-size;
+			height: $md-track-size;
+
+			a {
+				width: $md-track-size;
+				height: $md-track-size;
+			}
+		}
+		.content-inner {
+			width: 40vw;
+			margin-left: 22vw;
+			padding: 0;
+		}
 	}
 	.track-container > header h4,
 	.track-container > header p {
-		top: -21vw;
+		top: -1 * $md-track-size;
 	}
-	ul.track-detail li {
+	.track-detail li {
 		margin: 0 5px;
 	}
 	.track .content {
-		top: -21vw;
-		width: 63vw;
-	}
-	.track .content header {
-		margin-bottom: 0;
-	}
-	.track .content .iframe-wrapper {
-		top: 21vw;
-		width: 63vw;
-		height: 21vw;
+		top: -1 * $md-track-size;
+		width: $md-track-size * 3;
+
+		header {
+			margin-bottom: 0;
+		}
+		.iframe-wrapper {
+			top: $md-track-size;
+			width: $md-track-size * 3;
+			height: $md-track-size;
+		}
 	}
 
 	.no-soundcloud {
 		margin: 0;
-		line-height: 21vw;
+		line-height: $md-track-size;
 	}
 }
 
@@ -585,48 +612,49 @@ ul.track-detail li.key:before {
 	header nav {
 		float: none;
 		position: relative;
-	}
-	header nav > ul {
-		width: 93vw;
-		display: -ms-flexbox;  /* IE10 */
-		display: -webkit-box;  /* Android4.3以下、Safari3.1〜6.0 */
-		display: -moz-box;     /*Firefox21*/
-		display: -webkit-flex; /* Safari6.1以降 */
-		display: flex;
 
-		-webkit-justify-content: space-around;   /* Safari etc. */
-		-ms-justify-content    : space-around;   /* IE10        */
-		justify-content        : space-around;
+		> ul {
+			width: 93vw;
+			display: -ms-flexbox;  /* IE10 */
+			display: -webkit-box;  /* Android4.3以下、Safari3.1〜6.0 */
+			display: -moz-box;     /*Firefox21*/
+			display: -webkit-flex; /* Safari6.1以降 */
+			display: flex;
 
-		padding: 0;
-		top: 80px;
-		right: auto;
+			-webkit-justify-content: space-around;   /* Safari etc. */
+			-ms-justify-content    : space-around;   /* IE10        */
+			justify-content        : space-around;
 
-		border-bottom-left-radius        : 0;
-		-webkit-border-bottom-left-radius: 0; /* Chrome, Safari */
-		-moz-border-radius-bottomleft    : 0; /* Firefox */
-	}
-	header nav > ul > li {
-		display: block;
-		-webkit-flex-grow: 1;
-		flex-grow: 1;
-		margin: 0;
-		padding: 0;
-		line-height: 50px;
-		text-align: center;
-		top: 0;
-	}
-	header nav a {
-		padding: 0;
-	}
-	header nav li.current {
-		padding-top: 0;
-	}
-	header nav .current > a {
-		line-height: 50px !important;
-	}
-	header nav #nav-music.current > a:after {
-		content : "▼"
+			padding: 0;
+			top: 80px;
+			right: auto;
+
+			border-bottom-left-radius        : 0;
+			-webkit-border-bottom-left-radius: 0; /* Chrome, Safari */
+			-moz-border-radius-bottomleft    : 0; /* Firefox */
+		}
+		> ul > li {
+			display: block;
+			-webkit-flex-grow: 1;
+			flex-grow: 1;
+			margin: 0;
+			padding: 0;
+			line-height: 50px;
+			text-align: center;
+			top: 0;
+		}
+		a {
+			padding: 0;
+		}
+		li.current {
+			padding-top: 0;
+		}
+		.current > a {
+			line-height: 50px !important;
+		}
+		#nav-music.current > a:after {
+			content : "▼"
+		}
 	}
 
 	/* global music category navi */
@@ -645,14 +673,12 @@ ul.track-detail li.key:before {
 		-webkit-border-bottom-right-radius: 10px; /* Chrome, Safari */
 		-moz-border-radius-bottomright    : 10px; /* Firefox */
 	}
-	#nav-music ol li {
+	ol li {
 		width: 15em;
 		height: 2em;
 		padding: 5px;
 		line-height: 2em;
 		text-align: left;
-	}
-	#nav-music ol a {
 	}
 	#index-wrapper {
 		display: none;
@@ -661,99 +687,120 @@ ul.track-detail li.key:before {
 	/* track */
 	#page-music #track-list {
 		float: none;
-		width: 79.5vw;
+		width: $sm-track-size * 3;
 	}
 	#page-music #index {
 		float: none;
 	}
-	#track-list .track {
-		width: 26.5vw;
-		height: 26.5vw;
-	}
-	#track-list .track img {
-		width: 26.5vw;
-		height: 26.5vw;
-	}
-	.track-container > header {
-		width: 26.5vw;
-		height: 26.5vw;
-	}
-	.track-container > header a {
-		width: 26.5vw;
-		height: 26.5vw;
-	}
-	.track .content-inner {
-		margin-left: 27vw;
-		width: 53vw;
-	}
-	.track .content-inner > p {
-		margin: 0.5vw 0;
-		font-size: 80%;
-	}
-	.track-container > header h4,
-	.track-container > header p {
-		top: -26.5vw;
+	.track {
+		width: $sm-track-size;
+		height: $sm-track-size;
+
+		img {
+			width: $sm-track-size;
+			height: $sm-track-size;
+		}
+		.track-container {
+			> header {
+				width: $sm-track-size;
+				height: $sm-track-size;
+
+				a {
+					width: $sm-track-size;
+					height: $sm-track-size;
+				}
+				h4,
+				p {
+					top: $sm-track-size;
+				}
+			}
+		}
+		.content-inner {
+			margin-left: 27vw;
+			width: 53vw;
+
+			> p {
+				margin: 0.5vw 0;
+				font-size: 80%;
+			}
+		}
 	}
 	.track .content {
-		top: -26.5vw;
-		width: 79.5vw;
-	}
-	.track .content .iframe-wrapper {
-		top: 26.5vw;
-		width: 79.5vw;
-		height: 26.5vw;
+		top: $sm-track-size;
+		width: $sm-track-size * 3;
+
+		.iframe-wrapper {
+			top: $sm-track-size;
+			width: $sm-track-size * 3;
+			height: $sm-track-size;
+		}
 	}
 
 	.no-soundcloud {
 		margin: 0;
-		line-height: 26.5vw;
+		line-height: $sm-track-size;
 	}
 }
 
 @media screen and (max-width:590px) {
 	/* what's new */
-	#whatsnew dt {
-		float: none;
-		width: auto;
-	}
-	#whatsnew dd {
-		float: none;
-		width: auto;
-		padding-left: 2em;
+	#whatsnew {
+		dt {
+			float: none;
+			width: auto;
+		}
+		dd {
+			float: none;
+			width: auto;
+			padding-left: 2em;
+		}
 	}
 	/* about */
-	.about dt {
-		float: none;
-		width: auto;
-		margin-bottom: 10px;
-	}
-	.about dd {
-		float: none;
-		width: auto;
-		margin-left: 1em;
-		margin-bottom: 10px;
+	.about {
+		dt {
+			float: none;
+			width: auto;
+			margin-bottom: 10px;
+		}
+		dd {
+			float: none;
+			width: auto;
+			margin-left: 1em;
+			margin-bottom: 10px;
+		}
 	}
 	/* track */
-	.track .content {
-		top: -26.5vw;
-		width: 79.5vw;
+	.track {
+		.content {
+			top: -1 * $sm-track-size;
+			width: $sm-track-size * 3;
+
+			header .base {
+				font-size: 75%;
+			}
+			.iframe-wrapper {
+				top: 53vw;
+			}
+		}
+		.content-inner > p {
+			position: absolute;
+			left: -1 * $sm-track-size;
+			top: $sm-track-size;
+			width: $sm-track-size * 3;
+		}
+		.track-detail {
+			width: $sm-track-size * 2;
+
+			li {
+				font-size: 75%;
+			}
+		}
 	}
-	.track .content-inner > p {
-		position: absolute;
-		left: -26.5vw;
-		top: 26.5vw;
-		width: 79.5vw;
-	}
-	.track ul.track-detail {
-		width: 53vw;
-	}
-	.track .content header .base {
-		font-size: 75%;
-	}
-	ul.track-detail li {
-		font-size: 75%;
-	}
-	.track .content .iframe-wrapper {
-		top: 53vw;
-	}
+}
+
+.debug {
+	position: fixed;
+	opacity: 1;
+	z-index: 100;
+	background-color: rgba(0, 0, 0, 0.7);
 }
