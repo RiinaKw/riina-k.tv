@@ -9,6 +9,10 @@ $link-color: #ffff00;
 $visited-link-color: #ffcc00;
 $border-width: 30px;
 
+$lg-track-size: 200px;
+$md-track-size: 21vw;
+$sm-track-size: 26.5vw;
+
 body {
 	background-color: $background-color;
 	position: relative;
@@ -332,10 +336,6 @@ ul.track-detail {
 	position: relative;
 	color: #ffffff;
 }
-
-$lg-track-size: 200px;
-$md-track-size: 21vw;
-$sm-track-size: 26.5vw;
 
 .track {
 	position: relative;
