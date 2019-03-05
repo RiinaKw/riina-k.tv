@@ -1,0 +1,759 @@
+@charset "utf-8";
+
+body {
+	background-color: #333333;
+	position: relative;
+	margin: 0;
+	color: #ffffff;
+	font-size: 14px;
+	font-family: Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
+	background-image: url("../images/bg.png");
+	background-attachment: fixed;
+	background-position: center center;
+	background-repeat: no-repeat;
+	overflow-y: scroll;
+}
+body.blackout {
+	background-image: none;
+}
+body.blur {
+	background-image: url("../images/bg-blur.jpg");
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+	body {
+		overflow: visible;
+	}
+}
+
+a {
+	color: #ffff00;
+	outline: none;
+}
+a:visited {
+	color: #ffcc00;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-weight: bold;
+}
+#outer {
+	width: 960px;
+	overflow: hidden;
+	margin:0 auto;
+}
+#wrapper {
+	border-left: solid 30px #444444;
+	border-right: solid 30px #444444;
+	opacity: 0.9;
+	filter: alpha(opacity=90);
+}
+#container {
+	background-color: #666666;
+}
+
+#main {
+	margin: 1em 40px;
+	overflow: visible;
+	clear: both;
+}
+
+p {
+	margin: 1em 0;
+}
+
+/* clearfix */
+.clearfix:after {
+	content:" ";
+	display:block;
+	clear:both;
+}
+
+#logo {
+	background-color: #444444;
+	padding: 15px 0;
+	z-index: 10;
+}
+#logo h1 {
+	float: left;
+	height: 50px;
+	margin: 0;
+	line-height: 50px;
+	font-size: 36px;
+}
+#logo h1 a {
+	display: block;
+	background-image: url("../images/logo48.png");
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left: 70px;
+	text-decoration: none;
+}
+#logo p {
+	float: left;
+	margin: 0;
+	padding-top: 5px;
+	font-size: 24px;
+	line-height: 50px;
+	font-weight: bold;
+}
+#logo p:before {
+	content: " : ";
+	margin: 0 0.5em 0 0.8em;
+}
+header nav {
+	float: right;
+	width: 240px;
+	position: relative;
+	z-index: 1;
+}
+header nav ul {
+	position: absolute;
+	list-style-type: none;
+	width: 250px;
+	height: 50px;
+	right: 0;
+
+	/* background as #444444, opacity 0.7 */
+	background: rgba(68, 68, 68, 0.7);
+	filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#80444444, endcolorstr=#80444444, gradienttype=0); /* rgba to IE */
+
+	margin-top: -80px;	/* header height */
+	text-align: center;
+
+	border-bottom-left-radius: 10px;
+	-webkit-border-bottom-left-radius: 10px; /* Chrome, Safari */
+	-moz-border-radius-bottomleft: 10px; /* Firefox */
+	/* behavior: url(ie-css3.htc); IE...why does not work?  http://fetchak.com/ie-css3/ */
+}
+header nav > ul > li {
+	display: inline-block;
+	margin: 0 3px;
+	line-height: 30px;
+}
+header nav a {
+	display: inline-block;
+	padding: 10px 0;
+	position: relative;
+}
+header nav li.current {
+	font-weight: bold;
+	padding-top: 10px;
+}
+header nav li.disabled > a {
+	text-decoration: line-through;
+	cursor: default;
+}
+header nav li.current > a {
+	padding: 0 !important;
+	line-height: 1em;
+	text-decoration: none;
+	cursor: default;
+	color: #ffffff;
+	top: -10px;
+}
+#nav-music ol {
+	display: none;
+}
+
+footer {
+	padding: 10px;
+	border-top: dotted 1px #cccccc;
+	text-align: right;
+	line-height: 20px;
+}
+
+#page-top #right-content iframe {
+	display: none;
+}
+
+
+#main-header {
+	margin-bottom: 20px;
+}
+#main-header h2 {
+	float: left;
+	font-size: 24px;
+}
+#main-header p:before,
+#main-header p:after {
+	content: " ─ ";
+	margin: 0 1em;
+}
+#main-header p {
+	margin: 0;
+	padding-top: 2px;
+	line-height: 24px;
+	float: left;
+	font-weight: bold;
+}
+
+#main #left-content {
+	float: left;
+	width: 550px;
+}
+#main #right-content {
+	float: right;
+	width: 250px;
+	height: 400px;
+}
+
+body#page-music #main #left-content {
+	float: left;
+	width: 250px;
+	height: 400px;
+}
+body#page-music #main #right-content {
+	float: right;
+	width: 500px;
+}
+
+#whatsnew {
+}
+#whatsnew dt {
+	clear: both;
+	float: left;
+	width: 100px;
+	margin-bottom: 10px;
+}
+#whatsnew dd {
+	float: left;
+	width: 450px;
+	margin-bottom: 10px;
+}
+
+.about h3 {
+	font-size: 18px;
+	margin: 1.5em 0 1em;
+	margin-left: -1em;
+}
+.category h3 {
+	font-size: 18px;
+	margin: 1em 0;
+	padding-top: 10px;
+}
+
+.about {
+	margin-left: 20px;
+	margin-bottom: 4em;
+}
+
+.about h4,
+.track h4 {
+	margin: 0.5em 0;
+}
+.about dl {
+}
+.about dt {
+	clear: both;
+	float: left;
+	width: 80px;
+	margin-bottom: 10px;
+}
+.about dd {
+	float: left;
+	width: 400px;
+	margin-bottom: 10px;
+}
+
+#page-music #track-list {
+	float: right;
+	width: 600px;
+	position: relative;
+}
+#page-music #index {
+	float: left;
+	width: 200px;
+}
+#page-music #index ol {
+	list-style-type: square;
+	margin-left: 1.5em;
+}
+#page-music #index li {
+	margin: 0.3em 0;
+}
+
+ul.track-detail {
+	list-style-type: none;
+	font-size: 85%;
+}
+ul.track-detail li {
+	display: inline-block;
+	margin: 3px 12px;
+}
+ul.track-detail li.enviroment {
+}
+ul.track-detail li.genre:before {
+	content: "Genre: ";
+}
+ul.track-detail li.bpm:before {
+	content: "BPM: ";
+}
+ul.track-detail li.key:before {
+	content: "Key: ";
+}
+
+.category-container {
+	display: -ms-flexbox;  /* IE10 */
+	display: -webkit-box;  /* Android4.3以下、Safari3.1〜6.0 */
+	display: -webkit-flex; /* Safari6.1以降 */
+	display: -moz-box;     /*Firefox21*/
+	display: flex;
+
+	-ms-flex-wrap    : wrap; /*IE10*/
+	-webkit-flex-wrap: wrap; /* Safari6.1以降 */
+	-moz-flex-wrap   : wrap; /*Firefox21*/
+	flex-wrap        : wrap;
+
+	-ms-flex-line-pack   : flex-start; /*IE10*/
+	-webkit-align-content: flex-start; /* Safari6.1以降 */
+	-moz-box-align       : start;  /*Firefox21*/
+	align-content        : flex-start;
+
+	-webkit-align-items: flex-start;
+	-ms-align-items    : flex-start;  /* IE10 */
+	align-items        : flex-start;
+
+	position: relative;
+	color: #ffffff;
+}
+.track {
+	position: relative;
+	width: 200px;
+	height: 200px;
+	margin: 0 !important;
+	padding: 0 !important;
+	overflow: visible !important;
+	cursor: pointer;
+}
+.track.active .content {
+	position: relative;
+	z-index: 10;
+}
+
+.track-container {
+	width: 200px;
+/*	pointer-events: none;*/
+}
+
+.track img {
+	position: relative;
+	width: 200px;
+	height: 200px;
+	opacity: 1;
+}
+.track-container > header {
+	position: relative;
+	top: 0;
+	left: 0;
+	opacity: 1;
+	display: block;
+	width: 200px;
+	height: 200px;
+}
+.track-container > header a {
+	display: block;
+	width: 200px;
+	height: 200px;
+	color: #ffffff;
+	text-decoration: none;
+}
+.track-container > header h4,
+.track-container > header p {
+	position: relative;
+	top: -200px;
+	display: none;
+	opacity: 0;
+	padding: 5px;
+}
+.track-container .base:before {
+	content: "原曲: ";
+}
+.track-container > header .base {
+	margin: 10px 0;
+	padding: 5px;
+	font-size: 80%;
+}
+.track-container .base .production:before {
+	content: "(";
+}
+.track-container .base .production:after {
+	content: ")";
+}
+
+.track .content-inner {
+	margin-left: 205px;
+	padding: 5px;
+}
+
+.track .content {
+	z-index: 10;
+/*	pointer-events: auto;*/
+	position: relative;
+	left: 0;
+	top: -200px;
+	width: 200px;
+	cursor: default;
+}
+.track .content-inner {
+	opacity: 0;
+	display: none;
+	position: relative;
+}
+
+.track .content header {
+	margin-bottom: 0.5em;
+}
+.track .content header h4 {
+	display: inline;
+}
+.track .content header .base {
+	display: inline-block;
+	margin: 0.5em;
+	padding: 0;
+	margin-left: 1em;
+	font-size: 80%;
+}
+
+.track h4 {
+	margin-top: 0;
+}
+
+.track .content .iframe-wrapper {
+	position: absolute;
+	top: 200px;
+	width: 600px;
+	height: 200px;
+	background-color: rgba(255, 255, 255, 0.5);
+	color: #000000;
+	text-align: center;
+}
+.track .content iframe {
+	width: 100%;
+	height: 100%;
+}
+
+.iframe-loading {
+	position: absolute;
+	width: 80px !important;
+	height: 80px !important;
+	left: 0px;
+	top: -140px;
+}
+
+.track .close {
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-image: url(../images/close.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-color: rgba(0, 0, 0, 0.7);
+	line-height: 2em;
+	padding: 0 5px 0 2.5em;
+	cursor: pointer;
+
+	border-bottom-right-radius        : 10px;
+	-webkit-border-bottom-right-radius: 10px; /* Chrome, Safari */
+	-moz-border-radius-bottomright    : 10px; /* Firefox */
+}
+
+.no-soundcloud {
+	margin: 0;
+	line-height: 200px;
+}
+
+#popup-background {
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000000;
+	opacity: 0;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+
+.validator {
+	margin-top: 14px;
+}
+
+.validator img {
+	width: 80px;
+	height: 30px;
+}
+
+@media screen and (max-width:960px) {
+	/* layout */
+	html, body {
+		width: 100%;
+		overflow-x: hidden;
+	}
+	#outer {
+		width: 100%;
+	}
+	#main #left-content {
+		float: none;
+		width: 100%;
+		margin-bottom: 1em;
+		border-bottom: dotted 1px #cccccc;
+		padding-bottom: 1em;
+	}
+	#main #right-content {
+		float: none;
+		width: 100%;
+		height: auto;
+	}
+	/* what's new */
+	#whatsnew dt {
+		width: 20%;
+	}
+	#whatsnew dd {
+		width: 80%;
+	}
+	/* about */
+	.about dt {
+		width: 15%;
+	}
+	.about dd {
+		width: 85%;
+	}
+	/* track */
+	#page-music #track-list {
+		width: 63vw;
+	}
+	#page-music #index {
+		width: 15vw;
+	}
+	#track-list .track {
+		width: 21vw;
+		height: 21vw;
+	}
+	#track-list .track img {
+		width: 21vw;
+		height: 21vw;
+	}
+	.track-container > header {
+		width: 21vw;
+		height: 21vw;
+	}
+	.track-container > header a {
+		width: 21vw;
+		height: 21vw;
+	}
+	.track .content-inner {
+		width: 40vw;
+		margin-left: 22vw;
+		padding: 0;
+	}
+	.track-container > header h4,
+	.track-container > header p {
+		top: -21vw;
+	}
+	ul.track-detail li {
+		margin: 0 5px;
+	}
+	.track .content {
+		top: -21vw;
+		width: 63vw;
+	}
+	.track .content header {
+		margin-bottom: 0;
+	}
+	.track .content .iframe-wrapper {
+		top: 21vw;
+		width: 63vw;
+		height: 21vw;
+	}
+
+	.no-soundcloud {
+		margin: 0;
+		line-height: 21vw;
+	}
+}
+
+@media screen and (max-width:760px) {
+	/* layout */
+	#wrapper {
+		border-width: 0 4vw;
+	}
+	#main {
+		margin: 85px 4vw 1em;
+	}
+	/* global navi */
+	header nav {
+		float: none;
+		position: relative;
+	}
+	header nav > ul {
+		width: 93vw;
+		display: -ms-flexbox;  /* IE10 */
+		display: -webkit-box;  /* Android4.3以下、Safari3.1〜6.0 */
+		display: -moz-box;     /*Firefox21*/
+		display: -webkit-flex; /* Safari6.1以降 */
+		display: flex;
+
+		-webkit-justify-content: space-around;   /* Safari etc. */
+		-ms-justify-content    : space-around;   /* IE10        */
+		justify-content        : space-around;
+
+		padding: 0;
+		top: 80px;
+		right: auto;
+
+		border-bottom-left-radius        : 0;
+		-webkit-border-bottom-left-radius: 0; /* Chrome, Safari */
+		-moz-border-radius-bottomleft    : 0; /* Firefox */
+	}
+	header nav > ul > li {
+		display: block;
+		-webkit-flex-grow: 1;
+		flex-grow: 1;
+		margin: 0;
+		padding: 0;
+		line-height: 50px;
+		text-align: center;
+		top: 0;
+	}
+	header nav a {
+		padding: 0;
+	}
+	header nav li.current {
+		padding-top: 0;
+	}
+	header nav .current > a {
+		line-height: 50px !important;
+	}
+	header nav #nav-music.current > a:after {
+		content : "▼"
+	}
+
+	/* global music category navi */
+	#nav-music ol {
+		position: absolute;
+		left: 30vw;
+
+		/* background as #444444, opacity 0.7 */
+		background: rgba(68, 68, 68, 0.7);
+
+		border-bottom-left-radius        : 10px;
+		-webkit-border-bottom-left-radius: 10px; /* Chrome, Safari */
+		-moz-border-radius-bottomleft    : 10px; /* Firefox */
+
+		border-bottom-right-radius        : 10px;
+		-webkit-border-bottom-right-radius: 10px; /* Chrome, Safari */
+		-moz-border-radius-bottomright    : 10px; /* Firefox */
+	}
+	#nav-music ol li {
+		width: 15em;
+		height: 2em;
+		padding: 5px;
+		line-height: 2em;
+		text-align: left;
+	}
+	#nav-music ol a {
+	}
+	#index-wrapper {
+		display: none;
+	}
+
+	/* track */
+	#page-music #track-list {
+		float: none;
+		width: 79.5vw;
+	}
+	#page-music #index {
+		float: none;
+	}
+	#track-list .track {
+		width: 26.5vw;
+		height: 26.5vw;
+	}
+	#track-list .track img {
+		width: 26.5vw;
+		height: 26.5vw;
+	}
+	.track-container > header {
+		width: 26.5vw;
+		height: 26.5vw;
+	}
+	.track-container > header a {
+		width: 26.5vw;
+		height: 26.5vw;
+	}
+	.track .content-inner {
+		margin-left: 27vw;
+		width: 53vw;
+	}
+	.track .content-inner > p {
+		margin: 0.5vw 0;
+		font-size: 80%;
+	}
+	.track-container > header h4,
+	.track-container > header p {
+		top: -26.5vw;
+	}
+	.track .content {
+		top: -26.5vw;
+		width: 79.5vw;
+	}
+	.track .content .iframe-wrapper {
+		top: 26.5vw;
+		width: 79.5vw;
+		height: 26.5vw;
+	}
+
+	.no-soundcloud {
+		margin: 0;
+		line-height: 26.5vw;
+	}
+}
+
+@media screen and (max-width:590px) {
+	/* what's new */
+	#whatsnew dt {
+		float: none;
+		width: auto;
+	}
+	#whatsnew dd {
+		float: none;
+		width: auto;
+		padding-left: 2em;
+	}
+	/* about */
+	.about dt {
+		float: none;
+		width: auto;
+		margin-bottom: 10px;
+	}
+	.about dd {
+		float: none;
+		width: auto;
+		margin-left: 1em;
+		margin-bottom: 10px;
+	}
+	/* track */
+	.track .content {
+		top: -26.5vw;
+		width: 79.5vw;
+	}
+	.track .content-inner > p {
+		position: absolute;
+		left: -26.5vw;
+		top: 26.5vw;
+		width: 79.5vw;
+	}
+	.track ul.track-detail {
+		width: 53vw;
+	}
+	.track .content header .base {
+		font-size: 75%;
+	}
+	ul.track-detail li {
+		font-size: 75%;
+	}
+	.track .content .iframe-wrapper {
+		top: 53vw;
+	}
+}
