@@ -2,15 +2,9 @@
 					<div id="main" class="clearfix">
 						<main id="left-content">
 							<script>
-								var _gaq = _gaq || [];
-								_gaq.push(['_setAccount', 'UA-46798910-1']);
-								_gaq.push(['_setDomainName', 'riina-k.tv']);
-								_gaq.push(['_trackPageview']);
-								(function() {
-									var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-									ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-									var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-								})();
+								$(function(){
+									page.googleanalytics();
+								});
 							</script>
 							<header id="main-header" class="clearfix">
 								<h2>What's new</h2>
@@ -29,21 +23,6 @@
 								<a class="twitter-timeline" data-lang="ja" data-height="500" data-theme="dark"
 									href="https://twitter.com/Riina_Kw_m?ref_src=twsrc%5Etfw">Tweets by Riina_Kw_m</a>
 							</div>
-							<script>
-								$(function(){
-									var duration = ( $("body").hasClass("effected") ? 500 : 2500 );
-									setTimeout(function(){
-										var wrapper = document.getElementById("timeline");
-										var script = document.createElement("script");
-										script.setAttribute("src", "https://platform.twitter.com/widgets.js");
-										wrapper.appendChild(script);
-
-										setTimeout(function(){
-											resizeHandler();
-										}, 1500);
-									}, duration);
-								});
-							</script>
 
 							<div class="validator">
 								<a href="https://validator.w3.org/check?uri=referer" data-rel="external"><img src="{{$root}}/images/html.svg" alt="valid html5" /></a>
