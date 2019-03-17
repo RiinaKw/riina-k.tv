@@ -1,3 +1,4 @@
+"use strict";
 
 var page = new Page;
 var category = new Category;
@@ -22,7 +23,7 @@ function Page()
 
 		if ( $("#page-music").length ) {
 			if ( ! $("#popup-background").length ) {
-				$div = $("<div />").attr("id", "popup-background");
+				var $div = $("<div />").attr("id", "popup-background");
 				$("#track-list").append($div);
 			}
 			$("#popup-background").hide().addClass("hide");
@@ -53,34 +54,12 @@ function Page()
 			});
 
 			$("#popup-background").on("click", function(){
-				track.close({});
+				track.close();
 			});
 
 			$(".track").on({
-				// hover
-				"mouseenter" : function(){
-					if ( $(".active").length ) {
-						return;
-					}
-					var $track = $(this);
-					$("img", $track).fadeTo(100, 0.2, function(){
-						$("article").removeClass("hover")
-						$track.addClass("hover");
-					});
-					$(".track-container > header *", $track).not("a").not("img").stop().show().fadeTo(100, 1, function(){
-						$(this).show();
-					});
-				},
-				// blur
-				"mouseleave" : function(){
-					var $track = $(this);
-					$track.removeClass("hover");
-					$(".track-container img", $track).fadeTo(100, 1, function(){
-					});
-					$(".track-container > header *", $track).not("a").not("img").stop().fadeTo(100, 0, function(){
-						$(this).hide();
-					});
-				}
+				"mouseenter" : track.hover,
+				"mouseleave" : track.blur
 			});
 			$(".track").on("click", function(e){
 				var $track = $(this);
@@ -443,7 +422,7 @@ function Page()
 				}
 				page.scrollTo(hash);
 			} else {
-				track.close({});
+				track.close();
 			}
 		}
 		return false;
@@ -684,13 +663,13 @@ function Track()
 						$article.addClass("active");
 					}
 					// close button
-					$close = $(".close", $article);
+					var $close = $(".close", $article);
 					if ( !$close.length ) {
 						$close = $("<div />").addClass("close").appendTo( $(".iconbox", $article) );
 						$close.html("close").css("opacity", 0).fadeTo(200, 0.8);
 						$close.on("click", function(){
 							page.debug("close track");
-							this.close({});
+							track.close();
 						});
 					}
 					// soundcloud fade in
@@ -705,9 +684,9 @@ function Track()
 						// stop mp3
 						var audio = $("iframe.preview");
 						for (idx in track) {
-							var track = audio[idx];
-							track.pause();
-							track.currentTime = 0;
+							var curTrack = audio[idx];
+							curTrack.pause();
+							curTrack.currentTime = 0;
 						}
 
 						// soundcloud iframe
@@ -769,8 +748,8 @@ function Track()
 	this.close = function(param)
 	{
 		param = {
-			popstate: param.popstate,
-			success: param.success
+			popstate: (param ? param.popstate : false),
+			success: (param ? param.success : function(){})
 		};
 		var $article = this.current;
 		if ( !$article || $article.length == 0 ) {
@@ -807,10 +786,8 @@ function Track()
 			return $(".content", $article).fadeTo(100, 0);
 		})
 		.queue(function(){
-			$content = $(".content", $article);
-			$content.hide();
+			var $content = $(".content", $article).hide().css("z-index", 0);
 			$article.removeClass("active");
-			$content.css("z-index", 0);
 
 			// shrink category
 			var $categories = $(".category-container");
@@ -826,9 +803,7 @@ function Track()
 						height: trackColumn * trackHeight
 					},
 					200,
-					function(){
-						page.resize();
-					}
+					page.resize
 				);
 			}
 			$("iframe.preview", $article).remove();
@@ -854,6 +829,37 @@ function Track()
 			return $content;
 		}); // $.globalQueue.queue()
 	} // this.close
+
+	this.hover = function()
+	{
+		if ( $(".active").length ) {
+			return;
+		}
+		var $track = $(this);
+		$("img", $track).fadeTo(100, 0.2, function(){
+			$("article").removeClass("hover")
+			$track.addClass("hover");
+		});
+		$(".track-container > header *", $track)
+			.not("a").not("img")
+			.stop().show()
+			.fadeTo(100, 1, function(){
+				$(this).show();
+		});
+	} // this.hover
+
+	this.blur = function()
+	{
+		var $track = $(this);
+		$track.removeClass("hover");
+		$(".track-container img", $track).fadeTo(100, 1, function(){
+		});
+		$(".track-container > header *", $track)
+			.not("a").not("img")
+			.stop().fadeTo(100, 0, function(){
+				$(this).hide();
+		});
+	} // this.blur
 } // function Track()
 
 // Convenience object to ease global animation queueing
