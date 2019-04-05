@@ -366,7 +366,8 @@ ul.track-detail {
   opacity: 0;
   display: none;
   position: relative;
-  margin-left: 35%; }
+  margin-left: 200px;
+  width: 400px; }
 
 .track .content header {
   margin-bottom: 0.5em; }
@@ -470,6 +471,9 @@ ul.track-detail {
       width: 40vw;
       margin-left: 22vw;
       padding: 0; }
+  .track-container > header {
+    width: 21vw;
+    height: 21vw; }
   .track-container > header h4,
   .track-container > header p {
     top: -21vw; }
@@ -541,7 +545,8 @@ ul.track-detail {
     header nav .current > a {
       line-height: 50px !important; }
     header nav #nav-music.current > a:after {
-      content: "▼"; }
+      content: "▼";
+      margin-left: 0.5rem; }
   /* global music category navi */
   #nav-music ol {
     position: absolute;
@@ -586,7 +591,7 @@ ul.track-detail {
         height: 26.5vw; }
       .track .track-container > header h4,
       .track .track-container > header p {
-        top: 26.5vw; }
+        top: -26.5vw; }
     .track .content-inner {
       margin-left: 27vw;
       width: 53vw; }

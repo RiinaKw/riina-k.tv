@@ -49,17 +49,6 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
 		<link rel="stylesheet" href="{{$root}}/css/reset.css" />
 		<link rel="stylesheet" href="{{$root}}/css/common.css" />
-
-		<script src="{{$root}}/js/ua.js"></script>
-<!--[if lt IE 9]>
-		<script src="{{$root}}/js/html5.js"></script>
-		<script src="{{$root}}/js/IE9.js"></script>
-<![endif]-->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="{{$root}}/js/jquery.easing.js"></script>
-
-		<script src="{{$root}}/js/soundcloud_api.js"></script>
-		<script src="{{$root}}/js/common.js"></script>
 	</head>
 
 	<body id="{{$page_id}}">
@@ -95,5 +84,21 @@
 				</div><!-- #container -->
 			</div><!-- #wrapper -->
 		</div><!-- #outer -->
+
+		<script src="{{$root}}/js/ua.js"></script>
+<!--[if lt IE 9]>
+		<script src="{{$root}}/js/html5.js"></script>
+		<script src="{{$root}}/js/IE9.js"></script>
+<![endif]-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="{{$root}}/js/jquery.easing.js"></script>
+
+		<script src="{{$root}}/js/soundcloud_api.js"></script>
+		<script src="{{$root}}/js/common.js"></script>
+		<script>
+			$(function(){
+				page.googleanalytics();
+			});
+		</script>
 	</body>
 </html>

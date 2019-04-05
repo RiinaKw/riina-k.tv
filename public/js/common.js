@@ -588,12 +588,8 @@ function Track()
 				if ( $iconbox.length == 0 ) {
 					$iconbox = $('<div class="iconbox" />').prependTo($content);
 					if ( $("img", $iconbox).length == 0 ) {
-						var width = 200;
-						var height = 200;
-						if ($(window).width() < 760) {
-							width = "26.5vw";
-							height = "26.5vw";
-						}
+						var width = $article.width();
+						var height = $article.height();
 						$iconbox.empty()
 							.css({
 								position: "absolute",
@@ -618,14 +614,13 @@ function Track()
 				$(".track-container > header *", $article).not("a").not("img").hide();
 
 				// show iconbox
-				var width = 600;
-				if ($(window).width() < 760) {
-					width = "79.5vw";
-				}
+				var width = $article.width();
+				var height = $article.height();
 				return $content.css({opacity:0}).show().animate(
 					{
-						width: width,
+						width: width * 2,
 						left: 0,
+						top: -1 * height,
 						opacity: 1
 					},
 					{
@@ -683,10 +678,10 @@ function Track()
 					if (iframeUrl) {
 						// stop mp3
 						var audio = $("iframe.preview");
-						for (idx in track) {
-							var curTrack = audio[idx];
-							curTrack.pause();
-							curTrack.currentTime = 0;
+						for (var idx=0; idx<audio.length; ++idx) {
+							var curAudio = audio[idx];
+							curAudio.pause();
+							curAudio.currentTime = 0;
 						}
 
 						// soundcloud iframe
@@ -712,11 +707,10 @@ function Track()
 							});
 						}
 					} else if (previewUrl) {
-						//$iframeWrapper.empty().html('<p class="no-soundcloud">soundcloud not available. <a href="' + previewUrl + '" target="_blank">download here</a></p>');
 						// stop soundcloud
 						var iframeElement = $("iframe.playing").get(0);
 						if (iframeElement) {
-							widget = SC.Widget(iframeElement);
+							var widget = SC.Widget(iframeElement);
 							widget.pause();
 						}
 
@@ -724,10 +718,9 @@ function Track()
 						var $iframe = $("iframe", $article);
 						if ( $iframe.length == 0 ) {
 							$iframeWrapper.append('<iframe />');
-							$iframe = $("iframe", $article);
+							var $iframe = $("iframe", $article);
 							$iframe.addClass("preview").addClass("playing").attr("src", src);
 						}
-						//$iframeWrapper.empty().html('<p class="no-soundcloud"><audio controls="controls" preload="metadata"><source src="' + previewUrl + '" type="audio/mp3" /></audio></p>');
 					} else {
 						$iframeWrapper.empty().html('<p class="no-soundcloud">listening not available</p>');
 					}
