@@ -51,7 +51,7 @@ h1, h2, h3, h4, h5, h6 {
 #outer {
 	width: 960px;
 	overflow: hidden;
-	margin:0 auto;
+	margin: 0 auto;
 }
 #wrapper {
 	border: solid 0 $border-color;
@@ -439,10 +439,12 @@ ul.track-detail {
 	display: none;
 	position: relative;
 	margin-left: $lg-track-size;
-	width: $lg-track-size * 2;
+	padding: 0 0.5rem;
 }
 
 .track .content {
+	width: $lg-track-size * 3;
+
 	header {
 		margin-bottom: 0.5em;
 
@@ -509,11 +511,15 @@ ul.track-detail {
 	height: 30px;
 }
 
-@media screen and (max-width:960px) {
+@media screen and (min-width:761px) and (max-width:960px) {
 	/* layout */
 	html, body {
 		width: 100%;
 		overflow-x: hidden;
+		font-size: 1.5vw;
+	}
+	footer {
+		width: 100%;
 	}
 	#outer {
 		width: 100%;
@@ -568,6 +574,9 @@ ul.track-detail {
 				height: $md-track-size;
 			}
 		}
+		.content {
+			width: $md-track-size * 3;
+		}
 		.content-inner {
 			width: 40vw;
 			margin-left: 22vw;
@@ -609,8 +618,26 @@ ul.track-detail {
 
 @media screen and (max-width:760px) {
 	/* layout */
+	body {
+		font-size: 14px;
+	}
 	#wrapper {
 		border-width: 0 4vw;
+	}
+	#left-content {
+		float: none;
+		width: 100%;
+		margin-bottom: 1em;
+		border-bottom: dotted 1px #cccccc;
+		padding-bottom: 1em;
+	}
+	#right-content {
+		float: none;
+		width: 100%;
+		height: auto;
+	}
+	#outer {
+		width: 100%;
 	}
 	#main {
 		margin: 85px 4vw 1em;
@@ -724,17 +751,16 @@ ul.track-detail {
 			}
 		}
 		.content-inner {
-			margin-left: 27vw;
-			width: 53vw;
+			margin-left: $sm-track-size;
+			width: $sm-track-size * 2;
 
 			> p {
 				margin: 0.5vw 0;
-				font-size: 80%;
 			}
 		}
 	}
 	.track .content {
-		top: $sm-track-size;
+		top: -1 * $sm-track-size;
 		width: $sm-track-size * 3;
 
 		.iframe-wrapper {
@@ -751,6 +777,24 @@ ul.track-detail {
 }
 
 @media screen and (max-width:590px) {
+	body {
+		font-size: 14px;
+	}
+	#outer {
+		width: 100%;
+	}
+	#left-content {
+		float: none;
+		width: 100%;
+		margin-bottom: 1em;
+		border-bottom: dotted 1px #cccccc;
+		padding-bottom: 1em;
+	}
+	#right-content {
+		float: none;
+		width: 100%;
+		height: auto;
+	}
 	/* what's new */
 	#whatsnew {
 		dt {

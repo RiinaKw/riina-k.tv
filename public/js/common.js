@@ -618,9 +618,8 @@ function Track()
 				var height = $article.height();
 				return $content.css({opacity:0}).show().animate(
 					{
-						width: width * 2,
+						width: width * 3,
 						left: 0,
-						top: -1 * height,
 						opacity: 1
 					},
 					{
