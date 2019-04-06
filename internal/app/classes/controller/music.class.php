@@ -31,6 +31,7 @@ class Controller_Music extends Controller_Base {
 		}
 
 		$view = new View_Container('music.tpl.html');
+		$view->meta('page');
 		$view->page_id = 'page-music';
 		$view->categories = $categories;
 
@@ -63,6 +64,7 @@ class Controller_Music extends Controller_Base {
 		if ( !$cur_track ) {
 			throw new HttpNotFoundException('track "' . $slug . '" not exists');
 		}
+		$view->meta('track', $cur_track);
 		$this->_set_url($cur_track);
 
 		$view->track = $cur_track;

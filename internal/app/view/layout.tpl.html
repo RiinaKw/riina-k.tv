@@ -12,56 +12,7 @@
 		<!-- for Safari -->
 		<link rel="mask-icon" sizes="any" href="/favicon/rktv.svg" color="#333333">
 
-{{if isset($track)}}
-		<meta property="og:url"          content="{{$root}}{{$path}}" />
-		<meta property="og:type"         content="article" />
-		<meta property="og:title"        content="{{$track.title|escape}} - {{#title_en#}}" />
-		<meta property="og:description"  content="{{$track.content|escape|serialize}}" />
-{{if $track.image_name}}
-		<meta property="og:image"        content="{{$root}}/artwork/{{$track.image_name}}" />
-		<meta property="og:image:width"  content="500" />
-		<meta property="og:image:height" content="500" />
-{{else}}
-		<meta property="og:image"        content="{{$root}}/images/og.png" />
-		<meta property="og:image:width"  content="500" />
-		<meta property="og:image:height" content="500" />
-{{/if}}
-		<meta property="fb:admins"       content="100027747308230" />
-		<meta property="fb:app_id"       content="293296621217108" />
-
-		<meta property="twitter:url"         content="{{$root}}{{$path}}" />
-		<meta property="twitter:card"        content="summary" />
-		<meta property="twitter:site"        content="{{#twitter#}}" />
-		<meta property="twitter:title"       content="{{$track.title|escape}} - {{#title_en#}}" />
-		<meta property="twitter:description" content="{{$track.content|escape|serialize}}" />
-{{if $track.image_name}}
-		<meta property="twitter:image"       content="{{$root}}/artwork/{{$track.image_name}}" />
-		<meta property="og:image:width"      content="500" />
-		<meta property="og:image:height"     content="500" />
-{{else}}
-		<meta property="twitter:image"       content="{{$root}}/images/og.png" />
-		<meta property="og:image:width"      content="500" />
-		<meta property="og:image:height"     content="500" />
-{{/if}}
-
-{{else}}
-		<meta property="og:url"          content="{{$root}}{{$path}}" />
-		<meta property="og:type"         content="website" />
-		<meta property="og:title"        content="{{#title#}}" />
-		<meta property="og:description"  content="{{#description#}}" />
-		<meta property="og:image"        content="{{$root}}/images/og.png" />
-		<meta property="og:image:width"  content="500" />
-		<meta property="og:image:height" content="500" />
-		<meta property="fb:admins"       content="100027747308230" />
-		<meta property="fb:app_id"       content="293296621217108" />
-
-		<meta property="twitter:url"         content="{{$root}}{{$path}}" />
-		<meta property="twitter:card"        content="summary" />
-		<meta property="twitter:site"        content="{{#twitter#}}" />
-		<meta property="twitter:title"       content="{{#title#}}" />
-		<meta property="twitter:description" content="{{#description#}}" />
-		<meta property="twitter:image"       content="{{$root}}/images/og.png" />
-{{/if}}
+{{$meta}}
 
 		<meta name=”theme-color” content=”#333333″ />
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
