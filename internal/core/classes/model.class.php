@@ -1,12 +1,14 @@
 <?php
 
 class Model {
-	
+
 	protected $_dbh;
-	
-	public function __construct($config)
+
+	public function __construct()
 	{
-		$this->_dbh = new PDO($config['dsn'], $config['username'], $config['password']);
+		global $bootstrap;
+
+		$this->_dbh = $bootstrap->dbh;
 	} // function __construct()
-	
+
 } // class Model

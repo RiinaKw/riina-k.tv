@@ -12,4 +12,4 @@ if ($bootstrap->env == 'development') {
 	error_reporting(E_ALL);
 }
 
-$bootstrap->route();
+Routing::route();
