@@ -1,0 +1,16 @@
+{
+  "name": "rk. tv : あーけーどてぃーゔぃー",
+  "short_name": "rk. tv",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#333",
+  "description": "Keyアレンジ、Master of Epic アレンジをメインに手がける同人音楽サークルです。",
+  "icons": [{
+    "src": "favicon/rktv.svg",
+    "type": "image/svg+xml"
+  },{
+    "src": "favicon/android-192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }]
+}
