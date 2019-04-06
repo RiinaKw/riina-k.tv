@@ -56,7 +56,10 @@ class Routing {
 		if ( method_exists($instance, $method) ) {
 			$instance->$method($param);
 		} else {
-			trigger_error('class "' . $class . '" has not method "' . $method . '"', E_USER_ERROR);
+			trigger_error(
+				'class "' . $class . '" has not method "' . $method . '"',
+				E_USER_ERROR
+			);
 		}
 	} // function route()
 

@@ -30,7 +30,10 @@ class View_Smarty extends View {
 		$this->_engine->right_delimiter = '}}';
 
 		// register prefilter
-		$this->_engine->registerFilter( "pre", array(__CLASS__, '_uniform_charcode') );
+		$this->_engine->registerFilter(
+			'pre',
+			array(__CLASS__, '_uniform_charcode')
+		);
 
 		// add conf
 		$this->_engine->configLoad('riina-k.tv.conf');
@@ -62,7 +65,6 @@ class View_Smarty extends View {
 		if ( !$this->_template ) {
 			throw new Exception('template is not assigned.');
 		} else {
-			// var_dump( $this->_engine->template_exists($this->_template) );exit;
 			$exists = false;
 			foreach ($this->_engine->template_dir as $dir) {
 				$path = $dir . $this->_template;
@@ -72,7 +74,9 @@ class View_Smarty extends View {
 				}
 			}
 			if ( !$exists ) {
-				throw new Exception('template "' . $this->_template . '" is not readable file.');
+				throw new Exception(
+					'template "' . $this->_template . '" is not readable file.'
+				);
 			}
 		}
 		return true;

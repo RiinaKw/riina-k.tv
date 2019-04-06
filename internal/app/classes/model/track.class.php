@@ -1,10 +1,15 @@
 <?php
 
 class Model_Track extends Model {
-	
+
 	function get_as_category()
 	{
-		$statement = $this->_dbh->prepare('SELECT * FROM categories ORDER BY display_order ASC, id ASC;');
+		$statement = $this->_dbh->prepare( <<<SELECT
+	SELECT *
+	FROM categories
+	ORDER BY display_order ASC, id ASC;
+SELECT
+		);
 		$statement->execute();
 
 		$arr = array();
@@ -18,7 +23,9 @@ class Model_Track extends Model {
 	ORDER BY id ASC;
 SELECT
 			);
-			$category_statement->bindValue(':category_id', $category['id'], PDO::PARAM_INT);
+			$category_statement->bindValue(
+				':category_id', $category['id'], PDO::PARAM_INT
+			);
 			$category_statement->execute();
 			$arr[] = array(
 				'count' => $category_statement->rowCount(),
@@ -29,7 +36,7 @@ SELECT
 		}
 		return $arr;
 	} // function get_as_category()
-	
+
 	public function get_by_slug($slug)
 	{
 		$statement = $this->_dbh->prepare( <<<SELECT
@@ -44,5 +51,5 @@ SELECT
 		$statement->execute();
 		return $statement->fetch(PDO::FETCH_ASSOC);
 	} // function get_by_slug()
-	
+
 } // class Model_Track

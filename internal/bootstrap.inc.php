@@ -22,7 +22,9 @@ class Bootstrap {
 
 		$this->_prop['vendor_dir']       = $this->internal_path('/vendor');
 
-		$url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+		$url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://')
+			. $_SERVER['SERVER_NAME']
+			. $_SERVER['REQUEST_URI'];
 		$pathes = parse_url($url);
 		if ( isset($_SERVER['PATH_INFO']) ) {
 			$path_info = $_SERVER['PATH_INFO'];
@@ -37,13 +39,18 @@ class Bootstrap {
 
 		$env_path = $this->env_path( $_SERVER['SERVER_NAME'] );
 		if ( !$env_path || !is_file($env_path) ) {
-			trigger_error('environment error: unknown environment ' . $_SERVER['SERVER_NAME'], E_USER_ERROR);
+			trigger_error('environment error: unknown environment '
+				. $_SERVER['SERVER_NAME'], E_USER_ERROR);
 		}
 		$env = require_once($env_path);
 		$this->_prop['db'] = $env['db'];
 		$this->_prop['env'] = $env['env'];
 		if ( $env['db'] ) {
-			$this->_prop['dbh'] = new PDO($env['db']['dsn'], $env['db']['username'], $env['db']['password']);
+			$this->_prop['dbh'] = new PDO(
+				$env['db']['dsn'],
+				$env['db']['username'],
+				$env['db']['password']
+			);
 		}
 
 		foreach ($env['dir'] as $name => $dir) {
@@ -126,7 +133,12 @@ class Bootstrap {
 			$view->message = $e->getMessage();
 			$view->trace = '';
 		} else {
-			$view->message = $e->getMessage() . ' in ' . $e->getFile() . '(' . $e->getLine() . ')';
+			$view->message = $e->getMessage()
+				. ' in '
+				. $e->getFile()
+				. '('
+				. $e->getLine()
+				. ')';
 			$view->trace = $e->getTraceAsString();
 		}
 
