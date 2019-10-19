@@ -127,7 +127,7 @@ class Bootstrap {
 	public function _exception_handle($e)
 	{
 		$view = new View('error.tpl.php');
-		$view->title = '404 ' . $e->getMessage();
+		$view->title = '500 ' . $e->getMessage();
 
 		if ($this->env == 'production') {
 			$view->message = $e->getMessage();
@@ -145,7 +145,7 @@ class Bootstrap {
 		$path = $this->app_config_path('conf/riina-k.tv.conf');
 		$view->config = parse_ini_file($path);
 
-		header( 'HTTP/1.0 404 ' . $this->title );
+		header( 'HTTP/1.0 500 ' . $this->title );
 		$view->render();
 	} // function _exception_handle()
 
