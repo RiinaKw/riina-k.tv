@@ -2,3 +2,5 @@
 .netrc
 composer.lock
 .editorconfig
+
+/logs
