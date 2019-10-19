@@ -1,3 +1,4 @@
 .htdigest
+.netrc
 composer.lock
 .editorconfig
