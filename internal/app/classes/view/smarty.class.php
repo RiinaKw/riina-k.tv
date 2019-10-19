@@ -38,6 +38,9 @@ class View_Smarty extends View
 		// add conf
 		$this->_engine->configLoad('riina-k.tv.conf');
 
+		// env
+		$this->assign('env', $bootstrap->env);
+
 		if ($template) {
 			$this->_template = $template;
 		}

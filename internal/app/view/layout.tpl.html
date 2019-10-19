@@ -64,10 +64,12 @@
 
 		<script src="{{$root}}/js/soundcloud_api.js"></script>
 		<script src="{{$root}}/js/common.js"></script>
+{{if $env == 'production'}}
 		<script>
 			$(function(){
 				page.googleanalytics();
 			});
 		</script>
+{{/if}}
 	</body>
 </html>
