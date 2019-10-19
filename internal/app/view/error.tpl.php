@@ -9,12 +9,8 @@
 	if ($bootstrap->env == 'development') {
 		var_dump($this);
 	}
-
-	$message = $this->message;
-	$pos = strpos($message, ' in');
-	$message = substr($message, 0, $pos);
 ?>
 		<h1><?php echo htmlspecialchars($this->title); ?></h1>
-		<p><?php echo htmlspecialchars($message); ?></p>
+		<p><?php echo htmlspecialchars($this->message); ?></p>
 	</body>
 </html>
