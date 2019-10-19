@@ -1,6 +1,7 @@
 <?php
 
-class View {
+class View
+{
 
 	protected $_template;
 

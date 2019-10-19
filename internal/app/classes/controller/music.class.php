@@ -1,6 +1,7 @@
 <?php
 
-class Controller_Music extends Controller_Base {
+class Controller_Music extends Controller_Base
+{
 
 	protected function _set_url(&$track)
 	{

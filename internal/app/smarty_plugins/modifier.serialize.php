@@ -19,5 +19,3 @@ function smarty_modifier_serialize($input)
 	
 	return $input;
 }
-
-?>

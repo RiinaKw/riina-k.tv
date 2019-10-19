@@ -1,6 +1,7 @@
 <?php
 
-class Controller_Iframe extends Controller_Base {
+class Controller_Iframe extends Controller_Base
+{
 	
 	public function action_detail($arg)
 	{

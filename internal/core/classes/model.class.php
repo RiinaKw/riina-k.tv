@@ -1,6 +1,7 @@
 <?php
 
-class Model {
+class Model
+{
 
 	protected $_dbh;
 

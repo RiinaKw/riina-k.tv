@@ -1,6 +1,7 @@
 <?php
 
-class Controller_Base extends Controller {
+class Controller_Base extends Controller
+{
 	
 	protected $_config = array();
 	

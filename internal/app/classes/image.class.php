@@ -1,6 +1,7 @@
 <?php
 
-class Image {
+class Image
+{
 
 	protected $resource = null;
 	protected $filepath = null;

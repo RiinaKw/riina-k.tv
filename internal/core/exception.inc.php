@@ -1,6 +1,7 @@
 <?php
 
-class HttpException extends Exception {
+class HttpException extends Exception
+{
 
 	protected $title = '';
 	protected $code = 0;
@@ -53,7 +54,8 @@ class HttpException extends Exception {
 
 } // class HttpException
 
-class HttpBadRequestException extends HttpException {
+class HttpBadRequestException extends HttpException
+{
 
 	public function __construct($message = null, $code = 400)
 	{
@@ -64,7 +66,8 @@ class HttpBadRequestException extends HttpException {
 
 } // class HttpBadRequestException
 
-class HttpForbiddenException extends HttpException {
+class HttpForbiddenException extends HttpException
+{
 
 	public function __construct($message = null, $code = 403)
 	{
@@ -75,7 +78,8 @@ class HttpForbiddenException extends HttpException {
 
 } // class HttpForbiddenException
 
-class HttpNotFoundException extends HttpException {
+class HttpNotFoundException extends HttpException
+{
 
 	public function __construct($message = null, $code = 404)
 	{
@@ -86,7 +90,8 @@ class HttpNotFoundException extends HttpException {
 
 } // class HttpNotFoundException
 
-class HttpImTeapotException extends HttpException {
+class HttpImTeapotException extends HttpException
+{
 
 	public function __construct($message = null, $code = 418)
 	{
@@ -97,7 +102,8 @@ class HttpImTeapotException extends HttpException {
 
 } // class HttpImTeapotException
 
-class HttpInternalServerErrorException extends HttpException {
+class HttpInternalServerErrorException extends HttpException
+{
 
 	public function __construct($message = null, $code = 500)
 	{
@@ -108,7 +114,8 @@ class HttpInternalServerErrorException extends HttpException {
 
 } // class HttpInternalServerErrorException
 
-class HttpNotImplementedException extends HttpException {
+class HttpNotImplementedException extends HttpException
+{
 
 	public function __construct($message = null, $code = 501)
 	{

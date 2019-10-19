@@ -1,6 +1,7 @@
 <?php
 
-class Routing {
+class Routing
+{
 
 	public static function route()
 	{

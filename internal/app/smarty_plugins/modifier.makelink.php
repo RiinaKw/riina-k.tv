@@ -26,5 +26,3 @@ function smarty_modifier_makelink($input)
 	}
 	return $input;
 }
-
-?>

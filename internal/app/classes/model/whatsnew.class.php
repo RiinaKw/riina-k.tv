@@ -1,6 +1,7 @@
 <?php
 
-class Model_Whatsnew extends Model {
+class Model_Whatsnew extends Model
+{
 
 	function get_all()
 	{

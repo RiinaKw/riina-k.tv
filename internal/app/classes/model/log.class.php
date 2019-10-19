@@ -1,7 +1,7 @@
 <?php
 
-class Model_Log extends Model {
-
+class Model_Log extends Model
+{
 	protected $_fp;
 
 	public function __construct($path, $mode)

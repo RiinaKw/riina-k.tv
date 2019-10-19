@@ -1,7 +1,7 @@
 <?php
 
-class View_Smarty extends View {
-
+class View_Smarty extends View
+{
 	protected $_engine;
 
 	public function __construct($template = null)

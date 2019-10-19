@@ -1,6 +1,7 @@
 <?php
 
-class View_Container extends View_Smarty {
+class View_Container extends View_Smarty
+{
 
 	protected $_container_engine;
 

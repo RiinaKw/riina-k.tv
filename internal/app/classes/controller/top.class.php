@@ -1,6 +1,7 @@
 <?php
 
-class Controller_Top extends Controller_Base {
+class Controller_Top extends Controller_Base
+{
 
 	public function action_index()
 	{

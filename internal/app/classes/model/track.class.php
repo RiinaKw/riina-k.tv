@@ -1,6 +1,7 @@
 <?php
 
-class Model_Track extends Model {
+class Model_Track extends Model
+{
 
 	function get_as_category()
 	{
