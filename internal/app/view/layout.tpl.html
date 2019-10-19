@@ -8,9 +8,9 @@
 		<!-- for Apple -->
 		<link rel="apple-touch-icon" sizes="180x180" href="{{$root}}/favicon/apple-180.png">
 		<!-- for Android -->
-		<link rel="manifest" href="/manifest.webmanifest" />
+		<link rel="manifest" href="{{$root}}/manifest.webmanifest" />
 		<!-- for Safari -->
-		<link rel="mask-icon" sizes="any" href="/favicon/rktv-sq-in.svg" color="#333333">
+		<link rel="mask-icon" sizes="any" href="{{$root}}/favicon/rktv-sq-in.svg" color="#333333">
 
 {{$meta}}
 
@@ -44,7 +44,7 @@
 
 					<noscript>JavaScriptをオンにしてください</noscript>
 
-{{$content}}
+{{block name=content}}{{/block}}
 
 					<footer>
 						{{#copyright#}}
