@@ -316,9 +316,9 @@ function Page()
 		}
 
 		if (_ua.Webkit) {
-			$("body").css("overflowY", "hidden");
+			$("body").css("overflowY", "auto");
 		} else if (_ua.Opera) {
-			$("html").css("overflowY", "hidden");
+			$("html").css("overflowY", "auto");
 		}
 		if ( windowHeight < headerHeight + contentHeight + footerHeight ) {
 			// appear scroll bar
@@ -338,8 +338,13 @@ function Page()
 			$("#container").css("height", windowHeight + "px");
 			$("footer").css({
 				position: "absolute",
-				bottom: "0"
+				bottom: "0",
+				width: $("#container").width(),
 			});
+		}
+
+		if ( $(document).height() > $(window).height() ) {
+			$("html, body").css("overflowY", "auto");
 		}
 
 		if ( $(window).width() >= 760 ) {
@@ -430,7 +435,7 @@ function Page()
 
 	this.debug = function(eventName)
 	{
-		if ( location.protocol == "file:" || location.host == "test.riina-k.tv" ) {
+		if ( location.host == "localhost" || location.host == "test.riina-k.tv" ) {
 			var $body = $("body");
 			var $documentWidth = $(".document-width", $body);
 			var $documentHeight = $(".document-height", $body);

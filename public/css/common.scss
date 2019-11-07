@@ -170,10 +170,12 @@ header nav {
 }
 
 footer {
-	padding: 10px;
 	border-top: dotted 1px #cccccc;
 	text-align: right;
 	line-height: 20px;
+}
+#footer-container {
+	padding: 10px;
 }
 
 #page-top #right-content iframe {
